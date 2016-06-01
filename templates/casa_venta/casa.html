@@ -1,0 +1,31 @@
+<h4 class="blog-post-title">Casas</h4>
+<hr/>
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(mejora);">&nbsp;Casas para Vender</button>
+<div class="pull-right">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Casas ..." class="nav-search-input" ng-model="filterCasa" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+
+<div class="table-responsive">                 
+
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="casas.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="casas.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columns">{{c.text}}</th></tr></thead>
+
+    <tr ng-repeat="c in casas | filter:filterCasa | orderBy:'-casa_k'" id="{{c.casa_k}}" animate-on-change='c.empresa + c.presupuesto + c.fecha_inicio_trabajos + c.fecha_entrega_trabajos' ng-animate=" 'animate'">
+        <td>{{c.casa_k}}</td><td>{{c.codigo_postal}} {{c.calle_numero}} {{c.colonia}} {{c.municipio}} {{c.estado}}</td><td>{{c.fecha_hora_creacion}}</td>
+        <td style="width:100px">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
+              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="borrarMejora(c);"></button>
+            </div>
+        </td>
+    </tr>
+    </table>
+</div>
+</div>
+              

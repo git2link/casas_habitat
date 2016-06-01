@@ -1,0 +1,29 @@
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="ofertar(oferta);">&nbsp;Agregar Oferta</button>
+<div class="pull-right" style="padding-bottom: 10px;">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Ofertas ..." class="nav-search-input" ng-model="filterOfertas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+<br>
+<div class="table-responsive">                 
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="ofertas_casa.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="ofertas_casa.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columnas_ofertas">{{c.text}}</th></tr></thead>
+    
+    <tr ng-repeat="c in ofertas_casa | filter:filterOfertas | orderBy:'fecha_oferta'" id="{{c.fecha_oferta}}"  ng-animate=" 'animate'">
+            <td>{{c.nombre_usuario}}</td>
+            <td>{{ c.oferta | currency:'$'}}</td>
+            <td>{{c.estatus}}</td>
+            <td>{{c.tipo}}</td>
+            <!--<td style="width:100px">
+                <div class="btn-group">
+                  <a ng-click="autorizarContraOferta(c)"><button type="button" class="btn btn-success fa fa-check-circle-o" ></button></a>
+                </div>
+            </td>-->
+    </tr>
+    </table>
+  </div>
+</div>

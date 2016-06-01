@@ -1,0 +1,132 @@
+
+<div class="portlet">
+      
+  <div class="portlet-header">
+
+    <h3>
+      <i class="fa fa-tasks"></i>
+      Filtrar...
+    </h3>
+
+  </div> <!-- /.portlet-header -->
+
+  <div class="portlet-content">
+
+    <form class="form-horizontal" role="form">
+
+      <div class="form-group">
+        <label class="col-md-2">Estado</label>
+        <div class="col-md-3">
+          <select ng-change="getmunicipios(estadoSeleccionado)" class="form-control" ng-model="estadoSeleccionado" ng-options="estado as estado.nombre for estado in estados track by estado.estado_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+        <label class="col-md-2">Municipio</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="municipioSeleccionado" ng-options="municipio as municipio.nombre for municipio in municipios track by municipio.municipio_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2">Tipo de Vivienda</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="tipoViviendaSeleccionado" ng-options="tipo_vivienda as tipo_vivienda.descripcion for tipo_vivienda in tipos_vivienda track by tipo_vivienda.tipo_vivienda_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+
+        <label class="col-md-2">Precios</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="rangoSeleccionado" ng-options="rango_precio as rango_precio.rango for rango_precio in rango_precios track by rango_precio.rango_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2"># de Recamaras</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="recamarasSeleccionado" ng-options="numero as numero.descripcion for numero in numeros track by numero.numero_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+
+        <label class="col-md-2"># de Baños</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="baniosSeleccionado" ng-options="numero as numero.descripcion for numero in numeros track by numero.numero_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2"># de Estacionamientos</label>
+        <div class="col-md-3">
+          <select class="form-control" ng-model="estacionamientosSeleccionado" ng-options="numero as numero.descripcion for numero in numeros track by numero.numero_k" >
+            <option value="">SELECCIONA UNA OPCIÓN...</option>
+          </select>
+        </div>
+      </div>
+      <button type="button" class="btn btn-danger fa fa-search" ng-click="filtrarCasas(estadoSeleccionado.estado_k, municipioSeleccionado.municipio_k, tipoViviendaSeleccionado.tipo_vivienda_k, rangoSeleccionado.rango_k, recamarasSeleccionado.numero_k, baniosSeleccionado.numero_k , estacionamientosSeleccionado.numero_k)">&nbsp;Filtrar</button>
+      <!--
+      <div class="form-group">
+        <label class="col-md-2">Checkbox (inline)</label>
+
+        <div class="col-md-10">
+          <label class="checkbox-inline">
+            <input type="checkbox"> Option 1
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox"> Option 2
+          </label>
+
+          <label class="checkbox-inline">
+            <input type="checkbox"> Option 3
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2">Radio (inline)</label>
+
+        <div class="col-md-10">
+          <label class="radio-inline">
+            <input type="radio" name="radioset1"> Option 1
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="radioset1"> Option 2
+          </label>
+
+          <label class="radio-inline">
+            <input type="radio" name="radioset1"> Option 3
+          </label>
+        </div>
+      </div>-->
+
+    </form>
+
+  </div> <!-- /.portlet-content -->
+
+</div> <!-- /.portlet -->
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="casas_agregar_interes(casas.interes);">&nbsp;Agregar Casas de Interes</button>
+
+<div class="table-responsive">                 
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+      <tr ng-show="casas_sin_interes.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+      <tr ng-hide="casas_sin_interes.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+
+      <thead><tr><th ng-repeat="c in columnas_compra_sin_interes">{{c.text}}</th></tr></thead>
+
+      <tr ng-repeat="c in casas_sin_interes | filter:filterCasasSinInteres | orderBy:'-casa_k'" id="{{c.casa_k}}"  ng-animate=" 'animate'">
+        <td><input type="checkbox" data-checklist-model="casas.interes" data-checklist-value="c"></td>
+        <td>{{c.casa_k}}</td>
+        <td>{{c.codigo_postal}} {{c.calle_numero}} {{c.colonia}} {{c.municipio}} {{c.estado}}</td>
+        <td>{{c.precio_venta | currency}}</td>
+        <td>{{c.pisos_nivel}}</td>
+        <td>{{c.recamaras}}</td>
+        <td>{{c.banios}}</td>                          
+      </tr>
+    </table>
+  </div>
+</div>
