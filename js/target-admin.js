@@ -387,3 +387,33 @@ var target_admin = function () {
 $(function () {
   target_admin.init ()
 })
+
+function formatear_num(input){
+  numero = input.value;
+
+  numero = numero.replace(/,/g, '');
+
+  var resultado = "";
+
+  nuevoNumero=numero.replace(/\,/g,'');
+  
+  if(numero.indexOf(".")>=0){
+    nuevoNumero=nuevoNumero.substring(0,nuevoNumero.indexOf("."));
+  }
+  
+  for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++)
+    resultado = nuevoNumero.charAt(i) + ((j > 0) && (j % 3 == 0)? ",": "") + resultado;
+  if(numero.indexOf(".")>=0)
+    resultado+=numero.substring(numero.indexOf("."));
+
+  input.value =  validar(resultado);
+
+
+  function validar(string) {
+    for (var i=0, output='', validos=",.123456789"; i<string.length; i++)
+      if (validos.indexOf(string.charAt(i)) != -1)
+        output += string.charAt(i)
+    return output;
+  }
+
+}
