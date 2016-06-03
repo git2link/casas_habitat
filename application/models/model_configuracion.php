@@ -108,6 +108,7 @@ class Model_Configuracion extends CI_Model {
 
     function insert_procedencia( $registro ){
 
+        $registro['activo'] = 1;
         $this->db->set($registro);
         $this->db->insert('cat_procedencia');
         return $this->db->insert_id();
@@ -134,6 +135,7 @@ class Model_Configuracion extends CI_Model {
 
     function insert_estatus_venta( $registro ){
 
+        $registro['activo'] = 1;
         $this->db->set($registro);
         $this->db->insert('cat_estatus_venta');
         return $this->db->insert_id();
@@ -159,7 +161,7 @@ class Model_Configuracion extends CI_Model {
     }
 
     function insert_forma_pago( $registro ){
-
+        $registro['activo'] = 1;
         $this->db->set($registro);
         $this->db->insert('cat_forma_pago');
         return $this->db->insert_id();
