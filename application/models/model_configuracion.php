@@ -66,4 +66,111 @@ class Model_Configuracion extends CI_Model {
         $this->db->insert('cat_tipo_casa_paquete');
         return $this->db->insert_id();
     }
+
+    function direcciones( $filtro ){
+        $sql = "select ce.estado_k, ce.nombre as estado , cm.municipio_k, cm.nombre as municipio, cc.colonia_k ,       cc.nombre as colonia, cc.codigo_postal from cat_estados ce
+            join cat_municipios cm using(estado_k)
+            join cat_colonias cc using (municipio_k) 
+            where ce.estado_k = ".$filtro['estado_k']." ";
+
+        if( !empty($filtro['municipio_k']))
+            $sql .= " and cm.municipio_k = ".$filtro['municipio_k']." ";
+        if( !empty($filtro['colonia_k']))
+            $sql .= " and cc.colonia_k = ".$filtro['colonia_k']." ";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+
+    }
+
+    function insert_colonia( $registro ) {
+        $this->db->set($registro);
+        $this->db->insert('cat_colonias');
+        return $this->db->insert_id();
+    }
+
+    function update_colonia( $registro , $colonia_k){
+        $this->db->set($registro);
+        $this->db->where('colonia_k', $colonia_k);
+        $this->db->update('cat_colonias');
+    }
+
+    function procedencia(){
+
+        $sql = "select * from cat_procedencia
+                where activo = 1";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+    }
+
+    function insert_procedencia( $registro ){
+
+        $this->db->set($registro);
+        $this->db->insert('cat_procedencia');
+        return $this->db->insert_id();
+
+    }
+
+    function update_procedencia( $registro , $procedencia_k ){
+
+        $this->db->set($registro);
+        $this->db->where('procedencia_k', $procedencia_k);
+        $this->db->update('cat_procedencia');
+
+    }
+
+    function estatus_venta(){
+
+        $sql = "select * from cat_estatus_venta
+                where activo = 1";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+    }
+
+    function insert_estatus_venta( $registro ){
+
+        $this->db->set($registro);
+        $this->db->insert('cat_estatus_venta');
+        return $this->db->insert_id();
+
+    }
+
+    function update_estatus_venta( $registro , $estatus_venta_k ){
+
+        $this->db->set($registro);
+        $this->db->where('estatus_venta_k', $estatus_venta_k);
+        $this->db->update('cat_estatus_venta');
+
+    }
+
+    function forma_pago(){
+
+        $sql = "select * from cat_forma_pago
+                where activo = 1";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+    }
+
+    function insert_forma_pago( $registro ){
+
+        $this->db->set($registro);
+        $this->db->insert('cat_forma_pago');
+        return $this->db->insert_id();
+
+    }
+
+    function update_forma_pago( $registro , $forma_pago_k ){
+
+        $this->db->set($registro);
+        $this->db->where('forma_pago_k', $forma_pago_k);
+        $this->db->update('cat_forma_pago');
+
+    }
 }

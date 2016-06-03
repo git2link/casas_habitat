@@ -10,6 +10,7 @@ class Casa extends CI_Controller {
 		$this->load->model('Model_Catalogos');
 		$this->load->model('Model_Cliente');
 		$this->load->library('casaLib');
+		$this->load->library('comunLib');
 		$this->form_validation->set_message('required', 'Debe ingresar campo %s');
 
     }
@@ -68,6 +69,9 @@ class Casa extends CI_Controller {
 	public function insert() {
 
 		$registro 				= $this->input->post();
+		$registro['costo'] 			= $this->comunlib->format_num( $registro['costo'] );
+		$registro['precio_venta'] 	= $this->comunlib->format_num( $registro['precio_venta'] );
+		$registro['apartado'] 		= $this->comunlib->format_num( $registro['apartado'] );
 		
 
 		$datos_adicionales = $this->casalib->generarClaveInterna( $registro );
@@ -117,6 +121,10 @@ class Casa extends CI_Controller {
 	public function update() {
 		$registro = $this->input->post();
 
+		$registro['costo'] 			= $this->comunlib->format_num( $registro['costo'] );
+		$registro['precio_venta'] 	= $this->comunlib->format_num( $registro['precio_venta'] );
+		$registro['apartado'] 		= $this->comunlib->format_num( $registro['apartado'] );
+		
 		$casa_cliente['cliente_k']	= $registro['cliente_k'];
 		$casa_cliente['casa_k']		= $registro['casa_k'];
 		unset($registro['cliente_k']);

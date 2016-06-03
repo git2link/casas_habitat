@@ -7,6 +7,7 @@ class Configuracion extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('Model_Configuracion');
+		$this->load->model('Model_Catalogos');
 
     }
 
@@ -108,6 +109,165 @@ class Configuracion extends CI_Controller {
 
 		
 		//print 1;
+	}
+
+	public function direcciones() {
+		$data['contenido'] 		= 'configuracion/direcciones';
+		$data['modal'] 			= 'configuracion/direcciones_modal';
+		$data['estados']		= $this->Model_Catalogos->getEstados();
+		$data['titulo'] 		= 'Configuracion';
+		$this->load->view('template_v3', $data);
+	}
+
+
+	public function direccionesdatatable(){
+		extract($_POST);
+		$filtro['estado_k'] 	= $estado_k;
+		$filtro['municipio_k'] 	= $municipio_k;
+
+		if(!empty($filtro['estado_k'])){
+			echo '{"data": ' . json_encode($this->Model_Configuracion->direcciones( $filtro)) . '}';
+		}else{
+			echo '{"data": "[]"}';
+		}
+	}
+
+	public function add_direccion() {
+
+		$registro 					= $this->input->post();
+
+		$registro = array(
+			'municipio_k' 	=> $registro['municipio_k'],
+			'codigo_postal' => $registro['codigo_postal'],
+			'nombre' 		=> $registro['colonia'],
+		);
+
+
+		$this->Model_Configuracion->insert_colonia( $registro );
+
+		print 1;
+	}
+
+	public function update_colonia(){
+
+		$registro 					= $this->input->post();
+		$colonia_k = $registro['colonia_k'];
+		$registro = array(
+			'municipio_k' 	=> $registro['municipio_k'],
+			'codigo_postal' => $registro['codigo_postal'],
+			'nombre' 		=> $registro['colonia'],
+		);
+
+
+		$this->Model_Configuracion->update_colonia( $registro , $colonia_k);
+
+		print 1;
+
+	}
+
+	public function procedencia_prospectos(){
+
+		$data['contenido'] 		= 'configuracion/procedencia_prospectos';
+		$data['modal'] 			= 'configuracion/procedencia_prospectos_modal';
+		$data['titulo'] 		= 'Configuracion';
+
+		$this->load->view('template_v3', $data);
+
+	}
+
+	public function procedenciadatatable(){
+
+		echo '{"data": ' . json_encode($this->Model_Configuracion->procedencia()) . '}';
+	}
+
+	public function add_procedencia() {
+
+		$registro = $this->input->post();
+		unset( $registro['procedencia_k']);
+		$this->Model_Configuracion->insert_procedencia( $registro );
+
+		print 1;
+	}
+
+	public function update_procedencia(){
+
+		$registro 					= $this->input->post();
+		$procedencia_k 				= $registro['procedencia_k'];
+
+		$this->Model_Configuracion->update_procedencia( $registro , $procedencia_k );
+
+		print 1;
+
+	}
+
+	public function estatus_venta(){
+
+		$data['contenido'] 		= 'configuracion/estatus_venta';
+		$data['modal'] 			= 'configuracion/estatus_venta_modal';
+		$data['titulo'] 		= 'Configuracion';
+
+		$this->load->view('template_v3', $data);
+
+	}
+
+	public function estatusventadatatable(){
+
+		echo '{"data": ' . json_encode($this->Model_Configuracion->estatus_venta()) . '}';
+	}
+
+	public function add_estatus_venta() {
+
+		$registro = $this->input->post();
+		unset( $registro['estatus_venta_k']);
+		$this->Model_Configuracion->insert_estatus_venta( $registro );
+
+		print 1;
+	}
+
+	public function update_estatus_venta(){
+
+		$registro 					= $this->input->post();
+		$estatus_venta_k 				= $registro['estatus_venta_k'];
+
+		$this->Model_Configuracion->update_estatus_venta( $registro , $estatus_venta_k );
+
+		print 1;
+
+	}
+
+	public function forma_pago(){
+
+		$data['contenido'] 		= 'configuracion/forma_pago';
+		$data['modal'] 			= 'configuracion/forma_pago_modal';
+		$data['titulo'] 		= 'Configuracion';
+
+		$this->load->view('template_v3', $data);
+
+	}
+
+	public function formapagodatatable(){
+
+		echo '{"data": ' . json_encode($this->Model_Configuracion->forma_pago()) . '}';
+	}
+
+	public function add_forma_pago() {
+
+		$registro = $this->input->post();
+		unset( $registro['forma_pago_k']);
+		$this->Model_Configuracion->insert_forma_pago( $registro );
+
+		print 1;
+	}
+
+	public function update_forma_pago(){
+
+		$registro 					= $this->input->post();
+		$forma_pago_k 				= $registro['forma_pago_k'];
+
+		$this->Model_Configuracion->update_forma_pago( $registro , $forma_pago_k );
+
+		print 1;
+
 	}
 
 

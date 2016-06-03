@@ -75,21 +75,21 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input name="costo" class="form-control">
+                            <input name="costo" class="form-control" onkeyup="formatear_num(this)" onchange="formatear_num(this)" onfocus="formatear_num(this)">
                         </div>
                     </div>
                     <label>Precio de venta</label>
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input name="precio_venta" class="form-control">
+                            <input name="precio_venta" class="form-control" onkeyup="formatear_num(this)" onchange="formatear_num(this)" onfocus="formatear_num(this)">
                         </div>
                     </div>
                     <label>Apartado</label>
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input name="apartado" class="form-control">
+                            <input name="apartado" class="form-control" onkeyup="formatear_num(this)" onchange="formatear_num(this)" onfocus="formatear_num(this)">
                         </div>
                     </div>
                     <label>Comision de venta</label>

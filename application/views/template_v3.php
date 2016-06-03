@@ -344,6 +344,9 @@
           <ul class="dropdown-menu">
             <li><a href="<?= base_url('configuracion/casa_paquete') ?>"> Casa - Paquetes</a></li>
             <li><a href="<?= base_url('configuracion/direcciones') ?>"> Direcciones</a></li>
+            <li><a href="<?= base_url('configuracion/forma_pago') ?>"> Formas de Pago</a></li>
+            <li><a href="<?= base_url('configuracion/estatus_venta') ?>"> Estatus para la Venta</a></li>
+            <li><a href="<?= base_url('configuracion/procedencia_prospectos') ?>"> Procedencia de Prospectos</a></li>
           </ul>
         </li>  
 
