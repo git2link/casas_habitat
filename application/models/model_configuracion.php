@@ -175,4 +175,57 @@ class Model_Configuracion extends CI_Model {
         $this->db->update('cat_forma_pago');
 
     }
+
+    function puestos(){
+
+        $sql = "select * from cat_puestos
+                where activo = 1";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+    }
+
+    function insert_puesto( $registro ){
+        $registro['activo'] = 1;
+        $this->db->set($registro);
+        $this->db->insert('cat_puestos');
+        return $this->db->insert_id();
+
+    }
+
+    function update_puesto( $registro , $puesto_k ){
+
+        $this->db->set($registro);
+        $this->db->where('puesto_k', $puesto_k);
+        $this->db->update('cat_puestos');
+
+    }
+
+    function sucursales(){
+
+        $sql = "select * from cat_sucursales
+                where activo = 1";
+
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+    }
+
+    function insert_sucursal( $registro ){
+        $registro['activo'] = 1;
+        $this->db->set($registro);
+        $this->db->insert('cat_sucursales');
+        return $this->db->insert_id();
+
+    }
+
+    function update_sucursal( $registro , $sucursal_k ){
+
+        $this->db->set($registro);
+        $this->db->where('sucursal_k', $sucursal_k);
+        $this->db->update('cat_sucursales');
+
+    }
+    
 }

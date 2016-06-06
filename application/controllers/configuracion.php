@@ -237,13 +237,13 @@ class Configuracion extends CI_Controller {
 
 	public function forma_pago(){
 
-		$data['contenido'] 		= 'configuracion/forma_pago';
-		$data['modal'] 			= 'configuracion/forma_pago_modal';
-		$data['titulo'] 		= 'Configuracion';
+	$data['contenido'] 		= 'configuracion/forma_pago';
+	$data['modal'] 			= 'configuracion/forma_pago_modal';
+	$data['titulo'] 		= 'Configuracion';
 
-		$this->load->view('template_v3', $data);
+	$this->load->view('template_v3', $data);
 
-	}
+}
 
 	public function formapagodatatable(){
 
@@ -270,6 +270,75 @@ class Configuracion extends CI_Controller {
 
 	}
 
+	public function puestos(){
+
+		$data['contenido'] 		= 'configuracion/puestos';
+		$data['modal'] 			= 'configuracion/puestos_modal';
+		$data['titulo'] 		= 'Configuracion';
+
+		$this->load->view('template_v3', $data);
+
+	}
+
+	public function puestosdatatable(){
+
+		echo '{"data": ' . json_encode($this->Model_Configuracion->puestos()) . '}';
+	}
+
+	public function add_puestos() {
+
+		$registro = $this->input->post();
+		unset( $registro['puesto_k']);
+		$this->Model_Configuracion->insert_puesto( $registro );
+
+		print 1;
+	}
+
+	public function update_puestos(){
+
+		$registro 					= $this->input->post();
+		$puesto_k 					= $registro['puesto_k'];
+
+		$this->Model_Configuracion->update_puesto( $registro , $puesto_k );
+
+		print 1;
+
+	}
+
+	public function sucursales(){
+
+		$data['contenido'] 		= 'configuracion/sucursales';
+		$data['modal'] 			= 'configuracion/sucursales_modal';
+		$data['titulo'] 		= 'Configuracion';
+
+		$this->load->view('template_v3', $data);
+
+	}
+
+	public function sucursalesdatatable(){
+
+		echo '{"data": ' . json_encode($this->Model_Configuracion->sucursales()) . '}';
+	}
+
+	public function add_sucursales() {
+
+		$registro = $this->input->post();
+		unset( $registro['sucursal_k']);
+		$this->Model_Configuracion->insert_sucursal( $registro );
+
+		print 1;
+	}
+
+	public function update_sucursales(){
+
+		$registro 					= $this->input->post();
+		$sucursal_k 				= $registro['sucursal_k'];
+
+		$this->Model_Configuracion->update_sucursal( $registro , $sucursal_k );
+
+		print 1;
+
+	}
 
 }
 

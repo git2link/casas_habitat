@@ -18,6 +18,13 @@
                         <?php endforeach ?>
                     </select>
                     <br>
+                    <label>Interes</label>
+                    <select class="form-control" name="interes_k">
+                        <?php foreach ($servicios as $row): ?>
+                            <option value="<?=$row->cat_servicio_k?>"><?=$row->descripcion?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <br>
                     <div align="center">
                         <label>Generales</label>
                     </div>

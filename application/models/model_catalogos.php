@@ -196,4 +196,19 @@ class Model_Catalogos extends CI_Model {
 
     }
 
+    function allServicios() {
+        $query = $this->db->get('cat_servicios');
+        return $query->result();
+    }
+
+    function allPuestos() {
+        $query = $this->db->get('cat_puestos');
+        return $query->result();
+    }
+
+    function allSucursales() {
+        $query = $this->db->get('cat_sucursales');
+        return $query->result();
+    }
+
 }

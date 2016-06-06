@@ -334,23 +334,32 @@
               </ul>
             </li>
           </ul>
-        </li>   
+        </li>
+
         <li class="dropdown ">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-cogs"></i> 
+          <a href="#contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <i class="fa fa-th-large"></i>
             Administrador
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu">
-            <li><a href="<?= base_url('configuracion/casa_paquete') ?>"> Casa - Paquetes</a></li>
-            <li><a href="<?= base_url('configuracion/direcciones') ?>"> Direcciones</a></li>
-            <li><a href="<?= base_url('configuracion/forma_pago') ?>"> Formas de Pago</a></li>
-            <li><a href="<?= base_url('configuracion/estatus_venta') ?>"> Estatus para la Venta</a></li>
-            <li><a href="<?= base_url('configuracion/procedencia_prospectos') ?>"> Procedencia de Prospectos</a></li>
-          </ul>
-        </li>  
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#"> 
+              Catalogos
+              </a>
 
-      
+              <ul class="dropdown-menu">
+                <li><a href="<?= base_url('configuracion/casa_paquete') ?>"> Casa - Paquetes</a></li>
+                <li><a href="<?= base_url('configuracion/direcciones') ?>"> Direcciones</a></li>
+                <li><a href="<?= base_url('configuracion/forma_pago') ?>"> Formas de Pago</a></li>
+                <li><a href="<?= base_url('configuracion/estatus_venta') ?>"> Estatus para la Venta</a></li>
+                <li><a href="<?= base_url('configuracion/procedencia_prospectos') ?>"> Procedencia de Prospectos</a></li>
+                <li><a href="<?= base_url('configuracion/puestos') ?>"> Puestos</a></li>
+                <li><a href="<?= base_url('configuracion/sucursales') ?>"> Sucursales</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>   
 
     </div> <!-- /.navbar-collapse -->   
 

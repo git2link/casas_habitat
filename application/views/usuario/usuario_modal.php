@@ -36,6 +36,20 @@
                         <label>Usuario</label>
                     </div>
                     <br>
+                    <label>Sucursal</label>
+                    <select name="sucursal_k" class="form-control">
+                      <?php foreach ($sucursales as $row): ?>
+                        <option value="<?=$row->sucursal_k?>"><?=$row->descripcion?></option>
+                      <?php endforeach ?>
+                    </select>
+                    <br>
+                    <label>Puesto</label>
+                    <select name="puesto_k" class="form-control">
+                      <?php foreach ($puestos as $row): ?>
+                        <option value="<?=$row->puesto_k?>"><?=$row->descripcion?></option>
+                      <?php endforeach ?>
+                    </select>
+                    <br>
                     <label>Perfil</label>
                     <select name="perfil_id" class="form-control">
                       <?php foreach ($perfil as $row): ?>

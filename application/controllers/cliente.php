@@ -52,6 +52,7 @@ class Cliente extends CI_Controller {
 			
 			$data['estado']					= $this->Model_Catalogos->getEstados();
 			$data['procedencia'] 			= $this->Model_Catalogos->allProcedencia();
+			$data['servicios'] 				= $this->Model_Catalogos->allServicios();
 			$data['js'] 					= "
 			<script type='text/javascript' src=".base_url('../js/app/direccion_2.js')."></script>";
 			

@@ -20,6 +20,8 @@ class Usuario extends CI_Controller {
 		$data['contenido'] 	= 'usuario/index';
 		$data['modal'] 		= 'usuario/usuario_modal';
 		$data['titulo'] 	= 'Usuarios';
+		$data['puestos'] 	= $this->Model_Catalogos->allPuestos();
+		$data['sucursales'] = $this->Model_Catalogos->allSucursales();
 		$data['perfil'] 	= $this->Model_Usuario->get_perfil_list();
 		$data['js_plugins']  = "
 			<script type='text/javascript' src=".base_url('../js/webcamjs/webcam.js')."></script>";
