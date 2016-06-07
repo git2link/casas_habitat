@@ -314,7 +314,7 @@
         </li>-->
         <li class="dropdown ">
           <a href="#contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-th-large"></i>
+            <i class="fa fa-bar-chart-o"></i>
             Reportes
             <span class="caret"></span>
           </a>
@@ -338,7 +338,7 @@
 
         <li class="dropdown ">
           <a href="#contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-th-large"></i>
+            <i class="fa fa-cogs"></i>
             Administrador
             <span class="caret"></span>
           </a>

@@ -17,6 +17,16 @@ class Model_Direccion extends CI_Model {
         
     }
 
+    function obtenerEstados(){
+        $sql = "select  estado_k, nombre as estado
+         from cat_estados  
+        order by nombre ASC";
+        $data = $this->db->query( $sql );
+
+        return $data->result();
+        
+    }
+
     function obtenerMunicipios($estado_k){
         $sql = "select  cm.municipio_k, cm.nombre as municipio
          from cat_municipios cm 

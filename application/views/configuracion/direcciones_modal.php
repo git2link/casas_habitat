@@ -47,15 +47,6 @@
     });
   }
 
-  function obtenerDireccionesEdit(cp){
-    $.ajax({
-        type: 'GET',
-        url: 'direccion/obtenerDirecciones/'+cp,
-        dataType: "json",
-    success: renderDirecciones
-    });
-  }
-
  function renderDirecciones(data){
 
     $('#estado    option').remove();
@@ -88,12 +79,57 @@
         $('#colonia').focus();
     }
  }
+
+ function obtenerEstados(){
+    $.ajax({
+        type: 'GET',
+        url: '../direccion/obtenerEstados/',
+        dataType: "json",
+    success: renderEstados
+    });
+ }
+
+ function renderEstados(data){
+
+    $('#estado option').remove();
+
+    var list = data == null ? [] : (data.estados instanceof Array ? data.estados : [data.estados ]);
+
+    if (list.length < 1) {
+
+       alert("SIN NINGÚN RESULTADO EN LA BD");
+
+    } else {
+
+
+        $('#estado').append('<option value="0">Seleccione una opción</option>');
+        $.each(list, function(index, direccion) {
+
+            $('#estado').append('<option value='+direccion.estado_k+'>'+direccion.estado+'</option>');
+
+        });
+
+        $('#estado').focus();
+        
+    }
+ }
+
+
  function obtenerMunicipios(estado_k){
     $.ajax({
         type: 'GET',
         url: '../direccion/obtenerMunicipios/'+estado_k,
         dataType: "json",
     success: renderMunicipios
+    });
+  }
+
+  function obtenerMunicipiosCreate(estado_k){
+    $.ajax({
+        type: 'GET',
+        url: '../direccion/obtenerMunicipios/'+estado_k,
+        dataType: "json",
+    success: renderMunicipiosCreate
     });
   }
 
@@ -122,6 +158,31 @@
     }
  }
 
+ function renderMunicipiosCreate(data){
+
+    $('#municipio option').remove();
+
+    var list = data == null ? [] : (data.municipios instanceof Array ? data.municipios : [data.municipios ]);
+
+    if (list.length < 1) {
+
+       alert("SIN NINGÚN RESULTADO EN LA BD");
+
+    } else {
+
+
+        $('#municipio').append('<option value="0">Seleccione una opción</option>');
+        $.each(list, function(index, direccion) {
+
+            $('#municipio').append('<option value='+direccion.municipio_k+'>'+direccion.municipio+'</option>');
+
+        });
+
+        $('#municipio').focus();
+        
+    }
+ }
+
 
   function obtenerDireccionesCasa(cp){
     $.ajax({
@@ -133,52 +194,12 @@
   }
 
 
-function renderDireccionesCasa(data){
-
-    $('#estado_casa    option').remove();
-    $('#municipio_casa option').remove();
-    $('#colonia_casa   option').remove();
-
-    var list = data == null ? [] : (data.direcciones instanceof Array ? data.direcciones : [data.direcciones ]);
-
-    if (list.length < 1) {
-
-       alert("SIN NINGÚN RESULTADO EN LA BD");
-
-    } else {
-
-        $('#estado_casa').append('<option value="0">Seleccione una opción</option>');
-        $('#estado_casa').append('<option value='+list[0].estado_k+' selected>'+list[0].estado+'</option>');
-
-
-        $('#municipio_casa').append('<option value="0">Seleccione una opción</option>');
-        $('#municipio_casa').append('<option value='+list[0].municipio_k+' selected >'+list[0].municipio+'</option>');
-
-
-        $('#colonia_casa').append('<option value="0">Seleccione una opción</option>');
-        $.each(list, function(index, direccion) {
-
-            $('#colonia_casa').append('<option value='+direccion.colonia_k+'>'+direccion.colonia+'</option>');
-
-        });
-
-        $('#colonia_casa').focus();
-        
-    }
-}
-
-    $('#codigo_postal').blur(function(){
-     obtenerDirecciones($(this).val());
-    });
-    $('#codigo_postal_casa').blur(function(){
-     obtenerDireccionesCasa($('#codigo_postal_casa').val());
-    });
-
-    $('#codigo_postal_edit').blur(function(){
-     obtenerDireccionesEdit($('#codigo_postal_edit').val());
-    });
     $('#estado_k').change(function(){
         obtenerMunicipios($('#estado_k').val());
+    });
+
+    $('#estado').change(function(){
+        obtenerMunicipiosCreate($('#estado_k').val());
     });
 
     $('#submit_form_1').on('click', function(e){

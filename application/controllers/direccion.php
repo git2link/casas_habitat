@@ -28,6 +28,14 @@ class Direccion extends CI_Controller {
 
     }
 
+	public function obtenerEstados(){
+
+		$data = $this->Model_Direccion->obtenerEstados();
+
+		echo '{"estados": ' . json_encode($data) . '}';
+
+	}
+
     public function obtenerMunicipios( $estado_k ){
 
     	$data = $this->Model_Direccion->obtenerMunicipios($estado_k);

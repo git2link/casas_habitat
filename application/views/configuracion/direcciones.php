@@ -85,18 +85,21 @@
             }
         });
   $('#btn_add_1').on('click', function(e){
+    $("#codigo_postal").prop('disabled', false);
+    obtenerEstados();
     e.preventDefault();
     $('#form_1')[0].reset();
     $('.action').val('add_direccion');
   });
 
   $('#btn_edit_1').on('click', function(e){
+    $("#codigo_postal").prop('disabled', true);
     e.preventDefault();
     var dta_table = table_1.row($('tr.selected')).data();
     if (dta_table != undefined) {
       var colonia  = dta_table['colonia_k'];
       $('#codigo_postal').val(dta_table['codigo_postal']);
-      $('#codigo_postal').blur();
+      obtenerDirecciones($('#codigo_postal').val());
         $.each(dta_table, function( index, value ) {
           $('#form_1 input, #form_1 select, #form_1 textarea').each(function(){
             var name = $(this).attr('name');
