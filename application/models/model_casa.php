@@ -10,7 +10,18 @@ class Model_Casa extends CI_Model {
         $this->db->select(' case when isNull(casa_cliente_k) then 
                                 ctc.descripcion else concat(cli.nombre, " ", cli.apellido_paterno, " ", cli.apellido_materno) 
                             end as cliente, ccli.cliente_k,
-                            c.*, ce.nombre as estado , cm.nombre as municipio, cc.nombre as colonia , ctc.descripcion as descripcion_tipo_casa, cpc.descripcion as descripcion_paquete_casa ', false);
+                            c.*, ce.nombre as estado , 
+                            cm.nombre as municipio, 
+                            cc.nombre as colonia , 
+                            ctc.descripcion as descripcion_tipo_casa, 
+                            cpc.descripcion as descripcion_paquete_casa,
+                            case 
+                                when isNull(checklist_k)        then 0
+                                when presupuesto_mejoras    = 2 then 0
+                                when revision_legal         = 2 then 0
+                                when contrato_casas_habitat = 2 then 0
+                                else 1 
+                            end as visita', false);
         $this->db->from('casa c');
         $this->db->join('cat_tipo_casa ctc', 'ctc.tipo_casa_k = c.tipo_casa_k');
         $this->db->join('cat_tipo_casa_paquete cpc', 'cpc.paquete_casa_k = c.paquete_casa_k', 'left');
@@ -19,6 +30,7 @@ class Model_Casa extends CI_Model {
         $this->db->join('cat_colonias cc' , 'cc.colonia_k = c.colonia_k');
         $this->db->join('casa_cliente ccli' , 'c.casa_k = ccli.casa_k and ccli.activo = 1', 'left');
         $this->db->join('cliente cli' , 'ccli.cliente_k = cli.cliente_k', 'left');
+        $this->db->join('casa_checklist i', 'i.casa_k = c.casa_k', 'left');
         if( $estatus_casa != NULL)
             $this->db->where( 'estatus_venta' , $estatus_casa );
 
@@ -259,6 +271,16 @@ class Model_Casa extends CI_Model {
 
         return $data->result();
         
+    }
+
+    function employees_availabe(){
+        $sql = 'SELECT id, 
+                    concat(nombre, " ", apellido_paterno, " ", apellido_materno) as employee 
+                FROM usuario 
+                WHERE activo= 1
+                order by employee';
+        $query = $this->db->query( $sql );
+        return $query->result();
     }
 
 }

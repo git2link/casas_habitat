@@ -2,7 +2,7 @@
 <div class="page-header">
     <h1> <?= $clave_interna ?> <small> checklist </small> </h1> 
     <div class="pull-left table_functions_left">
-        <a href="<?=base_url('servicio/vender')?>" class="btn btn-danger btn-sm" title="Regresar">
+        <a href="<?=base_url('casa')?>" class="btn btn-danger btn-sm" title="Regresar">
             <i class="fa fa-arrow-left"></i>
         </a>
         <button id="btn_save_checklist_0" class="btn btn-success btn-sm" title="Guardar cambios"> 

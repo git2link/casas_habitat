@@ -7,6 +7,15 @@
       <a id="btn_edit_1" data-toggle="modal" href="#modal_1" class="btn btn-secondary btn-sm" title="Editar">
         <i class="fa fa-pencil-square-o"></i>
       </a>
+      <button id="btn_checklist_1" class="btn btn-success btn-sm" title="Checklist" disabled>
+        <i class="fa fa-check-square-o "></i>
+      </button>
+      <a id="btn_visita_1" data-toggle="modal" href="#modal_2" class="btn btn-warning btn-sm" title="Agendar visita" disabled>
+        <i class="fa fa-eye"></i>
+      </a>
+      <!--<button id="btn_mejora_1" class="btn btn-success btn-sm" title="Agregar mejora" >
+        <i class="fa fa-cogs"></i>
+      </button>-->
   </div>
   <div class="pull-right table_functions_right">
   </div>
@@ -98,6 +107,36 @@
 
       $('#casa_k').val(casa);
       $('.action').val('update');
+    }else{
+      alert('Seleccione un registro');
+      return false;
+    }
+  });
+
+  $('#tbl_1 tbody').on('click', function(e){
+    e.preventDefault();
+    var dta_table = table_1.row($('tr.selected')).data();
+    if (dta_table != undefined) {
+      if (dta_table['visita'] == 1) {
+        $('#btn_visita_1').attr('disabled', false);
+        $('#casa_visita').val(dta_table['casa_k']);
+      }else{
+        $('#btn_visita_1').attr('disabled', true);
+      }
+      $('#btn_checklist_1').attr('disabled', false);
+    }else{
+      $('#btn_visita_1').attr('disabled', true);
+      $('#btn_checklist_1').attr('disabled', true);
+    }
+  });
+
+  $('#btn_checklist_1').on('click', function(e){
+    e.preventDefault();
+    var dta_table = table_1.row($('tr.selected')).data();
+    if (dta_table != undefined) {
+      var casa  = dta_table['casa_k'];
+      var clave  = dta_table['clave_interna'];
+      window.location.replace("<?=base_url('checklist/index/" + casa + "/" + clave + "')?>");
     }else{
       alert('Seleccione un registro');
       return false;

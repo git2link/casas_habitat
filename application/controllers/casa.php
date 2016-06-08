@@ -21,7 +21,8 @@ class Casa extends CI_Controller {
 		$data['titulo'] 		= 'Casas';
 		$data['tipo_paquete'] 	= $this->Model_Casa->getTipoPaquete();
 		$data['cliente'] 		= $this->Model_Cliente->all();
-		$data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );
+		$data['employee'] 		= $this->Model_Casa->employees_availabe();
+		/*$data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );*/
 		$this->load->view('template_v3', $data);
 	}
 

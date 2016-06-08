@@ -167,6 +167,38 @@
     <input id="casa_k" name="casa_k" hidden>
 </form>
 
+<form id="form_2">
+    <div id="modal_2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Agendar visita</h3>
+                </div>
+                <div class="modal-body">
+                    <div align="center">
+                        <label>Detalles de visita</label>
+                    </div>
+                    <label>Empleado</label>
+                    <select class="form-control" name="usuario_k">
+                      <option value="">Seleccione una opción</option>
+                      <?php foreach ($employee as $row): ?>
+                        <option value="<?= $row->id ?>"><?= $row->employee ?></option>
+                      <?php endforeach ?>
+                    </select>
+                    <br>
+                    <label>Fecha de visita</label>
+                    <input name="fecha_visita" class="form-control date">
+                <div class="modal-footer">
+                    <button data-dismiss="modal" id="submit_form_2" class="btn btn-default" >Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="action" hidden>
+    <input id="casa_visita" name="casa_k" hidden>
+</form>
+
 <script type="text/javascript">
 
   function obtenerDirecciones(cp){
@@ -372,6 +404,30 @@ function renderDireccionesCasa(data){
             $('#div_cliente').hide();
         }
     });
-     
+    
+    $('#submit_form_2').on('click', function(e){
+      e.preventDefault();
+      var data = $('#form_2').serialize();
+      pnotify_common('info');
+      $.ajax({
+        type: 'POST',
+        url: "<?=base_url('servicio/set_visita')?>",
+        data: data,
+        success: function(data){
+            if (data == 1) {
+                pnotify_common('success');
+                table_1.ajax.reload();
+            }else{
+                pnotify_common('error');
+            }
+        },
+        error: function(a, b, c){
+            pnotify_common('error');
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+      });
+    });
 </script>
 
