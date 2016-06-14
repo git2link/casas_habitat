@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Avaluo extends CI_Controller {
+class Avaluo extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -15,19 +15,19 @@ class Avaluo extends CI_Controller {
     }
 
 	public function index() {
-		$data['contenido'] = 'avaluo/index';
-		$data['titulo'] = 'Avaluos';
-		$data['query'] = $this->Model_Avaluo->all();
-		$this->load->view('template2', $data);
+		$this->data['contenido'] = 'avaluo/index';
+		$this->data['titulo'] = 'Avaluos';
+		$this->data['query'] = $this->Model_Avaluo->all();
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function search() {
 
-		$data['contenido'] 	= 'avaluo/index';
-		$data['titulo'] 	= 'Avaluos';
+		$this->data['contenido'] 	= 'avaluo/index';
+		$this->data['titulo'] 	= 'Avaluos';
 		$value 				= $this->input->post('buscar');
-		$data['query'] 		= $this->Model_Avaluo->allFiltered('p.empresa', $value);
-		$this->load->view('template2', $data);
+		$this->data['query'] 		= $this->Model_Avaluo->allFiltered('p.empresa', $value);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -38,12 +38,12 @@ class Avaluo extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] 			= 'avaluo/create';
-		$data['titulo'] 			= 'Crear Avaluo';
-		$data['casas']				= $this->Model_Catalogos->getCasas();
-		$data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
-		$data['sino']			    = $this->Model_Catalogos->getSiNo();
-		$this->load->view('template2', $data);
+		$this->data['contenido'] 			= 'avaluo/create';
+		$this->data['titulo'] 			= 'Crear Avaluo';
+		$this->data['casas']				= $this->Model_Catalogos->getCasas();
+		$this->data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
+		$this->data['sino']			    = $this->Model_Catalogos->getSiNo();
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function insert() {
@@ -66,12 +66,12 @@ class Avaluo extends CI_Controller {
 
 	public function edit($id) {
 
-		$data['contenido'] 	= 'avaluo/edit';
-		$data['titulo'] 	= 'Actualizar Avaluo';
-		$data['registro'] 	= $this->Model_Avaluo->find($id);
-		$data['casas']				= $this->Model_Catalogos->getCasas();
-		$data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
-		$this->load->view('template2', $data);
+		$this->data['contenido'] 	= 'avaluo/edit';
+		$this->data['titulo'] 	= 'Actualizar Avaluo';
+		$this->data['registro'] 	= $this->Model_Avaluo->find($id);
+		$this->data['casas']				= $this->Model_Catalogos->getCasas();
+		$this->data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
+		$this->load->view('template_v3', $this->data);
 		
 	}
 

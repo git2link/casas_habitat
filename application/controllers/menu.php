@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class Menu extends MY_Controller {
 
 	// Constructor de Clase
 	function __construct() {
@@ -15,18 +15,18 @@ class Menu extends CI_Controller {
 	}
 
 	public function index() {
-		$data['contenido'] = 'menu/index';
-		$data['titulo'] = 'Menú';
-		$data['query'] = $this->Model_Menu->all();
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu/index';
+		$this->data['titulo'] = 'Menú';
+		$this->data['query'] = $this->Model_Menu->all();
+		$this->load->view('template', $this->data);
 	}
 
 	public function search() {
-		$data['contenido'] = 'menu/index';
-		$data['titulo'] = 'Menú';
+		$this->data['contenido'] = 'menu/index';
+		$this->data['titulo'] = 'Menú';
 		$value = $this->input->post('buscar');
-		$data['query'] = $this->Model_Menu->allFiltered('name', $value);
-		$this->load->view('template', $data);
+		$this->data['query'] = $this->Model_Menu->allFiltered('name', $value);
+		$this->load->view('template', $this->data);
 	}
 
 	public function my_validation() {
@@ -34,9 +34,9 @@ class Menu extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] = 'menu/create';
-		$data['titulo'] = 'Crear Menú';
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu/create';
+		$this->data['titulo'] = 'Crear Menú';
+		$this->load->view('template', $this->data);
 	}
 
 	public function insert() {
@@ -56,10 +56,10 @@ class Menu extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$data['contenido'] = 'menu/edit';
-		$data['titulo'] = 'Actualizar Menú';
-		$data['registro'] = $this->Model_Menu->find($id);
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu/edit';
+		$this->data['titulo'] = 'Actualizar Menú';
+		$this->data['registro'] = $this->Model_Menu->find($id);
+		$this->load->view('template', $this->data);
 	}
 
 	public function update() {
@@ -83,15 +83,15 @@ class Menu extends CI_Controller {
 	}
 
 	public function menu_perfiles($menu_id) {
-		$data['contenido'] = 'menu/menu_perfiles';
-		$data['titulo'] = 'Accesos de '.$this->Model_Menu->find($menu_id)->name;
+		$this->data['contenido'] = 'menu/menu_perfiles';
+		$this->data['titulo'] = 'Accesos de '.$this->Model_Menu->find($menu_id)->name;
 
 		// Cargar arreglos Izquierda y Derecha
 		$perfiles = $this->menulib->get_perfiles_asig_noasig($menu_id);
-		$data['query_izq'] = $perfiles[0];
-		$data['query_der'] = $perfiles[1];
+		$this->data['query_izq'] = $perfiles[0];
+		$this->data['query_der'] = $perfiles[1];
 
-		$this->load->view('template', $data);
+		$this->load->view('template', $this->data);
 	}
 
 	public function mp_noasig() {

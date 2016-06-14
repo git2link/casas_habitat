@@ -67,6 +67,23 @@ class CasaLib {
                 break;
             
             default:
+            
+                $autoIncremental = $this->CI->Model_Casa->obtenerAutoIncrementalVive( $registro['tipo_casa_k'] , $registro['municipio_k'] );
+                $municipio      = $this->CI->Model_Direccion->getMunicipioById( $registro['municipio_k'] );
+                $paquete        = $this->CI->Model_Casa->getPaqueteById( $registro['paquete_casa_k']);   
+
+                $numeroPaquete  = substr( $paquete->descripcion , mb_strrpos($paquete->descripcion, '.')+1 );
+
+                $clave_interna = "S-".strtoupper(substr( $municipio->nombre , 0 , 3).$autoIncremental->autoincremental."-".$numeroPaquete );
+                
+                $datos_adicionales = array(
+                    "autoincremental_tipo"  => $autoIncremental->autoincremental,
+                    "clave_interna"         => $clave_interna
+                    );
+
+                return $datos_adicionales;
+
+
                 break;
         }
 

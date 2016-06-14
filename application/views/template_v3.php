@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="<?= base_url('../js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css') ?>">
     <link rel="stylesheet" href="<?= base_url('../js/plugins/magnific/magnific-popup.css') ?>">
     <link rel="stylesheet" href="<?= base_url('../css/demos/ui-notifications.css') ?>">
-
+    <link rel="stylesheet" href="<?= base_url('../css/demos/ui-notifications.css') ?>">
 
 
     <!--Datatables-->
@@ -180,7 +180,7 @@
 
         <li class="dropdown navbar-profile">
           <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-            <img src="<?= base_url('../img/avatars/profile.jpg') ?>" class="navbar-profile-avatar" alt="">
+            <img src="<?= $foto ?>" class="navbar-profile-avatar" alt="">
             <span class="navbar-profile-label">almarazjair@gmail.com &nbsp;</span>
             <i class="fa fa-caret-down"></i>
           </a>
@@ -378,6 +378,7 @@
 
       <div class="content-header">
         <h2 class="content-header-title"><?= $titulo ?></h2>
+        
         <?= $this->load->view($contenido) ?>
       </div> <!-- /.content-header -->
 

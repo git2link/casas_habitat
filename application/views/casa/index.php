@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1> Prospectos <small> gestión  </small> </h1> 
+  <h1> Prospectos <small> gestión  </small> </h1>
   <div class="pull-left table_functions_left">
       <a id="btn_add_1" data-toggle="modal" href="#modal_1" class="btn btn-success btn-sm" title="Agregar">
         <i class="fa fa-plus"></i>
@@ -12,6 +12,9 @@
       </button>
       <a id="btn_visita_1" data-toggle="modal" href="#modal_2" class="btn btn-warning btn-sm" title="Agendar visita" disabled>
         <i class="fa fa-eye"></i>
+      </a>
+      <a id="btn_propuesta_1" data-toggle="modal" href="#modal_3" class="btn btn-info btn-sm" title="Agregar propuesta" disabled>
+          <i class="fa fa-money"></i>
       </a>
       <!--<button id="btn_mejora_1" class="btn btn-success btn-sm" title="Agregar mejora" >
         <i class="fa fa-cogs"></i>
@@ -119,14 +122,20 @@
     if (dta_table != undefined) {
       if (dta_table['visita'] == 1) {
         $('#btn_visita_1').attr('disabled', false);
+        $('#btn_propuesta_1').attr('disabled', false);
         $('#casa_visita').val(dta_table['casa_k']);
+        $('#casa_propuesta').val(dta_table['casa_k']);
+        $('#cliente_propuesta').val(dta_table['cliente_k']);
+          
       }else{
         $('#btn_visita_1').attr('disabled', true);
+        $('#btn_propuesta_1').attr('disabled', true);
       }
       $('#btn_checklist_1').attr('disabled', false);
     }else{
       $('#btn_visita_1').attr('disabled', true);
       $('#btn_checklist_1').attr('disabled', true);
+      $('#btn_propuesta_1').attr('disabled', true);
     }
   });
 
@@ -142,4 +151,39 @@
       return false;
     }
   });
+
+  $('#btn_propuesta_1').on('click', function(e){
+    e.preventDefault();
+    $("#modal_3").mask({'label':""});
+    var dta_table = table_1.row($('tr.selected')).data();
+    if (dta_table != undefined) {
+
+      $.ajax({
+            type: 'POST',
+            url: "<?=base_url('servicio/insert_propuesta_temporal')?>",
+            success: function(data){
+              $("#modal_3").unmask({'label':""});
+              $("#propuesta_tmp_k").val(data);
+              $("#propuesta_tmp").val(data);
+            },
+            error: function(a, b, c){
+                pnotify_common('error');
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            }
+        });
+
+      var casa_k     = dta_table['casa_k'];
+      var cliente_k  = dta_table['cliente_k'];
+      $('#casa_k').val(casa_k);
+      $('#cliente_k').val(casa_k);
+
+      $('.action').val('update');
+    }else{
+      alert('Seleccione un registro');
+      return false;
+    }
+  });
+
 </script>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Catalogo extends CI_Controller {
+class Catalogo extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -11,12 +11,12 @@ class Catalogo extends CI_Controller {
     }
 
     	public function get_tipo_vivienda_json(){
-		$data = $this->Model_Catalogos->allTipoVivienda();
+		$datos = $this->Model_Catalogos->allTipoVivienda();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 	}

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Servicio extends CI_Controller {
+class Servicio extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -19,18 +19,18 @@ class Servicio extends CI_Controller {
 
 	public function comprar() {
 
-		$data['contenido'] = 'servicio/comprar';
-		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$data['estados']			= $this->Model_Catalogos->getEstados();		
-		$data['sexo']				= $this->Model_Catalogos->getSexos();
-		$data['titulo'] = 'Comprar';
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['contenido'] = 'servicio/comprar';
+		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
+		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
+		$this->data['titulo'] = 'Comprar';
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
 
 
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -93,14 +93,14 @@ class Servicio extends CI_Controller {
 	}
 
 	public function vender() {
-		$data['contenido'] 			= 'servicio/vender';
-		$data['modal'] 				= 'servicio/vender_modal';
-		$data['nivel_urgencia'] 	= $this->Model_Catalogos->get_nivel_urgencia();
-		$data['cliente'] 			= $this->Model_Servicio->prospecto_cliente_list();
-		$data['employee'] 			= $this->Model_Servicio->employees_availabe();
-		$data['titulo'] 			= 'Vender';
-		$data['js']				    = "";
-		$this->load->view('template_v3', $data);
+		$this->data['contenido'] 			= 'servicio/vender';
+		$this->data['modal'] 				= 'servicio/vender_modal';
+		$this->data['nivel_urgencia'] 	= $this->Model_Catalogos->get_nivel_urgencia();
+		$this->data['cliente'] 			= $this->Model_Servicio->prospecto_cliente_list();
+		$this->data['employee'] 			= $this->Model_Servicio->employees_availabe();
+		$this->data['titulo'] 			= 'Vender';
+		$this->data['js']				    = "";
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -204,16 +204,16 @@ class Servicio extends CI_Controller {
 	}
 
 	public function remodelar() {
-		$data['contenido'] = 'servicio/remodelar';
-		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$data['estados']			= $this->Model_Catalogos->getEstados();		
-		$data['sexo']				= $this->Model_Catalogos->getSexos();
-		$data['titulo'] 			= 'Remodelar';
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['contenido'] = 'servicio/remodelar';
+		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
+		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
+		$this->data['titulo'] 			= 'Remodelar';
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -289,16 +289,16 @@ class Servicio extends CI_Controller {
 	}
 
 	public function construir() {
-		$data['contenido'] = 'servicio/construir';
-		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$data['estados']			= $this->Model_Catalogos->getEstados();		
-		$data['sexo']				= $this->Model_Catalogos->getSexos();
-		$data['titulo'] 			= 'Construir';
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['contenido'] = 'servicio/construir';
+		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
+		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
+		$this->data['titulo'] 			= 'Construir';
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -374,16 +374,16 @@ class Servicio extends CI_Controller {
 	}
 
 	public function mantenimiento() {
-		$data['contenido'] = 'servicio/mantenimiento';
-		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$data['estados']			= $this->Model_Catalogos->getEstados();		
-		$data['sexo']				= $this->Model_Catalogos->getSexos();
-		$data['titulo'] 			= 'Mantenimiento';
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['contenido'] = 'servicio/mantenimiento';
+		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
+		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
+		$this->data['titulo'] 			= 'Mantenimiento';
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -449,12 +449,12 @@ class Servicio extends CI_Controller {
 
 		$filtro = json_decode(file_get_contents('php://input'),true);
 
-		$data = $this->Model_Servicio->casas_sin_interes( $cliente_k , $filtro );
+		$datos = $this->Model_Servicio->casas_sin_interes( $cliente_k , $filtro );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 	}
@@ -529,35 +529,40 @@ class Servicio extends CI_Controller {
 
 	public function casas_con_interes( $cliente_k ){
 
-		$data = $this->Model_Servicio->casas_con_interes( $cliente_k );
+		$datos = $this->Model_Servicio->casas_con_interes( $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 	}
 
 	public function casas_en_venta( $cliente_k ){
 
-		$data = $this->Model_Servicio->casas_en_venta( $cliente_k );
+		$datos = $this->Model_Servicio->casas_en_venta( $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 	}
 
-	public function insertpropuesta( $cliente_k ){
-		$registro = json_decode(file_get_contents('php://input'),true);
-		$registro['cliente_k'] = $cliente_k;
-		$registro['fecha_hora_creacion'] = date('Y-m-d H:i:s');
-		$registro['usuario_creacion']	 = $this->session->userdata('usuario_id');
+	public function insertar_propuesta(){
+
+		$registro 							= $this->input->post();
+		$registro['fecha_hora_creacion'] 	= date('Y-m-d H:i:s');
+		$registro['usuario_creacion']	 	= $this->session->userdata('usuario_id');
 		$registro['estatus']			 = 'En espera';
-		$id = $this->Model_Servicio->insertpropuesta($registro);
+
+		$propuesta_tmp_k = $registro['propuesta_tmp_k']; 
+		unset($registro['propuesta_tmp_k']);
+		$id = $this->Model_Servicio->insertar_propuesta($registro);
+
+		$this->Model_Servicio->copiarPagosDePropuestaTemporal( $id , $propuesta_tmp_k);
 
 		$array = array(
 			"estatus_atencion"		=> 'En Propuesta',
@@ -567,25 +572,17 @@ class Servicio extends CI_Controller {
 			);
 		$this->Model_Cliente->update($array, $registro['cliente_k'] );
 
-
-
-		$array_response = array(
-			'status'	=> 'success',
-			'message'   => 'Propuesta enviada exitosamente',
-			'data'		=> $id
-			);
-
-		echo json_encode($array_response);
+		echo 1;
 	}
 
 	public function visitas_casa( $casa_k , $cliente_k ){
 
-		$data = $this->Model_Servicio->visitas_casa( $casa_k , $cliente_k );
+		$datos = $this->Model_Servicio->visitas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 
@@ -631,14 +628,14 @@ class Servicio extends CI_Controller {
 			);
 		$this->Model_Cliente->update($array, $registro['cliente_k'] );
 
-		$data = (object)array(
+		$datos = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario')
 			);
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Propuesta enviada exitosamente',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 
 		echo json_encode($array_response);
@@ -646,12 +643,12 @@ class Servicio extends CI_Controller {
 
 	public function ofertas_casa( $casa_k , $cliente_k ){
 
-		$data = $this->Model_Servicio->ofertas_casa( $casa_k , $cliente_k );
+		$datos = $this->Model_Servicio->ofertas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 
@@ -659,12 +656,12 @@ class Servicio extends CI_Controller {
 
 	public function ofertas_casas(){
 
-		$data = $this->Model_Servicio->ofertas_casas();
+		$datos = $this->Model_Servicio->ofertas_casas();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 
@@ -693,7 +690,7 @@ class Servicio extends CI_Controller {
 			"fecha_proxima_atencion"=> date ( 'Y-m-d' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )
 			);
 		$this->Model_Cliente->update($array, $registro['cliente_k'] );
-		$data = (object)array(
+		$datos = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario'),
 			'estatus'			=> $arreglo['estatus'],
@@ -702,7 +699,7 @@ class Servicio extends CI_Controller {
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Oferta enviada exitosamente',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 
 		echo json_encode($array_response);
@@ -730,7 +727,7 @@ class Servicio extends CI_Controller {
 
 		$id = $this->Model_Servicio->insertar_oferta($arreglo);
 
-		$data = (object)array(
+		$datos = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario'),
 			'estatus'			=> $arreglo['estatus'],
@@ -739,7 +736,7 @@ class Servicio extends CI_Controller {
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Oferta enviada exitosamente',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 
 		echo json_encode($array_response);
@@ -809,12 +806,12 @@ class Servicio extends CI_Controller {
 
 	public function propuestas_casa( $casa_k , $cliente_k ){
 
-		$data = $this->Model_Servicio->propuestas_casa( $casa_k , $cliente_k );
+		$datos = $this->Model_Servicio->propuestas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 
@@ -867,6 +864,25 @@ class Servicio extends CI_Controller {
 				print '{"data": ' . json_encode( $this->Model_Servicio->servicio_venta() ) . '}';
 			}
 		}
+	}
+
+	public function insert_propuesta_temporal() {
+		$registro = array();
+		$registro['fecha_hora_creacion'] 	= date('Y-m-d H:i:s');
+		$registro['usuario_creacion']	 	= $this->session->userdata('usuario_id');
+		$id = $this->Model_Servicio->insert_propuesta_temporal($registro);
+
+
+		print $id;
+	}
+
+	public function insertar_pago_propuesta_tmp() {
+
+		$registro 						= $this->input->post();
+
+		$this->Model_Servicio->insertar_pago_propuesta_tmp($registro);
+
+		print 1;
 	}
 
 }

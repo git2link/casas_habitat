@@ -389,6 +389,7 @@ $(function () {
 })
 
 function formatear_num(input){
+  
   numero = input.value;
 
   numero = numero.replace(/,/g, '');
@@ -410,7 +411,7 @@ function formatear_num(input){
 
 
   function validar(string) {
-    for (var i=0, output='', validos=",.123456789"; i<string.length; i++)
+    for (var i=0, output='', validos=",.1234567890"; i<string.length; i++)
       if (validos.indexOf(string.charAt(i)) != -1)
         output += string.charAt(i)
     return output;

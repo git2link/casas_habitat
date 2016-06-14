@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Notaria extends CI_Controller {
+class Notaria extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -14,19 +14,19 @@ class Notaria extends CI_Controller {
     }
 
 	public function index() {
-		$data['contenido'] = 'notaria/index';
-		$data['titulo'] = 'Notarias';
-		$data['query'] = $this->Model_Notaria->all();
-		$this->load->view('template2', $data);
+		$this->data['contenido'] = 'notaria/index';
+		$this->data['titulo'] = 'Notarias';
+		$this->data['query'] = $this->Model_Notaria->all();
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function search() {
 
-		$data['contenido'] 	= 'notaria/index';
-		$data['titulo'] 	= 'Notarias';
+		$this->data['contenido'] 	= 'notaria/index';
+		$this->data['titulo'] 	= 'Notarias';
 		$value 				= $this->input->post('buscar');
-		$data['query'] 		= $this->Model_Notaria->allFiltered('n.nombre', $value);
-		$this->load->view('template2', $data);
+		$this->data['query'] 		= $this->Model_Notaria->allFiltered('n.nombre', $value);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -37,10 +37,10 @@ class Notaria extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] 			= 'notaria/create';
-		$data['titulo'] 			= 'Crear Notaria';
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template2', $data);
+		$this->data['contenido'] 			= 'notaria/create';
+		$this->data['titulo'] 			= 'Crear Notaria';
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function insert() {
@@ -63,15 +63,15 @@ class Notaria extends CI_Controller {
 
 	public function edit($id) {
 
-		$data['contenido'] 	= 'notaria/edit';
-		$data['titulo'] 	= 'Actualizar Notaria';
-		$data['registro'] 	= $this->Model_Notaria->find($id);
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
-		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
-		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
+		$this->data['contenido'] 	= 'notaria/edit';
+		$this->data['titulo'] 	= 'Actualizar Notaria';
+		$this->data['registro'] 	= $this->Model_Notaria->find($id);
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
+		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
+		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
 
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 		
 	}
 

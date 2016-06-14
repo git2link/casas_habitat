@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Menu_Perfil extends CI_Controller {
+class Menu_Perfil extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -13,18 +13,18 @@ class Menu_Perfil extends CI_Controller {
     }
 
 	public function index() {
-		$data['contenido'] = 'menu_perfil/index';
-		$data['titulo'] = 'Accesos';
-		$data['query'] = $this->Model_Menu_Perfil->all();
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu_perfil/index';
+		$this->data['titulo'] = 'Accesos';
+		$this->data['query'] = $this->Model_Menu_Perfil->all();
+		$this->load->view('template', $this->data);
 	}
 
 	public function search() {
-		$data['contenido'] = 'menu_perfil/index';
-		$data['titulo'] = 'Accesos';
+		$this->data['contenido'] = 'menu_perfil/index';
+		$this->data['titulo'] = 'Accesos';
 		$value = $this->input->post('buscar');
-		$data['query'] = $this->Model_Menu_Perfil->allFiltered('perfil.name', $value);
-		$this->load->view('template', $data);
+		$this->data['query'] = $this->Model_Menu_Perfil->allFiltered('perfil.name', $value);
+		$this->load->view('template', $this->data);
 	}
 
 	public function my_validation() {
@@ -32,11 +32,11 @@ class Menu_Perfil extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] = 'menu_perfil/create';
-		$data['titulo'] = 'Crear Acceso';
-		$data['menus'] = $this->Model_Menu_Perfil->get_menus(); /* Lista de los Menu */
-		$data['perfiles'] = $this->Model_Menu_Perfil->get_perfiles(); /* Lista de los Perfiles */
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu_perfil/create';
+		$this->data['titulo'] = 'Crear Acceso';
+		$this->data['menus'] = $this->Model_Menu_Perfil->get_menus(); /* Lista de los Menu */
+		$this->data['perfiles'] = $this->Model_Menu_Perfil->get_perfiles(); /* Lista de los Perfiles */
+		$this->load->view('template', $this->data);
 	}
 
 	public function insert() {
@@ -57,12 +57,12 @@ class Menu_Perfil extends CI_Controller {
 	public function edit($id) {
 		// $id = $this->uri->segment(3);
 
-		$data['contenido'] = 'menu_perfil/edit';
-		$data['titulo'] = 'Actualizar Acceso';
-		$data['registro'] = $this->Model_Menu_Perfil->find($id);
-		$data['menus'] = $this->Model_Menu_Perfil->get_menus(); /* Lista de los Menu */
-		$data['perfiles'] = $this->Model_Menu_Perfil->get_perfiles(); /* Lista de los Perfiles */
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'menu_perfil/edit';
+		$this->data['titulo'] = 'Actualizar Acceso';
+		$this->data['registro'] = $this->Model_Menu_Perfil->find($id);
+		$this->data['menus'] = $this->Model_Menu_Perfil->get_menus(); /* Lista de los Menu */
+		$this->data['perfiles'] = $this->Model_Menu_Perfil->get_perfiles(); /* Lista de los Perfiles */
+		$this->load->view('template', $this->data);
 	}
 
 	public function update() {

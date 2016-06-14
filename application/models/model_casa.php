@@ -283,4 +283,18 @@ class Model_Casa extends CI_Model {
         return $query->result();
     }
 
+    function pagos_propuesta_tmp( $propuesta_k ){
+        $where = array(
+            'propuesta_tmp_k' => $propuesta_k
+            );
+        $this->db->select('monto, fecha');
+        $this->db->from('pagos_propuesta_tmp');
+        $this->db->where( $where );
+
+        $data = $this->db->get();
+
+        return $data->result();
+        
+    }
+
 }

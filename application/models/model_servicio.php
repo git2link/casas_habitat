@@ -226,7 +226,7 @@ class Model_Servicio extends CI_Model {
         $this->db->insert('casas_cliente_interes');
     }
 
-    function insertpropuesta( $registro ){
+    function insertar_propuesta( $registro ){
         $this->db->set($registro);
         $this->db->insert('propuestas');
         return $this->db->insert_id();
@@ -405,5 +405,28 @@ class Model_Servicio extends CI_Model {
         return $this->db->update('venta a
                                     join casa_cliente b on a.casa_cliente_k = b.casa_cliente_k');
     }
+
+    function insert_propuesta_temporal( $registro ){
+        $this->db->set($registro);
+        $this->db->insert('propuestas_tmp');
+        return $this->db->insert_id();
+    }
+    
+    function insertar_pago_propuesta_tmp( $registro ){
+        $this->db->set($registro);
+        $this->db->insert('pagos_propuesta_tmp');
+    }
+
+    function copiarPagosDePropuestaTemporal( $id , $propuesta_tmp_k){
+
+        $sql = "INSERT INTO pagos_propuesta (propuesta_k , monto , fecha )
+        SELECT ".$id." , monto , fecha  FROM pagos_propuesta_tmp
+         WHERE propuesta_tmp_k = ".$propuesta_tmp_k." " ;
+
+         $this->db->query($sql);
+
+
+    }
+
 
 }

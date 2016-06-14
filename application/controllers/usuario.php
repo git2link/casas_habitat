@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Usuario extends CI_Controller {
+class Usuario extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -17,18 +17,18 @@ class Usuario extends CI_Controller {
     }
 
 	public function index() {
-		$data['contenido'] 	= 'usuario/index';
-		$data['modal'] 		= 'usuario/usuario_modal';
-		$data['titulo'] 	= 'Usuarios';
-		$data['puestos'] 	= $this->Model_Catalogos->allPuestos();
-		$data['sucursales'] = $this->Model_Catalogos->allSucursales();
-		$data['perfil'] 	= $this->Model_Usuario->get_perfil_list();
-		$data['js_plugins']  = "
+		$this->data['contenido'] 	= 'usuario/index';
+		$this->data['modal'] 		= 'usuario/usuario_modal';
+		$this->data['titulo'] 	= 'Usuarios';
+		$this->data['puestos'] 	= $this->Model_Catalogos->allPuestos();
+		$this->data['sucursales'] = $this->Model_Catalogos->allSucursales();
+		$this->data['perfil'] 	= $this->Model_Usuario->get_perfil_list();
+		$this->data['js_plugins']  = "
 			<script type='text/javascript' src=".base_url('../js/webcamjs/webcam.js')."></script>";
-		$data['js'] 					= "
+		$this->data['js'] 					= "
 			<script type='text/javascript' src=".base_url('../js/app/direccion_2.js')."></script>";
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data );
 		
 	}
 
@@ -54,11 +54,11 @@ class Usuario extends CI_Controller {
 	}
 
 	public function search() {
-		$data['contenido'] = 'usuario/index';
-		$data['titulo'] = 'Usuarios';
+		$this->data['contenido'] = 'usuario/index';
+		$this->data['titulo'] = 'Usuarios';
 		$value = $this->input->post('buscar');
-		$data['query'] = $this->Model_Usuario->allFiltered('usuario.name', $value);
-		$this->load->view('template2', $data);
+		$this->data['query'] = $this->Model_Usuario->allFiltered('usuario.name', $value);
+		$this->load->view('template_v3', $this->data );
 	}
 
 	public function my_validation() {
@@ -66,14 +66,14 @@ class Usuario extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] 	= 'usuario/create';
-		$data['titulo'] 	= 'Crear Usuario';
-		$data['perfiles'] 	= $this->Model_Usuario->get_perfiles(); /* Lista de los Perfiles */
-		$data['js']			= "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['contenido'] 	= 'usuario/create';
+		$this->data['titulo'] 	= 'Crear Usuario';
+		$this->data['perfiles'] 	= $this->Model_Usuario->get_perfiles(); /* Lista de los Perfiles */
+		$this->data['js']			= "<script src=".base_url('../js/app/direccion.js')."></script>
 							<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 							<script src=".base_url('../js/angular/ui-bootstrap-tpls-0.9.0.js')."></script>
 							<script type='text/javascript' src=".base_url('../js/app/codigo_postal.js')."></script>";
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data );
 	}
 
 	public function insert() {
@@ -97,16 +97,16 @@ class Usuario extends CI_Controller {
 
 	public function edit($id) {
 
-		$data['contenido'] 	= 'usuario/edit';
-		$data['titulo'] 	= 'Actualizar Usuario';
-		$data['registro'] 	= $this->Model_Usuario->find($id);
-		$data['perfiles'] 	= $this->Model_Usuario->get_perfiles(); /* Lista de los Perfiles */
-		$data['estado']		= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
-		$data['municipio']	= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
-		$data['colonias']	= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
-		$data['usuario_k']	= $id;
+		$this->data['contenido'] 	= 'usuario/edit';
+		$this->data['titulo'] 	= 'Actualizar Usuario';
+		$this->data['registro'] 	= $this->Model_Usuario->find($id);
+		$this->data['perfiles'] 	= $this->Model_Usuario->get_perfiles(); /* Lista de los Perfiles */
+		$this->data['estado']		= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
+		$this->data['municipio']	= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
+		$this->data['colonias']	= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$this->data['usuario_k']	= $id;
 
-		$data['js']			= "<script src=".base_url('../js/app/direccion.js')."></script>
+		$this->data['js']			= "<script src=".base_url('../js/app/direccion.js')."></script>
 				<script src=".base_url('../js/plugins/fileupload/bootstrap-fileupload.js')."></script>
 				<script src=".base_url('../js/plugins/magnific/jquery.magnific-popup.min.js')."></script>
 
@@ -126,7 +126,7 @@ class Usuario extends CI_Controller {
 				<script src=".base_url('../js/jquery-upload/jquery.fileupload-ui.js')."></script>
 				<script src=".base_url('../js/jquery-upload/usuariosmain.js')."></script>
 		";
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data );
 	}
 
 	public function update() {
@@ -163,12 +163,12 @@ class Usuario extends CI_Controller {
 	}
 
 	public function find_json( $id ){
-		$data = $this->Model_Usuario->find_json( $id );
+		$datos = $this->Model_Usuario->find_json( $id );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 		echo json_encode($array_response);
 	}

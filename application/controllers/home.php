@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends MY_Controller {
 
 	// Constructor de Clase
 	function __construct() {
@@ -15,10 +15,10 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-		$data['contenido'] 		= 'home/index';
-		$data['titulo'] 		= '';
-		$data['news'] 			= $this->Model_Noticias->news();
-		$this->load->view('template_v3', $data);
+		$this->data['contenido'] 		= 'home/index';
+		$this->data['titulo'] 		= '';
+		$this->data['news'] 			= $this->Model_Noticias->news();
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function get_news() {
@@ -29,21 +29,21 @@ class Home extends CI_Controller {
 	}
 
 	public function acerca_de() {
-		$data['contenido'] = 'home/acerca_de';
-		$data['titulo'] = 'Acerca De';
-		$this->load->view('template2', $data);
+		$this->data['contenido'] = 'home/acerca_de';
+		$this->data['titulo'] = 'Acerca De';
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function acceso_denegado() {
-		$data['contenido'] = 'home/acceso_denegado';
-		$data['titulo'] = 'Denegado';
-		$this->load->view('template2', $data);
+		$this->data['contenido'] = 'home/acceso_denegado';
+		$this->data['titulo'] = 'Denegado';
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function ingreso() {
-		$data['contenido'] = 'home/ingreso';
-		$data['titulo'] = 'Ingreso';
-		$this->load->view('template_login', $data);
+		$this->data['contenido'] = 'home/ingreso';
+		$this->data['titulo'] = 'Ingreso';
+		$this->load->view('template_login', $this->data);
 	}
 
 	public function ingresar() {
@@ -69,9 +69,9 @@ class Home extends CI_Controller {
 	}
 
 	public function cambio_clave() {
-		$data['contenido'] = 'home/cambio_clave';
-		$data['titulo'] = 'Cambiar Contraseña';
-		$this->load->view('template', $data);
+		$this->data['contenido'] = 'home/cambio_clave';
+		$this->data['titulo'] = 'Cambiar Contraseña';
+		$this->load->view('template', $this->data);
 	}
 
 	public function cambiar_clave() {

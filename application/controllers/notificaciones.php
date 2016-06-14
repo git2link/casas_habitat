@@ -2,7 +2,7 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Notificaciones extends CI_Controller{
+class Notificaciones extends MY_Controller{
 
     function __construct() {
         parent::__construct();

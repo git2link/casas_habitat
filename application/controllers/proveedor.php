@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Proveedor extends CI_Controller {
+class Proveedor extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -14,21 +14,21 @@ class Proveedor extends CI_Controller {
     }
 
 	public function index() {
-		$data['contenido'] 	= 'proveedor/index';
-		$data['modal'] 		= 'proveedor/proveedor_modal';
-		$data['titulo'] 	= 'Proveedores';
-		$data['js'] 					= "
+		$this->data['contenido'] 	= 'proveedor/index';
+		$this->data['modal'] 		= 'proveedor/proveedor_modal';
+		$this->data['titulo'] 	= 'Proveedores';
+		$this->data['js'] 					= "
 			<script type='text/javascript' src=".base_url('../js/app/direccion_2.js')."></script>";
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function search() {
 
-		$data['contenido'] 	= 'proveedor/index';
-		$data['titulo'] 	= 'Proveedores';
+		$this->data['contenido'] 	= 'proveedor/index';
+		$this->data['titulo'] 	= 'Proveedores';
 		$value 				= $this->input->post('buscar');
-		$data['query'] 		= $this->Model_Proveedor->allFiltered('p.empresa', $value);
-		$this->load->view('template2', $data);
+		$this->data['query'] 		= $this->Model_Proveedor->allFiltered('p.empresa', $value);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -39,11 +39,11 @@ class Proveedor extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] 			= 'proveedor/create';
-		$data['titulo'] 			= 'Crear Proveedor';
-		$data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template2', $data);
+		$this->data['contenido'] 			= 'proveedor/create';
+		$this->data['titulo'] 			= 'Crear Proveedor';
+		$this->data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function insert() {
@@ -68,16 +68,16 @@ class Proveedor extends CI_Controller {
 
 	public function edit($id) {
 
-		$data['contenido'] 	= 'proveedor/edit';
-		$data['titulo'] 	= 'Actualizar Proveedor';
-		$data['registro'] 	= $this->Model_Proveedor->find($id);
-		$data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
-		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
-		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
+		$this->data['contenido'] 	= 'proveedor/edit';
+		$this->data['titulo'] 	= 'Actualizar Proveedor';
+		$this->data['registro'] 	= $this->Model_Proveedor->find($id);
+		$this->data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
+		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
+		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
+		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
 
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 		
 	}
 

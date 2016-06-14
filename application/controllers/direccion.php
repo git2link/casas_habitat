@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Direccion extends CI_Controller {
+class Direccion extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -15,49 +15,49 @@ class Direccion extends CI_Controller {
 
     function obtenerCodigosPostales(){
 
-    	$data = $this->Model_Direccion->obtenerCodigosPostales();
+    	$datos = $this->Model_Direccion->obtenerCodigosPostales();
 
-    	echo json_encode($data);
+    	echo json_encode($datos);
     }
 
     public function obtenerDirecciones( $cp ){
 
-    	$data = $this->Model_Direccion->obtenerDirecciones($cp);
+    	$datos = $this->Model_Direccion->obtenerDirecciones($cp);
 
-    	echo '{"direcciones": ' . json_encode($data) . '}';
+    	echo '{"direcciones": ' . json_encode($datos) . '}';
 
     }
 
 	public function obtenerEstados(){
 
-		$data = $this->Model_Direccion->obtenerEstados();
+		$datos = $this->Model_Direccion->obtenerEstados();
 
-		echo '{"estados": ' . json_encode($data) . '}';
+		echo '{"estados": ' . json_encode($datos) . '}';
 
 	}
 
     public function obtenerMunicipios( $estado_k ){
 
-    	$data = $this->Model_Direccion->obtenerMunicipios($estado_k);
+    	$datos = $this->Model_Direccion->obtenerMunicipios($estado_k);
 
-    	echo '{"municipios": ' . json_encode($data) . '}';
+    	echo '{"municipios": ' . json_encode($datos) . '}';
 
     }
 
 	public function index() {
-		$data['contenido'] = 'direccion/index';
-		$data['titulo'] = 'Direcciones';
-		$data['query'] = $this->Model_Direccion->all();
-		$this->load->view('template2', $data);
+		$this->data['contenido'] = 'direccion/index';
+		$this->data['titulo'] = 'Direcciones';
+		$this->data['query'] = $this->Model_Direccion->all();
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function search() {
 
-		$data['contenido'] 	= 'direccion/index';
-		$data['titulo'] 	= 'Direcciones';
+		$this->data['contenido'] 	= 'direccion/index';
+		$this->data['titulo'] 	= 'Direcciones';
 		$value 				= $this->input->post('buscar');
-		$data['query'] 		= $this->Model_Direccion->allFiltered('c.clave_interna', $value);
-		$this->load->view('template2', $data);
+		$this->data['query'] 		= $this->Model_Direccion->allFiltered('c.clave_interna', $value);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -68,17 +68,17 @@ class Direccion extends CI_Controller {
 	}
 
 	public function create() {
-		$data['contenido'] 			= 'direccion/create';
-		$data['titulo'] 			= 'Crear Direccion';
-		$data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
-		$data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
-		$data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
-		$data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
-		$data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
-		$data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
-		$data['llaves'] 			= $this->Model_Direccion->get_llaves();
+		$this->data['contenido'] 			= 'direccion/create';
+		$this->data['titulo'] 			= 'Crear Direccion';
+		$this->data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
+		$this->data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
+		$this->data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
+		$this->data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
+		$this->data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
+		$this->data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
+		$this->data['llaves'] 			= $this->Model_Direccion->get_llaves();
 
-		$this->load->view('template2', $data);
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function insert() {
@@ -101,17 +101,17 @@ class Direccion extends CI_Controller {
 
 	public function edit($id) {
 
-		$data['contenido'] 	= 'direccion/edit';
-		$data['titulo'] 	= 'Actualizar Direccion';
-		$data['registro'] 	= $this->Model_Direccion->find($id);
-		$data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
-		$data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
-		$data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
-		$data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
-		$data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
-		$data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
-		$data['llaves'] 			= $this->Model_Direccion->get_llaves();
-		$this->load->view('template2', $data);
+		$this->data['contenido'] 	= 'direccion/edit';
+		$this->data['titulo'] 	= 'Actualizar Direccion';
+		$this->data['registro'] 	= $this->Model_Direccion->find($id);
+		$this->data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
+		$this->data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
+		$this->data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
+		$this->data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
+		$this->data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
+		$this->data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
+		$this->data['llaves'] 			= $this->Model_Direccion->get_llaves();
+		$this->load->view('template_v3', $this->data);
 		
 	}
 
@@ -137,12 +137,12 @@ class Direccion extends CI_Controller {
 
 	public function get_estados_json(){
 
-    	$data = $this->Model_Catalogos->get_estados_json();
+    	$datos = $this->Model_Catalogos->get_estados_json();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 
 		echo json_encode($array_response);
@@ -150,12 +150,12 @@ class Direccion extends CI_Controller {
 
     public function get_municipios_json( $estado_k ){
 
-    	$data = $this->Model_Catalogos->get_municipios_json( $estado_k );
+    	$datos = $this->Model_Catalogos->get_municipios_json( $estado_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $data
+			'data'		=> $datos
 			);
 
 		echo json_encode($array_response);

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Configuracion extends CI_Controller {
+class Configuracion extends MY_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -13,10 +13,10 @@ class Configuracion extends CI_Controller {
 
 
 	public function casa_paquete() {
-		$data['contenido'] 		= 'configuracion/casa_paquete';
-		$data['modal'] 			= 'configuracion/casa_paquete_modal';
-		$data['titulo'] 		= 'Configuracion';
-		$this->load->view('template_v3', $data);
+		$this->data['contenido'] 		= 'configuracion/casa_paquete';
+		$this->data['modal'] 			= 'configuracion/casa_paquete_modal';
+		$this->data['titulo'] 		= 'Configuracion';
+		$this->load->view('template_v3', $this->data);
 	}
 
 	public function datatable() {
@@ -112,11 +112,11 @@ class Configuracion extends CI_Controller {
 	}
 
 	public function direcciones() {
-		$data['contenido'] 		= 'configuracion/direcciones';
-		$data['modal'] 			= 'configuracion/direcciones_modal';
-		$data['estados']		= $this->Model_Catalogos->getEstados();
-		$data['titulo'] 		= 'Configuracion';
-		$this->load->view('template_v3', $data);
+		$this->data['contenido'] 		= 'configuracion/direcciones';
+		$this->data['modal'] 			= 'configuracion/direcciones_modal';
+		$this->data['estados']		= $this->Model_Catalogos->getEstados();
+		$this->data['titulo'] 		= 'Configuracion';
+		$this->load->view('template_v3', $this->data);
 	}
 
 
@@ -167,11 +167,11 @@ class Configuracion extends CI_Controller {
 
 	public function procedencia_prospectos(){
 
-		$data['contenido'] 		= 'configuracion/procedencia_prospectos';
-		$data['modal'] 			= 'configuracion/procedencia_prospectos_modal';
-		$data['titulo'] 		= 'Configuracion';
+		$this->data['contenido'] 		= 'configuracion/procedencia_prospectos';
+		$this->data['modal'] 			= 'configuracion/procedencia_prospectos_modal';
+		$this->data['titulo'] 		= 'Configuracion';
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -202,11 +202,11 @@ class Configuracion extends CI_Controller {
 
 	public function estatus_venta(){
 
-		$data['contenido'] 		= 'configuracion/estatus_venta';
-		$data['modal'] 			= 'configuracion/estatus_venta_modal';
-		$data['titulo'] 		= 'Configuracion';
+		$this->data['contenido'] 		= 'configuracion/estatus_venta';
+		$this->data['modal'] 			= 'configuracion/estatus_venta_modal';
+		$this->data['titulo'] 		= 'Configuracion';
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -237,11 +237,11 @@ class Configuracion extends CI_Controller {
 
 	public function forma_pago(){
 
-	$data['contenido'] 		= 'configuracion/forma_pago';
-	$data['modal'] 			= 'configuracion/forma_pago_modal';
-	$data['titulo'] 		= 'Configuracion';
+	$this->data['contenido'] 		= 'configuracion/forma_pago';
+	$this->data['modal'] 			= 'configuracion/forma_pago_modal';
+	$this->data['titulo'] 		= 'Configuracion';
 
-	$this->load->view('template_v3', $data);
+	$this->load->view('template_v3', $this->data);
 
 }
 
@@ -272,11 +272,11 @@ class Configuracion extends CI_Controller {
 
 	public function puestos(){
 
-		$data['contenido'] 		= 'configuracion/puestos';
-		$data['modal'] 			= 'configuracion/puestos_modal';
-		$data['titulo'] 		= 'Configuracion';
+		$this->data['contenido'] 		= 'configuracion/puestos';
+		$this->data['modal'] 			= 'configuracion/puestos_modal';
+		$this->data['titulo'] 		= 'Configuracion';
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
@@ -307,11 +307,11 @@ class Configuracion extends CI_Controller {
 
 	public function sucursales(){
 
-		$data['contenido'] 		= 'configuracion/sucursales';
-		$data['modal'] 			= 'configuracion/sucursales_modal';
-		$data['titulo'] 		= 'Configuracion';
+		$this->data['contenido'] 		= 'configuracion/sucursales';
+		$this->data['modal'] 			= 'configuracion/sucursales_modal';
+		$this->data['titulo'] 		= 'Configuracion';
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template_v3', $this->data);
 
 	}
 
