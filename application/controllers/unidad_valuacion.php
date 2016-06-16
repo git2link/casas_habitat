@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Unidad_Valuacion extends MY_Controller {
+class Unidad_Valuacion extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -14,19 +14,19 @@ class Unidad_Valuacion extends MY_Controller {
     }
 
 	public function index() {
-		$this->data['contenido'] = 'unidad_valuacion/index';
-		$this->data['titulo'] = 'Unidades de Valuación';
-		$this->data['query'] = $this->Model_Unidad_Valuacion->all();
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] = 'unidad_valuacion/index';
+		$data['titulo'] = 'Unidades de Valuación';
+		$data['query'] = $this->Model_Unidad_Valuacion->all();
+		$this->load->view('template_v3', $data);
 	}
 
 	public function search() {
 
-		$this->data['contenido'] 	= 'unidad_valuacion/index';
-		$this->data['titulo'] 	= 'Unidades de Valuación';
+		$data['contenido'] 	= 'unidad_valuacion/index';
+		$data['titulo'] 	= 'Unidades de Valuación';
 		$value 				= $this->input->post('buscar');
-		$this->data['query'] 		= $this->Model_Unidad_Valuacion->allFiltered('uv.empresa', $value);
-		$this->load->view('template_v3', $this->data);
+		$data['query'] 		= $this->Model_Unidad_Valuacion->allFiltered('uv.empresa', $value);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -37,10 +37,10 @@ class Unidad_Valuacion extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] 			= 'unidad_valuacion/create';
-		$this->data['titulo'] 			= 'Crear Unidad de Valuación';
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 			= 'unidad_valuacion/create';
+		$data['titulo'] 			= 'Crear Unidad de Valuación';
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -63,15 +63,15 @@ class Unidad_Valuacion extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'unidad_valuacion/edit';
-		$this->data['titulo'] 	= 'Actualizar Unidad de Valuación';
-		$this->data['registro'] 	= $this->Model_Unidad_Valuacion->find($id);
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$data['contenido'] 	= 'unidad_valuacion/edit';
+		$data['titulo'] 	= 'Actualizar Unidad de Valuación';
+		$data['registro'] 	= $this->Model_Unidad_Valuacion->find($id);
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 		
 	}
 

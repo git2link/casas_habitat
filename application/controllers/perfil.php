@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Perfil extends MY_Controller {
+class Perfil extends CI_Controller {
 
 	// Constructor de Clase
 	function __construct() {
@@ -14,18 +14,18 @@ class Perfil extends MY_Controller {
 	}
 
 	public function index() {
-		$this->data['contenido'] = 'perfil/index';
-		$this->data['titulo'] = 'Perfiles';
-		$this->data['query'] = $this->Model_Perfil->all();
-		$this->load->view('template', $this->data);
+		$data['contenido'] = 'perfil/index';
+		$data['titulo'] = 'Perfiles';
+		$data['query'] = $this->Model_Perfil->all();
+		$this->load->view('template', $data);
 	}
 
 	public function search() {
-		$this->data['contenido'] = 'perfil/index';
-		$this->data['titulo'] = 'Perfiles';
+		$data['contenido'] = 'perfil/index';
+		$data['titulo'] = 'Perfiles';
 		$value = $this->input->post('buscar');
-		$this->data['query'] = $this->Model_Perfil->allFiltered('name', $value);
-		$this->load->view('template', $this->data);
+		$data['query'] = $this->Model_Perfil->allFiltered('name', $value);
+		$this->load->view('template', $data);
 	}
 
 	public function norep() {
@@ -33,9 +33,9 @@ class Perfil extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] = 'perfil/create';
-		$this->data['titulo'] = 'Crear Perfil';
-		$this->load->view('template', $this->data);
+		$data['contenido'] = 'perfil/create';
+		$data['titulo'] = 'Crear Perfil';
+		$this->load->view('template', $data);
 	}
 
 	public function insert() {
@@ -56,10 +56,10 @@ class Perfil extends MY_Controller {
 	public function edit($id) {
 		// $id = $this->uri->segment(3);
 
-		$this->data['contenido'] = 'perfil/edit';
-		$this->data['titulo'] = 'Actualizar Perfil';
-		$this->data['registro'] = $this->Model_Perfil->find($id);
-		$this->load->view('template', $this->data);
+		$data['contenido'] = 'perfil/edit';
+		$data['titulo'] = 'Actualizar Perfil';
+		$data['registro'] = $this->Model_Perfil->find($id);
+		$this->load->view('template', $data);
 	}
 
 	public function update() {

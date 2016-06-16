@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Actividades extends MY_Controller {
+class Actividades extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -10,17 +10,17 @@ class Actividades extends MY_Controller {
     }
 
 	public function visitas() {
-		$this->data['contenido'] 		= 'actividades/visita_calendario';
-		$this->data['titulo'] 		= 'Visita';
-		$this->data['js_plugins'] 	= "
+		$data['contenido'] 		= 'actividades/visita_calendario';
+		$data['titulo'] 		= 'Visita';
+		$data['js_plugins'] 	= "
 			<script src=".base_url('../js/fullcalendar/moment.js')."></script>
 			<script src=".base_url('../js/fullcalendar/fullcalendar.min.js')."></script>
 			<script src=".base_url('../js/fullcalendar/es.js')."></script>
 		";
-		$this->data['css_plugins'] 	= "
+		$data['css_plugins'] 	= "
 			<link rel='stylesheet' href='".base_url('../css/fullcalendar/fullcalendar.css')."'>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function set_visita_done() {
@@ -33,44 +33,44 @@ class Actividades extends MY_Controller {
 
 	function visita( $visita_k ){
 		
-		$this->data['contenido']			= 'home/acceso_denegado';
-		$this->data['titulo'] 			= 'Denegado';
+		$data['contenido']			= 'home/acceso_denegado';
+		$data['titulo'] 			= 'Denegado';
 		
 		if (isset($visita_k)) {
 			$arrQuery 					= $this->Model_Actividades->casa_by_visita($visita_k);
 			if (count($arrQuery)>0) {
 				if ($arrQuery[0]->realizada == 0) {
 
-					$this->data['visita_k']			= $visita_k;
+					$data['visita_k']			= $visita_k;
 					$casa_k						= $arrQuery[0]->casa_k;
-					$this->data['clave_interna']		= $arrQuery[0]->clave_interna;
+					$data['clave_interna']		= $arrQuery[0]->clave_interna;
 					
-					$this->data['contenido'] 			= 'casa/galeria2';
-					$this->data['modal']				= 'casa/galeria_modal';
-					$this->data['titulo'] 			= 'Casas';
+					$data['contenido'] 			= 'casa/galeria2';
+					$data['modal']				= 'casa/galeria_modal';
+					$data['titulo'] 			= 'Casas';
 
-					$this->data['imagenes']			= $this->Model_Casa->getImagenes_by_visita( $visita_k );
-					$this->data['casa_k']				= $casa_k;
-					$this->data['user_k']				= $user_k		= 		$this->session->userdata('usuario_id');
+					$data['imagenes']			= $this->Model_Casa->getImagenes_by_visita( $visita_k );
+					$data['casa_k']				= $casa_k;
+					$data['user_k']				= $user_k		= 		$this->session->userdata('usuario_id');
 					
-					$this->data['js_plugins']			= "
+					$data['js_plugins']			= "
 						<script src=".base_url('../js/fileinput/fileinput.min.js')."></script>
 						<script src=".base_url('../js/fileinput/fileinput_locale_es.js')."></script>
 						<script src=".base_url('../js/fileinput/jquery.media.js')."></script>
 						<script src=".base_url('../js/viewer/viewer.js')."></script>
 						<script src=".base_url('../js/app/common.js')."></script>";
 
-					$this->data['css_plugins']		= "
+					$data['css_plugins']		= "
 						<link rel='stylesheet' href='".base_url('../css/fileinput/fileinput.min.css')."'>
 						<link rel='stylesheet' href='".base_url('../css/viewer/viewer.css')."'>";
 				}else{
-					$this->data['contenido'] 			= 'actividades/visita_realizada';
-					$this->data['titulo'] 			= 'Visita realizada';
+					$data['contenido'] 			= 'actividades/visita_realizada';
+					$data['titulo'] 			= 'Visita realizada';
 				}
 			}
 		}
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mejora extends MY_Controller {
+class Mejora extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -16,11 +16,11 @@ class Mejora extends MY_Controller {
 
 
 	/*public function create( $id ) {
-		$this->data['contenido']  = 'mejora/index';
-		$this->data['casa_k'] 	= $id;
-		$this->data['titulo'] 	= 'Mejoras';
+		$data['contenido']  = 'mejora/index';
+		$data['casa_k'] 	= $id;
+		$data['titulo'] 	= 'Mejoras';
 
-		$this->data['js']			= "
+		$data['js']			= "
 		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
@@ -37,24 +37,24 @@ class Mejora extends MY_Controller {
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
 
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}*/
 
 	public function create( $id ) {
 
-		$this->data['modal'] 		= 'mejora/mejora_modal';
-		$this->data['titulo'] 	= 'Mejoras';
-		$this->data['casa_k'] 	= $id;
-		$this->data['proveedor'] 	= $this->Model_Proveedor->all();
-		$this->data['casa'] 		= $this->Model_Mejora->ubicacion( $id );
+		$data['modal'] 		= 'mejora/mejora_modal';
+		$data['titulo'] 	= 'Mejoras';
+		$data['casa_k'] 	= $id;
+		$data['proveedor'] 	= $this->Model_Proveedor->all();
+		$data['casa'] 		= $this->Model_Mejora->ubicacion( $id );
 		
-		if (count($this->data['casa'])>0) {
-			$this->data['clave'] 		= $this->data['casa'][0]->clave_interna;
-			$this->data['contenido'] 	= 'mejora/mejora';
+		if (count($data['casa'])>0) {
+			$data['clave'] 		= $data['casa'][0]->clave_interna;
+			$data['contenido'] 	= 'mejora/mejora';
 		}else{
-			$this->data['contenido'] 	= 'home/acceso_denegado';
+			$data['contenido'] 	= 'home/acceso_denegado';
 		}
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	function all( $id ){
@@ -71,11 +71,11 @@ class Mejora extends MY_Controller {
 
 /*
 	public function create() {
-		$this->data['contenido'] 			= 'mejora/create';
-		$this->data['titulo'] 			= 'Crear Mejora';
-		$this->data['mejora']			= $this->Model_Catalogos->getTipoMejoras();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 			= 'mejora/create';
+		$data['titulo'] 			= 'Crear Mejora';
+		$data['mejora']			= $this->Model_Catalogos->getTipoMejoras();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $data);
 	}*/
 
 	public function insert() {
@@ -142,16 +142,16 @@ class Mejora extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'mejora/edit';
-		$this->data['titulo'] 	= 'Actualizar Mejora';
-		$this->data['registro'] 	= $this->Model_Mejora->find($id);
-		$this->data['mejora']			= $this->Model_Catalogos->getTipoMejoras();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$data['contenido'] 	= 'mejora/edit';
+		$data['titulo'] 	= 'Actualizar Mejora';
+		$data['registro'] 	= $this->Model_Mejora->find($id);
+		$data['mejora']			= $this->Model_Catalogos->getTipoMejoras();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 		
 	}
 

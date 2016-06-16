@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Checklist extends MY_Controller {
+class Checklist extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -25,8 +25,8 @@ class Checklist extends MY_Controller {
 	
 	public function index( $casa_k = 0, $clave_interna ) {
 		$user_k								= $this->session->userdata('usuario_id');
-		$this->data['contenido'] 					= 'checklist/index';
-		$this->data['titulo'] 					= 'Casas';
+		$data['contenido'] 					= 'checklist/index';
+		$data['titulo'] 					= 'Casas';
 
 		$arrQuery 							= $this->Model_Checklist->exist( $casa_k );
 		
@@ -49,17 +49,17 @@ class Checklist extends MY_Controller {
 			$this->Model_Checklist->update_venta_by_casa($venta, $casa_k);
 		}
 
-		$this->data['clave_interna']				= $clave_interna;
-		$this->data['checklist']					= $this->Model_Checklist->checklist( $casa_k );
-		$this->data['checklistfiles_casa']		= $this->Model_Checklist->checklistfiles_casa( $casa_k );
-		$this->data['checklistfiles_habitat']		= $this->Model_Checklist->checklistfiles_habitat( $casa_k );
-		$this->data['checklistfiles_personales']	= $this->Model_Checklist->checklistfiles_personales( $casa_k );
-		$this->data['checklist_description']		= $this->Model_Checklist->checklist_description( $casa_k );
-		$this->data['adviser']					= $this->Model_Checklist->get_checklist_adviser( $user_k );
-		$this->data['user']						= $this->Model_Checklist->get_checklist_user( $casa_k );
-		$this->data['notaria']					= $this->Model_Checklist->get_notaria_list();
-		$this->data['currentuser']				= $this->Model_Checklist->get_current_user( $user_k );
-		$this->data['casa_k']						= $casa_k;
+		$data['clave_interna']				= $clave_interna;
+		$data['checklist']					= $this->Model_Checklist->checklist( $casa_k );
+		$data['checklistfiles_casa']		= $this->Model_Checklist->checklistfiles_casa( $casa_k );
+		$data['checklistfiles_habitat']		= $this->Model_Checklist->checklistfiles_habitat( $casa_k );
+		$data['checklistfiles_personales']	= $this->Model_Checklist->checklistfiles_personales( $casa_k );
+		$data['checklist_description']		= $this->Model_Checklist->checklist_description( $casa_k );
+		$data['adviser']					= $this->Model_Checklist->get_checklist_adviser( $user_k );
+		$data['user']						= $this->Model_Checklist->get_checklist_user( $casa_k );
+		$data['notaria']					= $this->Model_Checklist->get_notaria_list();
+		$data['currentuser']				= $this->Model_Checklist->get_current_user( $user_k );
+		$data['casa_k']						= $casa_k;
 
 		/*	Nombres */
 			$checklist_name['hoja_presupuesto']					= 'Hoja de presupuesto';
@@ -88,23 +88,23 @@ class Checklist extends MY_Controller {
 			$checklist_name['contrato_casas_habitat'] 			= 'Contrato casas habitat';
 		/*  Nombres */
 
-		$this->data['checklist_name']				= $checklist_name;
+		$data['checklist_name']				= $checklist_name;
 
-		$this->data['js_plugins']					= "
+		$data['js_plugins']					= "
 			<script src=".base_url('../js/fileinput/fileinput.min.js')."></script>
 			<script src=".base_url('../js/fileinput/fileinput_locale_es.js')."></script>
 			<script src=".base_url('../js/fileinput/jquery.media.js')."></script>
 			<script src=".base_url('../js/demos/form-extended.js')."></script>";
 
-		$this->data['css_plugins']		= "
+		$data['css_plugins']		= "
 			<link rel='stylesheet' href='".base_url('../css/fileinput/fileinput.min.css')."'>";
 
-		$this->data['js']				    = "
+		$data['js']				    = "
 			<script src=".base_url('../js/app/checklist.js')."></script>";
 
-		$this->data['modal']				= 'checklist/checklist_modal';
+		$data['modal']				= 'checklist/checklist_modal';
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function updatechecklist() {

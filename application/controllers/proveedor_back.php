@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Proveedor extends MY_Controller {
+class Proveedor extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -14,19 +14,19 @@ class Proveedor extends MY_Controller {
     }
 
 	public function index() {
-		$this->data['contenido'] = 'proveedor/index';
-		$this->data['titulo'] = 'Proveedores';
-		$this->data['query'] = $this->Model_Proveedor->all();
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] = 'proveedor/index';
+		$data['titulo'] = 'Proveedores';
+		$data['query'] = $this->Model_Proveedor->all();
+		$this->load->view('template_v3', $data);
 	}
 
 	public function search() {
 
-		$this->data['contenido'] 	= 'proveedor/index';
-		$this->data['titulo'] 	= 'Proveedores';
+		$data['contenido'] 	= 'proveedor/index';
+		$data['titulo'] 	= 'Proveedores';
 		$value 				= $this->input->post('buscar');
-		$this->data['query'] 		= $this->Model_Proveedor->allFiltered('p.empresa', $value);
-		$this->load->view('template_v3', $this->data);
+		$data['query'] 		= $this->Model_Proveedor->allFiltered('p.empresa', $value);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -37,11 +37,11 @@ class Proveedor extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] 			= 'proveedor/create';
-		$this->data['titulo'] 			= 'Crear Proveedor';
-		$this->data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 			= 'proveedor/create';
+		$data['titulo'] 			= 'Crear Proveedor';
+		$data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -64,16 +64,16 @@ class Proveedor extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'proveedor/edit';
-		$this->data['titulo'] 	= 'Actualizar Proveedor';
-		$this->data['registro'] 	= $this->Model_Proveedor->find($id);
-		$this->data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$data['contenido'] 	= 'proveedor/edit';
+		$data['titulo'] 	= 'Actualizar Proveedor';
+		$data['registro'] 	= $this->Model_Proveedor->find($id);
+		$data['proveedor']			= $this->Model_Catalogos->getTipoProveedores();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 		
 	}
 

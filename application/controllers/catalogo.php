@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Catalogo extends MY_Controller {
+class Catalogo extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {

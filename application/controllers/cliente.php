@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Cliente extends MY_Controller {
+class Cliente extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -17,10 +17,10 @@ class Cliente extends MY_Controller {
 	public function index() {
 
 		$registro['estatus_cliente'] 	= ESTATUS_CLIENTE_PROSPECTO;
-		$this->data['contenido'] 				= 'cliente/index';
-		$this->data['titulo'] 				= ' Clientes';
-		$this->data['query'] 					= $this->Model_Cliente->all( $registro );
-		$this->data['js']			= "
+		$data['contenido'] 				= 'cliente/index';
+		$data['titulo'] 				= ' Clientes';
+		$data['query'] 					= $this->Model_Cliente->all( $registro );
+		$data['js']			= "
 		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
@@ -34,34 +34,34 @@ class Cliente extends MY_Controller {
 
 		<script type='text/javascript' src=".base_url('../js/angular/underscore.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 
 	}
 
 	public function personas( $tipo ) {
 		if ( $tipo=='clientes' || $tipo=='prospectos' ) {
-			$this->data['contenido'] 				= 'cliente/personas';
-			$this->data['modal'] 					= 'cliente/personas_modal';
-			$this->data['titulo'] 				= 'Personas';
+			$data['contenido'] 				= 'cliente/personas';
+			$data['modal'] 					= 'cliente/personas_modal';
+			$data['titulo'] 				= 'Personas';
 			if ($tipo=='clientes') {
-				$this->data['tipo'] 				= 'cliente';
+				$data['tipo'] 				= 'cliente';
 			}else{
-				$this->data['tipo'] 				= 'prospecto';
+				$data['tipo'] 				= 'prospecto';
 			}
 			
-			$this->data['estado']					= $this->Model_Catalogos->getEstados();
-			$this->data['procedencia'] 			= $this->Model_Catalogos->allProcedencia();
-			$this->data['servicios'] 				= $this->Model_Catalogos->allServicios();
-			$this->data['js'] 					= "
+			$data['estado']					= $this->Model_Catalogos->getEstados();
+			$data['procedencia'] 			= $this->Model_Catalogos->allProcedencia();
+			$data['servicios'] 				= $this->Model_Catalogos->allServicios();
+			$data['js'] 					= "
 			<script type='text/javascript' src=".base_url('../js/app/direccion_2.js')."></script>";
 			
 		}else{
-			$this->data['contenido'] 				= 'home/acceso_denegado';
-			$this->data['titulo'] 				= 'Denegado';
+			$data['contenido'] 				= 'home/acceso_denegado';
+			$data['titulo'] 				= 'Denegado';
 		}
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 
@@ -79,11 +79,11 @@ class Cliente extends MY_Controller {
 
 	public function search() {
 
-		$this->data['contenido'] 	= 'cliente/index';
-		$this->data['titulo'] 	= 'Clientes';
+		$data['contenido'] 	= 'cliente/index';
+		$data['titulo'] 	= 'Clientes';
 		$value 				= $this->input->post('buscar');
-		$this->data['query'] 		= $this->Model_Cliente->allFiltered('cli.nombre', $value);
-		$this->load->view('template_v3', $this->data);
+		$data['query'] 		= $this->Model_Cliente->allFiltered('cli.nombre', $value);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -94,15 +94,15 @@ class Cliente extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] 			= 'cliente/create';
-		$this->data['titulo'] 			= 'Crear Cliente';
-		$this->data['casas']				= $this->Model_Catalogos->getCasas();
-		$this->data['estado_civil']		= $this->Model_Catalogos->getEstadoCivil();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] 			= 'cliente/create';
+		$data['titulo'] 			= 'Crear Cliente';
+		$data['casas']				= $this->Model_Catalogos->getCasas();
+		$data['estado_civil']		= $this->Model_Catalogos->getEstadoCivil();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -134,15 +134,15 @@ class Cliente extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'cliente/edit';
-		$this->data['titulo'] 	= 'Actualizar Cliente';
-		$this->data['casas']		= $this->Model_Catalogos->getCasas();
-		$this->data['registro'] 	= $this->Model_Cliente->find($id);
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 	= 'cliente/edit';
+		$data['titulo'] 	= 'Actualizar Cliente';
+		$data['casas']		= $this->Model_Catalogos->getCasas();
+		$data['registro'] 	= $this->Model_Cliente->find($id);
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
+		$this->load->view('template_v3', $data);
 		
 	}
 
@@ -183,11 +183,11 @@ class Cliente extends MY_Controller {
 	}
 
 	public function servicios($id){		
-		$this->data['contenido'] 				= 'cliente/servicios';
-		$this->data['titulo'] 				= ' Servicios';
-		$this->data['usuario_k']				= $id;
-		$this->data['datos_usuario']			= $this->Model_Cliente->find( $id );
-		$this->data['js']			= "
+		$data['contenido'] 				= 'cliente/servicios';
+		$data['titulo'] 				= ' Servicios';
+		$data['usuario_k']				= $id;
+		$data['datos_usuario']			= $this->Model_Cliente->find( $id );
+		$data['js']			= "
 		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-resource.min.js')."></script>
@@ -210,7 +210,7 @@ class Cliente extends MY_Controller {
   		<script src=".base_url('../js/plugins/howl/howl.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/demos/ui-notifications.js')."></script>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function datatable() {

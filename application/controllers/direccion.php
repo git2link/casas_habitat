@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Direccion extends MY_Controller {
+class Direccion extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -45,19 +45,19 @@ class Direccion extends MY_Controller {
     }
 
 	public function index() {
-		$this->data['contenido'] = 'direccion/index';
-		$this->data['titulo'] = 'Direcciones';
-		$this->data['query'] = $this->Model_Direccion->all();
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] = 'direccion/index';
+		$data['titulo'] = 'Direcciones';
+		$data['query'] = $this->Model_Direccion->all();
+		$this->load->view('template_v3', $data);
 	}
 
 	public function search() {
 
-		$this->data['contenido'] 	= 'direccion/index';
-		$this->data['titulo'] 	= 'Direcciones';
+		$data['contenido'] 	= 'direccion/index';
+		$data['titulo'] 	= 'Direcciones';
 		$value 				= $this->input->post('buscar');
-		$this->data['query'] 		= $this->Model_Direccion->allFiltered('c.clave_interna', $value);
-		$this->load->view('template_v3', $this->data);
+		$data['query'] 		= $this->Model_Direccion->allFiltered('c.clave_interna', $value);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -68,17 +68,17 @@ class Direccion extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] 			= 'direccion/create';
-		$this->data['titulo'] 			= 'Crear Direccion';
-		$this->data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
-		$this->data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
-		$this->data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
-		$this->data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
-		$this->data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
-		$this->data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
-		$this->data['llaves'] 			= $this->Model_Direccion->get_llaves();
+		$data['contenido'] 			= 'direccion/create';
+		$data['titulo'] 			= 'Crear Direccion';
+		$data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
+		$data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
+		$data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
+		$data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
+		$data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
+		$data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
+		$data['llaves'] 			= $this->Model_Direccion->get_llaves();
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -101,17 +101,17 @@ class Direccion extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'direccion/edit';
-		$this->data['titulo'] 	= 'Actualizar Direccion';
-		$this->data['registro'] 	= $this->Model_Direccion->find($id);
-		$this->data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
-		$this->data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
-		$this->data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
-		$this->data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
-		$this->data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
-		$this->data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
-		$this->data['llaves'] 			= $this->Model_Direccion->get_llaves();
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 	= 'direccion/edit';
+		$data['titulo'] 	= 'Actualizar Direccion';
+		$data['registro'] 	= $this->Model_Direccion->find($id);
+		$data['tipo_direccion'] 			= $this->Model_Direccion->get_tipo_direccion(); /* Lista de los Tipos de Direccion */
+		$data['paquete_direccion'] 		= $this->Model_Direccion->get_paquete_direccion(); /* Lista de los Paquetes de Direccion */
+		$data['estatus_venta'] 		= $this->Model_Direccion->get_estatus_venta();
+		$data['estatus_invadida'] 	= $this->Model_Direccion->get_estatus_invadida();
+		$data['tipo_vivienda'] 		= $this->Model_Direccion->get_tipo_vivienda();
+		$data['usuarios'] 			= $this->Model_Direccion->get_usuarios();
+		$data['llaves'] 			= $this->Model_Direccion->get_llaves();
+		$this->load->view('template_v3', $data);
 		
 	}
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Casa extends MY_Controller {
+class Casa extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -16,26 +16,26 @@ class Casa extends MY_Controller {
     }
 
 	public function index() {
-		$this->data['contenido'] 	= 'casa/index';
-		$this->data['modal'] 		= 'casa/casa_modal';
-		$this->data['titulo'] 		= 'Casas';
-		$this->data['tipo_paquete'] = $this->Model_Casa->getTipoPaquete();
-		$this->data['cliente'] 		= $this->Model_Cliente->all();
-		$this->data['employee'] 	= $this->Model_Casa->employees_availabe();
-		$this->data['js']			= "<script src=".base_url('../js/loadmask/spin.min.js')."></script>
+		$data['contenido'] 	= 'casa/index';
+		$data['modal'] 		= 'casa/casa_modal';
+		$data['titulo'] 		= 'Casas';
+		$data['tipo_paquete'] = $this->Model_Casa->getTipoPaquete();
+		$data['cliente'] 		= $this->Model_Cliente->all();
+		$data['employee'] 	= $this->Model_Casa->employees_availabe();
+		$data['js']			= "<script src=".base_url('../js/loadmask/spin.min.js')."></script>
 										<script src=".base_url('../js/loadmask/jquery.loadmask.spin.js')."></script>
 		";
-		/*$this->data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );*/
-		$this->load->view('template_v3', $this->data);
+		/*$data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );*/
+		$this->load->view('template_v3', $data);
 	}
 
 	public function search() {
 
-		$this->data['contenido'] 	= 'casa/index';
-		$this->data['titulo'] 	= 'Casas';
+		$data['contenido'] 	= 'casa/index';
+		$data['titulo'] 	= 'Casas';
 		$value 				= $this->input->post('buscar');
-		$this->data['query'] 		= $this->Model_Casa->allFiltered('c.clave_interna', $value);
-		$this->load->view('template_v3', $this->data);
+		$data['query'] 		= $this->Model_Casa->allFiltered('c.clave_interna', $value);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -57,20 +57,20 @@ class Casa extends MY_Controller {
 	}
 
 	public function create() {
-		$this->data['contenido'] 			= 'casa/create';
-		$this->data['titulo'] 			= 'Crear Casa';
-		$this->data['tipo_casa'] 			= $this->Model_Casa->get_tipo_casa(); /* Lista de los Tipos de Casa */
-		$this->data['paquete_casa'] 		= $this->Model_Casa->get_paquete_casa(); /* Lista de los Paquetes de Casa */
-		$this->data['estatus_venta'] 		= $this->Model_Casa->get_estatus_venta();
-		$this->data['estatus_invadida'] 	= $this->Model_Casa->get_estatus_invadida();
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['usuarios'] 			= $this->Model_Casa->get_usuarios();
-		$this->data['llaves'] 			= $this->Model_Casa->get_llaves();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] 			= 'casa/create';
+		$data['titulo'] 			= 'Crear Casa';
+		$data['tipo_casa'] 			= $this->Model_Casa->get_tipo_casa(); /* Lista de los Tipos de Casa */
+		$data['paquete_casa'] 		= $this->Model_Casa->get_paquete_casa(); /* Lista de los Paquetes de Casa */
+		$data['estatus_venta'] 		= $this->Model_Casa->get_estatus_venta();
+		$data['estatus_invadida'] 	= $this->Model_Casa->get_estatus_invadida();
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['usuarios'] 			= $this->Model_Casa->get_usuarios();
+		$data['llaves'] 			= $this->Model_Casa->get_llaves();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 												<script src=".base_url('../js/loadmask/spin.min.js')."></script>
 												<script src=".base_url('../js/loadmask/jquery.loadmask.spin.js')."></script>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -107,22 +107,22 @@ class Casa extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'casa/edit';
-		$this->data['titulo'] 	= 'Actualizar Casa';
-		$this->data['registro'] 	= $this->Model_Casa->find($id);
-		$this->data['tipo_casa'] 			= $this->Model_Casa->get_tipo_casa(); /* Lista de los Tipos de Casa */
-		$this->data['paquete_casa'] 		= $this->Model_Casa->get_paquete_casa(); /* Lista de los Paquetes de Casa */
-		$this->data['estatus_venta'] 		= $this->Model_Casa->get_estatus_venta();
-		$this->data['estatus_invadida'] 	= $this->Model_Casa->get_estatus_invadida();
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['usuarios'] 			= $this->Model_Casa->get_usuarios();
-		$this->data['llaves'] 			= $this->Model_Casa->get_llaves();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$data['contenido'] 	= 'casa/edit';
+		$data['titulo'] 	= 'Actualizar Casa';
+		$data['registro'] 	= $this->Model_Casa->find($id);
+		$data['tipo_casa'] 			= $this->Model_Casa->get_tipo_casa(); /* Lista de los Tipos de Casa */
+		$data['paquete_casa'] 		= $this->Model_Casa->get_paquete_casa(); /* Lista de los Paquetes de Casa */
+		$data['estatus_venta'] 		= $this->Model_Casa->get_estatus_venta();
+		$data['estatus_invadida'] 	= $this->Model_Casa->get_estatus_invadida();
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['usuarios'] 			= $this->Model_Casa->get_usuarios();
+		$data['llaves'] 			= $this->Model_Casa->get_llaves();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 		
 	}
 
@@ -172,15 +172,15 @@ class Casa extends MY_Controller {
 	}
 
 	public function createmejora( $id ) {
-		$this->data['contenido'] 			= 'casa/createmejora';
-		$this->data['titulo'] 			= 'Crear Mejora';
-		$this->data['proveedores'] 		= $this->Model_Catalogos->getProveedores( PROVEEDOR_FACILITADORES );
-		$this->data['query'] 			= $this->Model_Casa->getMejorasCasa( $id );
-		$this->data['casa_k']				= $id;
+		$data['contenido'] 			= 'casa/createmejora';
+		$data['titulo'] 			= 'Crear Mejora';
+		$data['proveedores'] 		= $this->Model_Catalogos->getProveedores( PROVEEDOR_FACILITADORES );
+		$data['query'] 			= $this->Model_Casa->getMejorasCasa( $id );
+		$data['casa_k']				= $id;
 		
-		$this->data['js']				=   "<script src=".base_url('../js/app/mejoras.js')."></script>";
+		$data['js']				=   "<script src=".base_url('../js/app/mejoras.js')."></script>";
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insertmejora() {
@@ -203,40 +203,40 @@ class Casa extends MY_Controller {
 
 	function galeria( $casa_k = null, $clave_interna = null ){
 		if ($casa_k != null && $clave_interna != null) {
-			$this->data['contenido'] 			= 'casa/galeria2';
-			$this->data['modal']				= 'casa/galeria_modal';
-			$this->data['titulo'] 			= 'Casas';
-			$this->data['clave_interna']		= $clave_interna;
-			$this->data['imagenes']			= $this->Model_Casa->getImagenes( $casa_k );
-			//$this->data['proveedores'] 		= $this->Model_Catalogos->getProveedores( PROVEEDOR_FACILITADORES ); /* Lista de los Proveedores */
-			$this->data['casa_k']				= $casa_k;
-			$this->data['user_k']				= $user_k		= 		$this->session->userdata('usuario_id');
+			$data['contenido'] 			= 'casa/galeria2';
+			$data['modal']				= 'casa/galeria_modal';
+			$data['titulo'] 			= 'Casas';
+			$data['clave_interna']		= $clave_interna;
+			$data['imagenes']			= $this->Model_Casa->getImagenes( $casa_k );
+			//$data['proveedores'] 		= $this->Model_Catalogos->getProveedores( PROVEEDOR_FACILITADORES ); /* Lista de los Proveedores */
+			$data['casa_k']				= $casa_k;
+			$data['user_k']				= $user_k		= 		$this->session->userdata('usuario_id');
 			
-			$this->data['js_plugins']			= "
+			$data['js_plugins']			= "
 				<script src=".base_url('../js/fileinput/fileinput.min.js')."></script>
 				<script src=".base_url('../js/fileinput/fileinput_locale_es.js')."></script>
 				<script src=".base_url('../js/fileinput/jquery.media.js')."></script>
 				<script src=".base_url('../js/viewer/viewer.js')."></script>
 				<script src=".base_url('../js/app/common.js')."></script>";
 
-			$this->data['css_plugins']		= "
+			$data['css_plugins']		= "
 				<link rel='stylesheet' href='".base_url('../css/fileinput/fileinput.min.css')."'>
 				<link rel='stylesheet' href='".base_url('../css/viewer/viewer.css')."'>";
 
 			
 		}else{
-			$this->data['contenido']			= 'home/acceso_denegado';
-			$this->data['titulo'] 			= 'Denegado';
+			$data['contenido']			= 'home/acceso_denegado';
+			$data['titulo'] 			= 'Denegado';
 		}
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 
 	public function inventario_ventas() {
-		$this->data['contenido'] = 'casa/inventario_ventas';
-		$this->data['titulo'] = 'Casas';
-		$this->data['query'] = $this->Model_Casa->all( ESTATUS_CASA_INVENTARIO_VENTA );
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] = 'casa/inventario_ventas';
+		$data['titulo'] = 'Casas';
+		$data['query'] = $this->Model_Casa->all( ESTATUS_CASA_INVENTARIO_VENTA );
+		$this->load->view('template_v3', $data);
 	}
 
 	function vender( $casa_k ){
@@ -247,18 +247,18 @@ class Casa extends MY_Controller {
 	}
 
 	public function propuesta( $id ){
-		$this->data['contenido'] 	= 'casa/propuesta';
-		$this->data['casa_k']		= $id;
-		$this->data['titulo'] 	= 'Propuesta';
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 	= 'casa/propuesta';
+		$data['casa_k']		= $id;
+		$data['titulo'] 	= 'Propuesta';
+		$this->load->view('template_v3', $data);
 
 	}
 
 	public function venta( $usuario_k ){
-		$this->data['contenido'] 	= 'casa/venta';
-		$this->data['casa_k']		= $usuario_k;
-		$this->data['titulo'] 	= 'Casas en venta';
-		$this->data['js']			= "<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
+		$data['contenido'] 	= 'casa/venta';
+		$data['casa_k']		= $usuario_k;
+		$data['titulo'] 	= 'Casas en venta';
+		$data['js']			= "<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-animate.min.js')."></script>
@@ -272,14 +272,14 @@ class Casa extends MY_Controller {
 
 		<script type='text/javascript' src=".base_url('../js/angular/underscore.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function ofertas_pendientes(){
 
-		$this->data['contenido'] 	= 'casa/ofertas';
-		$this->data['titulo'] 	= 'Ofertas para comprar Casas';
-		$this->data['js']			= "<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
+		$data['contenido'] 	= 'casa/ofertas';
+		$data['titulo'] 	= 'Ofertas para comprar Casas';
+		$data['js']			= "<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-resource.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
@@ -295,7 +295,7 @@ class Casa extends MY_Controller {
 
 		<script type='text/javascript' src=".base_url('../js/angular/underscore.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Producto extends MY_Controller {
+class Producto extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -14,10 +14,10 @@ class Producto extends MY_Controller {
 
 
 	public function index() {
-		$this->data['contenido'] = 'producto/index';
-		$this->data['titulo'] = 'Productos';
+		$data['contenido'] = 'producto/index';
+		$data['titulo'] = 'Productos';
 
-		$this->data['js']			= "
+		$data['js']			= "
 		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
@@ -34,7 +34,7 @@ class Producto extends MY_Controller {
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
 
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	function all(){
@@ -51,11 +51,11 @@ class Producto extends MY_Controller {
 
 
 	public function create() {
-		$this->data['contenido'] 			= 'producto/create';
-		$this->data['titulo'] 			= 'Crear Producto';
-		$this->data['producto']			= $this->Model_Catalogos->getTipoProductos();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 			= 'producto/create';
+		$data['titulo'] 			= 'Crear Producto';
+		$data['producto']			= $this->Model_Catalogos->getTipoProductos();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template_v3', $data);
 	}
 
 	public function insert() {
@@ -74,16 +74,16 @@ class Producto extends MY_Controller {
 
 	public function edit($id) {
 
-		$this->data['contenido'] 	= 'producto/edit';
-		$this->data['titulo'] 	= 'Actualizar Producto';
-		$this->data['registro'] 	= $this->Model_Producto->find($id);
-		$this->data['producto']			= $this->Model_Catalogos->getTipoProductos();
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
-		$this->data['estado']				= $this->Model_Catalogos->getEstado   ( $this->data['registro']->estado_k );
-		$this->data['municipio']			= $this->Model_Catalogos->getMunicipio( $this->data['registro']->municipio_k );
-		$this->data['colonias']			= $this->Model_Catalogos->getColonias ( $this->data['registro']->codigo_postal );
+		$data['contenido'] 	= 'producto/edit';
+		$data['titulo'] 	= 'Actualizar Producto';
+		$data['registro'] 	= $this->Model_Producto->find($id);
+		$data['producto']			= $this->Model_Catalogos->getTipoProductos();
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$data['estado']				= $this->Model_Catalogos->getEstado   ( $data['registro']->estado_k );
+		$data['municipio']			= $this->Model_Catalogos->getMunicipio( $data['registro']->municipio_k );
+		$data['colonias']			= $this->Model_Catalogos->getColonias ( $data['registro']->codigo_postal );
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 		
 	}
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Servicio extends MY_Controller {
+class Servicio extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -19,18 +19,18 @@ class Servicio extends MY_Controller {
 
 	public function comprar() {
 
-		$this->data['contenido'] = 'servicio/comprar';
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
-		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
-		$this->data['titulo'] = 'Comprar';
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] = 'servicio/comprar';
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$data['estados']			= $this->Model_Catalogos->getEstados();		
+		$data['sexo']				= $this->Model_Catalogos->getSexos();
+		$data['titulo'] = 'Comprar';
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
 
 
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -93,14 +93,14 @@ class Servicio extends MY_Controller {
 	}
 
 	public function vender() {
-		$this->data['contenido'] 			= 'servicio/vender';
-		$this->data['modal'] 				= 'servicio/vender_modal';
-		$this->data['nivel_urgencia'] 	= $this->Model_Catalogos->get_nivel_urgencia();
-		$this->data['cliente'] 			= $this->Model_Servicio->prospecto_cliente_list();
-		$this->data['employee'] 			= $this->Model_Servicio->employees_availabe();
-		$this->data['titulo'] 			= 'Vender';
-		$this->data['js']				    = "";
-		$this->load->view('template_v3', $this->data);
+		$data['contenido'] 			= 'servicio/vender';
+		$data['modal'] 				= 'servicio/vender_modal';
+		$data['nivel_urgencia'] 	= $this->Model_Catalogos->get_nivel_urgencia();
+		$data['cliente'] 			= $this->Model_Servicio->prospecto_cliente_list();
+		$data['employee'] 			= $this->Model_Servicio->employees_availabe();
+		$data['titulo'] 			= 'Vender';
+		$data['js']				    = "";
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -204,16 +204,16 @@ class Servicio extends MY_Controller {
 	}
 
 	public function remodelar() {
-		$this->data['contenido'] = 'servicio/remodelar';
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
-		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
-		$this->data['titulo'] 			= 'Remodelar';
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] = 'servicio/remodelar';
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$data['estados']			= $this->Model_Catalogos->getEstados();		
+		$data['sexo']				= $this->Model_Catalogos->getSexos();
+		$data['titulo'] 			= 'Remodelar';
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -289,16 +289,16 @@ class Servicio extends MY_Controller {
 	}
 
 	public function construir() {
-		$this->data['contenido'] = 'servicio/construir';
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
-		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
-		$this->data['titulo'] 			= 'Construir';
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] = 'servicio/construir';
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$data['estados']			= $this->Model_Catalogos->getEstados();		
+		$data['sexo']				= $this->Model_Catalogos->getSexos();
+		$data['titulo'] 			= 'Construir';
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 
@@ -374,16 +374,16 @@ class Servicio extends MY_Controller {
 	}
 
 	public function mantenimiento() {
-		$this->data['contenido'] = 'servicio/mantenimiento';
-		$this->data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
-		$this->data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
-		$this->data['estados']			= $this->Model_Catalogos->getEstados();		
-		$this->data['sexo']				= $this->Model_Catalogos->getSexos();
-		$this->data['titulo'] 			= 'Mantenimiento';
-		$this->data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
+		$data['contenido'] = 'servicio/mantenimiento';
+		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
+		$data['forma_pago'] 		= $this->Model_Catalogos->get_forma_pago();
+		$data['estados']			= $this->Model_Catalogos->getEstados();		
+		$data['sexo']				= $this->Model_Catalogos->getSexos();
+		$data['titulo'] 			= 'Mantenimiento';
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
 									<script src=".base_url('../js/demos/form-extended.js')."></script>
 		";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 
 	}
 

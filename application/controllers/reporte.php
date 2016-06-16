@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Reporte extends MY_Controller {
+class Reporte extends CI_Controller {
 
 	// Constructor de la clase
 	function __construct() {
@@ -11,9 +11,9 @@ class Reporte extends MY_Controller {
     }
 
 	public function index() {
-		$this->data['contenido'] = 'reporte/index';
-		$this->data['titulo'] = 'Reportes';
-		$this->data['js']			= "
+		$data['contenido'] = 'reporte/index';
+		$data['titulo'] = 'Reportes';
+		$data['js']			= "
 		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
@@ -28,13 +28,13 @@ class Reporte extends MY_Controller {
 
 		<script type='text/javascript' src=".base_url('../js/angular/underscore.min.js')."></script>
 		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function venta() {
-		$this->data['contenido'] = 'reporte/venta';
-		$this->data['titulo'] = 'Venta';
-		$this->data['js_plugins']			= "
+		$data['contenido'] = 'reporte/venta';
+		$data['titulo'] = 'Venta';
+		$data['js_plugins']			= "
 			<script src=".base_url('../js/pivot/jquery.ui.touch-punch.min.js')."></script>
 			<script src=".base_url('../js/pivot/jsapi.js')."></script>
 			<script src=".base_url('../js/pivot/pivot.js')."></script>
@@ -42,9 +42,9 @@ class Reporte extends MY_Controller {
 			<script src=".base_url('../js/pivot/gchart_renderers.js')."></script>
 			<script src=".base_url('../js/pivot/jquery.battatech.excelexport.js')."></script>";
 
-		$this->data['css_plugins']			= "
+		$data['css_plugins']			= "
 			<link rel='stylesheet' href='".base_url('../css/pivot/pivot.css')."'>";
-		$this->load->view('template_v3', $this->data);
+		$this->load->view('template_v3', $data);
 	}
 
 	public function atencion_compras(){
