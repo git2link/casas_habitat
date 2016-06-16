@@ -1,0 +1,35 @@
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(visita);">&nbsp;Agregar Visita</button>
+<div class="pull-right" style="padding-bottom: 10px;">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Visitas ..." class="nav-search-input" ng-model="filterVisitas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+<br>
+<div class="table-responsive">                 
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="visitas_casa.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="visitas_casa.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columnas_visitas">{{c.text}}</th></tr></thead>
+    
+    <tr ng-repeat="c in visitas_casa | filter:filterVisitas | orderBy:'fecha_visita'" id="{{c.fecha_visita}}" animate-on-change='c.fecha_visita + c.realizada'  ng-animate=" 'animate'">
+            <td>{{c.nombre_usuario}}</td>
+            <td>
+                <div ng-show="{{c.realizada}}">
+                    <button type="button" class="btn btn-success" disabled="disabled">Visitada</button>
+                </div>
+                <div ng-show="{{!c.realizada}}">
+                    <button type="button" class="btn btn-primary" disabled="disabled">No Visitada</button>
+                </div>
+            </td>
+            <td>{{c.fecha_visita}}</td>
+            <td style="width:100px">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
+                  <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="eliminar(c);"></button>
+            </td>
+    </tr>
+    </table>
+  </div>
+</div>

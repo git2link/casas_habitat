@@ -1,0 +1,34 @@
+<h4 class="blog-post-title">Clientes</h4>
+<hr/>
+<div class="pull-right" style="padding-bottom: 10px;">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Clientes ..." class="nav-search-input" ng-model="filterClientes" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+<br>
+<div class="table-responsive">                 
+
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="clientes.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="clientes.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columns">{{c.text}}</th></tr></thead>
+    
+    <tr ng-repeat="c in clientes | filter:filterClientes | orderBy:'-cliente_k'" id="{{c.cliente_k}}" animate-on-change='c.empresa + c.presupuesto + c.fecha_inicio_trabajos + c.fecha_entrega_trabajos' ng-animate=" 'animate'" ng-dblclick="cliente_servicios(c)">
+            <td>{{c.cliente_k}}</td>
+            <td>{{c.nombre}} {{c.apellido_paterno}} {{c.apellido_materno}}</td>
+            <td>{{c.codigo_postal}} {{c.calle_numero}} {{c.colonia}} {{c.municipio}} {{c.estado}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.fecha_hora_creacion}}</td>
+            <td style="width:100px">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
+                  <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="borrarCliente(c);"></button>
+                </div>
+            </td>
+    </tr>
+    </table>
+</div>
+</div>
+              

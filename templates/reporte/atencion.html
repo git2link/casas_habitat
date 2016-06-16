@@ -1,0 +1,41 @@
+<style type="text/css">
+	.amarillo {
+	  background-color: rgba(255, 255, 0, 0.6);
+	}
+	.rojo {
+	  background-color: rgba(255, 0, 0, 0.6);
+	}
+	.verde{
+	  background-color: rgba(0, 255, 0, 0.6);
+	}
+	</style>
+<h4 class="blog-post-title">{{title}}</h4>
+<hr/>
+<div class="pull-right">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar ..." class="nav-search-input" ng-model="filterMejora" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+<br>
+<br>
+<div class="table-responsive">                 
+
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="atenciones.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="atenciones.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columns">{{c.text}}</th></tr></thead>
+
+    <tr ng-repeat="c in atenciones | filter:filterMejora | orderBy:'fecha_proxima_atencion'" id="{{c.nombre_cliente}}" ng-animate=" 'animate'" ng-class="{verde: c.fecha_proxima_atencion>fecha_actual, amarillo: c.fecha_proxima_atencion==fecha_actual , rojo : c.fecha_proxima_atencion<fecha_actual}"> 
+        <td>{{c.nombre_cliente}}</td>
+        <td>{{c.estatus_atencion}}</td>
+        <td>{{c.fecha_atencion}}</td>
+        <td>{{c.fecha_proxima_atencion}}</td>
+        <td>{{c.nombre_usuario}}</td>
+    </tr>
+    </table>
+</div>
+</div>
+
+

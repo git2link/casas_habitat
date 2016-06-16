@@ -1,0 +1,4 @@
+[02-May-2016 17:00:03 CST6CDT] PHP Fatal error:  Call to undefined method Model_Reporte::atencion_ventas() in /home/siste102/domains/sistemas2link.com/public_html/casas_habitat/application/controllers/reporte.php on line 49
+[05-May-2016 16:14:02 CST6CDT] PHP Fatal error:  Call to undefined method Model_Casa::insertGaleria() in /home/siste102/domains/sistemas2link.com/public_html/casas_habitat/application/controllers/casa.php on line 452
+[05-May-2016 16:21:26 CST6CDT] PHP Fatal error:  Call to undefined method Model_Casa::insertGaleria() in /home/siste102/domains/sistemas2link.com/public_html/casas_habitat/application/controllers/casa.php on line 454
+[05-May-2016 16:23:37 CST6CDT] PHP Fatal error:  Call to undefined method Model_Casa::insertGaleria() in /home/siste102/domains/sistemas2link.com/public_html/casas_habitat/application/controllers/casa.php on line 455

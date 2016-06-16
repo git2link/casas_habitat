@@ -1,0 +1,54 @@
+    <button type="button" class="close" ng-click="cancel();">
+        <i class="fa fa-times-circle-o" style="margin:10px;color:blue;"></i>
+    </button>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}{{cliente.cliente_k}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="cliente_form" class="form-horizontal" role="form" novalidate>
+            
+            <form-element label="Nombre" mod="cliente">
+                <input type="text" class="form-control" name="Nombre" placeholder="Empresa" ng-model="cliente.nombre" ng-disabled="cliente.nombre" focus/>
+            </form-element>
+
+            <form-element label="Apellido Paterno" mod="cliente">
+                <input type="text" name="apellido_paterno" class="form-control" placeholder="Apellido Paterno" ng-model="cliente.apellido_paterno"/>
+            </form-element>
+            <form-element label="Apellido Materno" mod="cliente">
+                <input type="text" name="apellido_materno" class="form-control" placeholder="Apellido Materno" ng-model="cliente.apellido_materno"/>
+            </form-element>
+
+            <form-element label="Email" mod="cliente">
+            <textarea class="form-control" name="email" placeholder="Email" ng-model="cliente.email">{{cliente.email}}</textarea>
+            </form-element>
+
+            <form-element label="Teléfono de Casa" mod="cliente">
+                <input type="text" name="telefono_casa" class="form-control" placeholder="Teléfono de Casa" ng-model="cliente.telefono_casa"/>
+            </form-element>
+
+            <form-element label="Teléfono de Recados" mod="cliente">
+                <input type="text" name="telefono_recados" class="form-control" placeholder="Teléfono de Recados" ng-model="cliente.telefono_recados"/>
+            </form-element>
+
+            <form-element label="Teléfono Celular" mod="cliente">
+                <input type="text" name="telefono_celular" class="form-control" placeholder="Teléfono Celular" ng-model="cliente.telefono_celular"/>
+            </form-element>
+
+            <div class="space"></div>
+            <div class="space-4"></div>
+            <div class="modal-footer">
+                <form-element label="">
+                    <div class="text-right">
+                        <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                        <button ng-click="guardarCliente(cliente);"
+                                ng-disabled="cliente_form.$invalid || enableUpdate"
+                                class="btn btn-sm btn-primary"
+                                type="submit">
+                            <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                        </button>
+                    </div>
+                </form-element>
+            </div>
+        </form>
+    </div>
+
