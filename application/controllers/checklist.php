@@ -12,12 +12,12 @@ class Checklist extends CI_Controller {
     }
 
 	function all(){
-		$datos = $this->Model_Checklist->all( ESTATUS_CASA_PROSPECTO );
+		$data = $this->Model_Checklist->all( ESTATUS_CASA_PROSPECTO );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}
@@ -320,10 +320,10 @@ class Checklist extends CI_Controller {
 		print 1;
 	}
 
-	public function getChecklistFileTableName($datos){
+	public function getChecklistFileTableName($data){
 		$flagTable = true;
-		if (count($datos)>0) {
-			foreach ($datos as $key => $value) {
+		if (count($data)>0) {
+			foreach ($data as $key => $value) {
 				if (!$this->Model_Checklist->fieldexists($key, 'casa_checklist_file_part1')) {
 					$flagTable = false;
 				} 
@@ -332,7 +332,7 @@ class Checklist extends CI_Controller {
 				return 'casa_checklist_file_part1';
 			}else{
 				$flagTable = true;
-				foreach ($datos as $key => $value) {
+				foreach ($data as $key => $value) {
 					if (!$this->Model_Checklist->fieldexists($key, 'casa_checklist_file_part2')) {
 						$flagTable = false;
 					} 

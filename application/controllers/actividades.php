@@ -26,7 +26,15 @@ class Actividades extends CI_Controller {
 	public function set_visita_done() {
 		extract($_POST);
 		$arr_visita['visita_k'] 	= $visita_k;
-		$arr_visita['realizada']	= 1;
+		$arr_visita['realizada']	= 2;
+		$this->Model_Actividades->update_visita_by_visita($arr_visita);
+		print 1;
+	}
+
+	public function dismiss_visita() {
+		extract($_POST);
+		$arr_visita['visita_k'] 	= $visita;
+		$arr_visita['realizada']	= 3;
 		$this->Model_Actividades->update_visita_by_visita($arr_visita);
 		print 1;
 	}
@@ -49,7 +57,9 @@ class Actividades extends CI_Controller {
 					$data['modal']				= 'casa/galeria_modal';
 					$data['titulo'] 			= 'Casas';
 
+					$data['visita_options']		= $this->Model_Casa->get_visita_options( $casa_k );
 					$data['imagenes']			= $this->Model_Casa->getImagenes_by_visita( $visita_k );
+					
 					$data['casa_k']				= $casa_k;
 					$data['user_k']				= $user_k		= 		$this->session->userdata('usuario_id');
 					

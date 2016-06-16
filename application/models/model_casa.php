@@ -32,7 +32,7 @@ class Model_Casa extends CI_Model {
         $this->db->join('cliente cli' , 'ccli.cliente_k = cli.cliente_k', 'left');
         $this->db->join('casa_checklist i', 'i.casa_k = c.casa_k', 'left');
         if( $estatus_casa != NULL)
-            $this->db->where( 'estatus_venta' , $estatus_casa );
+            $this->db->where( 'estatus' , $estatus_casa );
 
         $query = $this->db->get();
         return $query->result();
@@ -47,6 +47,21 @@ class Model_Casa extends CI_Model {
         $this->db->join('cat_municipios cm' , 'cm.municipio_k = c.municipio_k');
         $this->db->join('cat_colonias cc' , 'cc.colonia_k = c.colonia_k');
         $this->db->like($field, $value);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function casa_details( $id ) {
+        $this->db->select('c.*, tv.descripcion as tipo_vivienda, ce.nombre as estado , cm.nombre as municipio, cc.nombre as colonia , ctc.descripcion as descripcion_tipo_casa, cpc.descripcion as descripcion_paquete_casa ');
+        $this->db->from('casa c');
+        $this->db->join('cat_tipo_casa ctc', 'ctc.tipo_casa_k = c.tipo_casa_k');
+        $this->db->join('cat_tipo_casa_paquete cpc', 'cpc.paquete_casa_k = c.paquete_casa_k');
+        $this->db->join('cat_estados ce' , 'ce.estado_k = c.estado_k');
+        $this->db->join('cat_municipios cm' , 'cm.municipio_k = c.municipio_k');
+        $this->db->join('cat_colonias cc' , 'cc.colonia_k = c.colonia_k');
+        $this->db->join('cat_tipo_vivienda tv' , 'tv.tipo_vivienda_k = c.tipo_vivienda_k');
+        $this->db->where( 'c.casa_k' , $id );
 
         $query = $this->db->get();
         return $query->result();
@@ -73,6 +88,26 @@ class Model_Casa extends CI_Model {
     	$this->db->set($registro);
 		$this->db->where('casa_k', $registro['casa_k']);
 		$this->db->update('casa');
+    }
+
+    function update_casa_flujo($registro) {
+        $this->db->set($registro);
+        $this->db->where('casa_k', $registro['casa_k']);
+        $this->db->update('casa_flujo');
+    }
+
+    function insert_casa_flujo($registro) {
+        $this->db->set($registro);
+        $this->db->insert('casa_flujo');
+        return $this->db->insert_id();
+    }
+
+    function casa_flujo_exist($id) {
+        $this->db->select('casa_flujo_k');
+        $this->db->from('casa_flujo');
+        $this->db->where('casa_k',$id);
+        $query = $this->db->get();
+        return $query->result();
     }
 
     function update_casa_cliente($registro) {
@@ -246,6 +281,16 @@ class Model_Casa extends CI_Model {
         return $data->result_array();
     }
 
+    function getImagenes_by_casa( $casa_k ){
+        $this->db->select('*');
+        $this->db->from('casa_galeria a');
+        $this->db->where('a.casa_k', $casa_k );
+        $this->db->where('a.activo', 1 );
+        $data = $this->db->get();
+
+        return $data->result_array();
+    }
+
     function updategaleria($registro, $id) {
         $this->db->set($registro);
         $this->db->where('galeria_k', $id);
@@ -270,6 +315,17 @@ class Model_Casa extends CI_Model {
         $data = $this->db->get();
 
         return $data->result();
+        
+    }
+
+    function get_visita_options( $id ){
+
+        $this->db->select('estatus_invadida_k, llaves, estatus_venta_k');
+        $this->db->from('casa');
+        $this->db->where('casa_k', $id );
+        $data = $this->db->get();
+
+        return $data->result_array();
         
     }
 

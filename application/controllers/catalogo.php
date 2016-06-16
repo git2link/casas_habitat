@@ -11,12 +11,12 @@ class Catalogo extends CI_Controller {
     }
 
     	public function get_tipo_vivienda_json(){
-		$datos = $this->Model_Catalogos->allTipoVivienda();
+		$data = $this->Model_Catalogos->allTipoVivienda();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}

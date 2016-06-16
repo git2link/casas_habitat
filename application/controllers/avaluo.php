@@ -18,7 +18,7 @@ class Avaluo extends CI_Controller {
 		$data['contenido'] = 'avaluo/index';
 		$data['titulo'] = 'Avaluos';
 		$data['query'] = $this->Model_Avaluo->all();
-		$this->load->view('template_v3', $data);
+		$this->load->view('template2', $data);
 	}
 
 	public function search() {
@@ -27,7 +27,7 @@ class Avaluo extends CI_Controller {
 		$data['titulo'] 	= 'Avaluos';
 		$value 				= $this->input->post('buscar');
 		$data['query'] 		= $this->Model_Avaluo->allFiltered('p.empresa', $value);
-		$this->load->view('template_v3', $data);
+		$this->load->view('template2', $data);
 
 	}
 
@@ -43,7 +43,7 @@ class Avaluo extends CI_Controller {
 		$data['casas']				= $this->Model_Catalogos->getCasas();
 		$data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
 		$data['sino']			    = $this->Model_Catalogos->getSiNo();
-		$this->load->view('template_v3', $data);
+		$this->load->view('template2', $data);
 	}
 
 	public function insert() {
@@ -71,7 +71,7 @@ class Avaluo extends CI_Controller {
 		$data['registro'] 	= $this->Model_Avaluo->find($id);
 		$data['casas']				= $this->Model_Catalogos->getCasas();
 		$data['unidades_valuacion'] = $this->Model_Catalogos->getProveedores( PROVEEDOR_UNIDAD_VALUACION );
-		$this->load->view('template_v3', $data);
+		$this->load->view('template2', $data);
 		
 	}
 

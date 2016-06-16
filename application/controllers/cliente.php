@@ -67,12 +67,12 @@ class Cliente extends CI_Controller {
 
 	function all(){
 		$filtro = json_decode(file_get_contents('php://input'),true);
-		$datos = $this->Model_Cliente->all( $filtro );
+		$data = $this->Model_Cliente->all( $filtro );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}

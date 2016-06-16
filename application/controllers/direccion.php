@@ -15,32 +15,32 @@ class Direccion extends CI_Controller {
 
     function obtenerCodigosPostales(){
 
-    	$datos = $this->Model_Direccion->obtenerCodigosPostales();
+    	$data = $this->Model_Direccion->obtenerCodigosPostales();
 
-    	echo json_encode($datos);
+    	echo json_encode($data);
     }
 
     public function obtenerDirecciones( $cp ){
 
-    	$datos = $this->Model_Direccion->obtenerDirecciones($cp);
+    	$data = $this->Model_Direccion->obtenerDirecciones($cp);
 
-    	echo '{"direcciones": ' . json_encode($datos) . '}';
+    	echo '{"direcciones": ' . json_encode($data) . '}';
 
     }
 
 	public function obtenerEstados(){
 
-		$datos = $this->Model_Direccion->obtenerEstados();
+		$data = $this->Model_Direccion->obtenerEstados();
 
-		echo '{"estados": ' . json_encode($datos) . '}';
+		echo '{"estados": ' . json_encode($data) . '}';
 
 	}
 
     public function obtenerMunicipios( $estado_k ){
 
-    	$datos = $this->Model_Direccion->obtenerMunicipios($estado_k);
+    	$data = $this->Model_Direccion->obtenerMunicipios($estado_k);
 
-    	echo '{"municipios": ' . json_encode($datos) . '}';
+    	echo '{"municipios": ' . json_encode($data) . '}';
 
     }
 
@@ -137,12 +137,12 @@ class Direccion extends CI_Controller {
 
 	public function get_estados_json(){
 
-    	$datos = $this->Model_Catalogos->get_estados_json();
+    	$data = $this->Model_Catalogos->get_estados_json();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 
 		echo json_encode($array_response);
@@ -150,12 +150,12 @@ class Direccion extends CI_Controller {
 
     public function get_municipios_json( $estado_k ){
 
-    	$datos = $this->Model_Catalogos->get_municipios_json( $estado_k );
+    	$data = $this->Model_Catalogos->get_municipios_json( $estado_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 
 		echo json_encode($array_response);

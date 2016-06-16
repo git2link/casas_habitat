@@ -35,6 +35,14 @@ class Model_Usuario extends CI_Model {
         return $query->result();
     }
 
+    function usuario_foto_by_usuario($usuario_k) {
+        $this->db->select('foto');
+        $this->db->from('usuario_foto');
+        $this->db->where('usuario_k', $usuario_k);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function insert_usuario_foto($registro) {
         $this->db->set($registro);
         $this->db->insert('usuario_foto');
@@ -68,19 +76,9 @@ class Model_Usuario extends CI_Model {
     }
 
     function get_login($user, $pass) {
-
-        $where = array(
-            'login'     => $user,
-            'password'  => $pass
-            );
-
-        $this->db->select( 'u.* , uf.foto');
-        $this->db->from('usuario u');
-        $this->db->join('usuario_foto uf' , 'uf.usuario_k = u.id' , 'left');
-        $this->db->where( $where );
-
-        return $this->db->get();
-
+        $this->db->where('login', $user);
+        $this->db->where('password', $pass);
+        return $this->db->get('usuario');
     }
 
     function get_perfiles() {
@@ -109,24 +107,6 @@ class Model_Usuario extends CI_Model {
         $data = $this->db->get();
 
         return $data->row();
-    }
-
-    function get_foto( $usuario_k ){
-
-        $where = array(
-            'usuario_k' => $usuario_k
-            );
-
-        $this->db->select('foto');
-        $this->db->from('usuario_foto');
-        $this->db->where( $where );
-
-        $data = $this->db->get()->row();
-
-        $foto = (empty ($data->foto)) ? base_url('../img/avatars/avatar_default.png') : $data->foto;
-        
-        return $foto;
-
     }
 
 }

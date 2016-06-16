@@ -24,5 +24,14 @@ class pdf_file extends CI_Controller {
 		}
 	}
 
+	public function saneamiento($casa_k, $str_file) {
+
+		if ($str_file != '') {
+			$data['casa_k'] = $casa_k;
+			$data['pdf'] = explode('%20', $str_file);
+			$this->load->view('pdf/saneamiento', $data);
+		}
+	}
+
 
 }

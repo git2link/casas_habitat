@@ -1,11 +1,3 @@
-
-<style type="text/css">
-    #loading-indicator {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-    }
-</style>
 <form id="form_1">
     <div id="modal_1" class="modal fade">
         <div class="modal-dialog">
@@ -22,7 +14,7 @@
                     <select id="tipo_casa_k" name="tipo_casa_k" class="form-control">
                         <option value="">Seleccione una opción...</option>
                         <?php $tipo = ''; ?>
-                        <?php foreach ($tipo_paquete as $registro): ?>
+                        <?php foreach ($tipo_paquete as $registro): ?> 
                             <?php if ( $tipo !=  $registro->tipo ): ?>
                                 <option value="<?= $registro->tipo_casa_k ?>"><?= $registro->tipo ?></option>
                                 <?php $tipo = $registro->tipo; ?>
@@ -33,8 +25,8 @@
                     <label>Paquete</label>
                     <select id="paquete_casa_k" name="paquete_casa_k" class="form-control">
                         <option value="">Seleccione una opción...</option>
-                        <?php foreach ($tipo_paquete as $registro): ?>
-                            <option cliente="<?= $registro->cliente ?>" tipo="<?= $registro->tipo_casa_k ?>" value = "<?= $registro->paquete_casa_k ?>" hidden><?= $registro->paquete ?></option>
+                        <?php foreach ($tipo_paquete as $registro): ?> 
+                            <option cliente="<?= $registro->cliente ?>" tipo="<?= $registro->tipo_casa_k ?>" value = "<?= $registro->paquete_casa_k ?>" hidden><?= $registro->paquete ?></option>  
                         <?php endforeach; ?>
                     </select>
                     <br>
@@ -42,35 +34,14 @@
                         <label>Prospecto - Cliente</label>
                         <select id="cliente_k" name="cliente_k" class="form-control">
                             <option value="">Seleccione una opción...</option>
-                            <?php foreach ($cliente as $registro): ?>
-                                <option value = "<?= $registro->cliente_k ?>"><?= $registro->nombre ?> <?= $registro->apellido_paterno ?> <?= $registro->apellido_materno ?></option>
+                            <?php foreach ($cliente as $registro): ?> 
+                                <option value = "<?= $registro->cliente_k ?>"><?= $registro->nombre ?> <?= $registro->apellido_paterno ?> <?= $registro->apellido_materno ?></option>  
                             <?php endforeach; ?>
                         </select>
                     </div>
-
-                    <br>
-                    <label>Invadida</label>
-                    <select name="estatus_invadida_k" class="form-control">
-                        <option value="1">Si</option>
-                        <option value="2">No</option>
-                        <option value="3">Tal vez</option>
-                    </select>
-                    <br>
-                    <label>Llaves</label>
-                    <select name="llaves" class="form-control">
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
                     <br>
                     <label>Credito Anterior</label>
                     <input name="credito_anterior" class="form-control">
-                    <br>
-                    <label>Estatus para la venta</label>
-                    <select name="estatus_venta_k" class="form-control">
-                        <option value="1">disponible</option>
-                        <option value="2">disponible invadida</option>
-                        <option value="3">reservada</option>
-                    </select>
                     <br>
                     <label>Antecedentes</label>
                     <textarea name="antecedentes" class="form-control" rows="2"></textarea>
@@ -171,10 +142,9 @@
             </div>
         </div>
     </div>
-            <input class="action" hidden>
-            <input id="casa_k" name="casa_k" hidden>
+    <input class="action" hidden>
+    <input id="casa_k" name="casa_k" hidden>
 </form>
-
 
 <form id="form_2">
     <div id="modal_2" class="modal fade">
@@ -190,10 +160,10 @@
                     </div>
                     <label>Empleado</label>
                     <select class="form-control" name="usuario_k">
-                        <option value="">Seleccione una opción</option>
-                        <?php foreach ($employee as $row): ?>
-                            <option value="<?= $row->id ?>"><?= $row->employee ?></option>
-                        <?php endforeach ?>
+                      <option value="">Seleccione una opción</option>
+                      <?php foreach ($employee as $row): ?>
+                        <option value="<?= $row->id ?>"><?= $row->employee ?></option>
+                      <?php endforeach ?>
                     </select>
                     <br>
                     <label>Fecha de visita</label>
@@ -209,10 +179,33 @@
     </div>
 </form>
 
+<form id="form_3">
+    <div id="modal_3" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">Incluir casa a inventario</h3>
+                </div>
+                <div class="modal-body">
+                    <div align="center">
+                        <label>Detalles de adquisición</label>
+                    </div>
+                    <br>
+                    <label>Precio de compra final</label>
+                    <input class="form-control" name="s_compra_final">
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" id="submit_form_3" class="btn btn-default" >Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="casa_stock" name="casa_k" hidden>
+    </div>
+</form>
 
 
-
-<div id="modal_3" class="modal fade">
+<div id="modal_4" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -220,7 +213,7 @@
                 <h3 class="modal-title">Agendar Propuesta</h3>
             </div>
             <div class="modal-body">
-                <form id="form_3">
+                <form id="form_4">
                     <div align="center">
                     <label>Detalles de la Propuesta</label>
                     </div>
@@ -254,18 +247,18 @@
                     <input id="casa_propuesta"    name="casa_k" hidden>
                     <input id="cliente_propuesta" name="cliente_k" hidden>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" id="submit_form_3" class="btn btn-default" >Continuar</button>
+                        <button data-dismiss="modal" id="submit_form_4" class="btn btn-default" >Continuar</button>
                     </div>
                 </form>
                 <div id="pagos" hidden>
-                    <form id="form_4">
+                    <form id="form_5">
                     <label>Fecha de Pago</label>
                     <input name="fecha" id='fecha' class="form-control date">
                     <label>Monto</label>
                     <input name="monto" id='monto' class="form-control">
                     <input name="propuesta_tmp_k" id="propuesta_tmp_k" hidden>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" id="submit_form_4" class="btn btn-default" >Continuar</button>
+                        <button data-dismiss="modal" id="submit_form_5" class="btn btn-default" >Continuar</button>
                     </div>
                     <br>
                     </form>
@@ -301,135 +294,135 @@
         });
     }
 
-    function obtenerDireccionesEdit(cp){
-        $.ajax({
-            type: 'GET',
-            url: 'direccion/obtenerDirecciones/'+cp,
-            dataType: "json",
-            success: renderDirecciones
+  function obtenerDireccionesEdit(cp){
+    $.ajax({
+        type: 'GET',
+        url: 'direccion/obtenerDirecciones/'+cp,
+        dataType: "json",
+    success: renderDirecciones
+    });
+  }
+
+ function renderDirecciones(data){
+
+    $('#estado    option').remove();
+    $('#municipio option').remove();
+    $('#colonia   option').remove();
+
+    var list = data == null ? [] : (data.direcciones instanceof Array ? data.direcciones : [data.direcciones ]);
+
+    if (list.length < 1) {
+
+       alert("SIN NINGÚN RESULTADO EN LA BD");
+
+    } else {
+
+        $('#estado').append('<option value="0">Seleccione una opción</option>');
+        $('#estado').append('<option value='+list[0].estado_k+' selected>'+list[0].estado+'</option>');
+
+
+        $('#municipio').append('<option value="0">Seleccione una opción</option>');
+        $('#municipio').append('<option value='+list[0].municipio_k+' selected >'+list[0].municipio+'</option>');
+
+
+        $('#colonia').append('<option value="0">Seleccione una opción</option>');
+        $.each(list, function(index, direccion) {
+
+            $('#colonia').append('<option value='+direccion.colonia_k+'>'+direccion.colonia+'</option>');
+
         });
+
+        $('#colonia').focus();
     }
+ }
+ function obtenerMunicipios(estado_k){
+    $.ajax({
+        type: 'GET',
+        url: 'direccion/obtenerMunicipios/'+estado_k,
+        dataType: "json",
+    success: renderMunicipios
+    });
+  }
 
-    function renderDirecciones(data){
+  function renderMunicipios(data){
 
-        $('#estado    option').remove();
-        $('#municipio option').remove();
-        $('#colonia   option').remove();
+    $('#municipio_k option').remove();
 
-        var list = data == null ? [] : (data.direcciones instanceof Array ? data.direcciones : [data.direcciones ]);
+    var list = data == null ? [] : (data.municipios instanceof Array ? data.municipios : [data.municipios ]);
 
-        if (list.length < 1) {
+    if (list.length < 1) {
 
-            alert("SIN NINGÚN RESULTADO EN LA BD");
+       alert("SIN NINGÚN RESULTADO EN LA BD");
 
-        } else {
-
-            $('#estado').append('<option value="0">Seleccione una opción</option>');
-            $('#estado').append('<option value='+list[0].estado_k+' selected>'+list[0].estado+'</option>');
+    } else {
 
 
-            $('#municipio').append('<option value="0">Seleccione una opción</option>');
-            $('#municipio').append('<option value='+list[0].municipio_k+' selected >'+list[0].municipio+'</option>');
+        $('#municipio_k').append('<option value="0">Seleccione una opción</option>');
+        $.each(list, function(index, direccion) {
 
+            $('#municipio_k').append('<option value='+direccion.municipio_k+'>'+direccion.municipio+'</option>');
 
-            $('#colonia').append('<option value="0">Seleccione una opción</option>');
-            $.each(list, function(index, direccion) {
-
-                $('#colonia').append('<option value='+direccion.colonia_k+'>'+direccion.colonia+'</option>');
-
-            });
-
-            $('#colonia').focus();
-        }
-    }
-    function obtenerMunicipios(estado_k){
-        $.ajax({
-            type: 'GET',
-            url: 'direccion/obtenerMunicipios/'+estado_k,
-            dataType: "json",
-            success: renderMunicipios
         });
+
+        $('#municipio_k').focus();
+        
     }
-
-    function renderMunicipios(data){
-
-        $('#municipio_k option').remove();
-
-        var list = data == null ? [] : (data.municipios instanceof Array ? data.municipios : [data.municipios ]);
-
-        if (list.length < 1) {
-
-            alert("SIN NINGÚN RESULTADO EN LA BD");
-
-        } else {
+ }
 
 
-            $('#municipio_k').append('<option value="0">Seleccione una opción</option>');
-            $.each(list, function(index, direccion) {
-
-                $('#municipio_k').append('<option value='+direccion.municipio_k+'>'+direccion.municipio+'</option>');
-
-            });
-
-            $('#municipio_k').focus();
-
-        }
-    }
+  function obtenerDireccionesCasa(cp){
+    $.ajax({
+        type: 'GET',
+        url: 'direccion/obtenerDirecciones/'+cp,
+        dataType: "json",
+    success: renderDireccionesCasa
+    });
+  }
 
 
-    function obtenerDireccionesCasa(cp){
-        $.ajax({
-            type: 'GET',
-            url: 'direccion/obtenerDirecciones/'+cp,
-            dataType: "json",
-            success: renderDireccionesCasa
+function renderDireccionesCasa(data){
+
+    $('#estado_casa    option').remove();
+    $('#municipio_casa option').remove();
+    $('#colonia_casa   option').remove();
+
+    var list = data == null ? [] : (data.direcciones instanceof Array ? data.direcciones : [data.direcciones ]);
+
+    if (list.length < 1) {
+
+       alert("SIN NINGÚN RESULTADO EN LA BD");
+
+    } else {
+
+        $('#estado_casa').append('<option value="0">Seleccione una opción</option>');
+        $('#estado_casa').append('<option value='+list[0].estado_k+' selected>'+list[0].estado+'</option>');
+
+
+        $('#municipio_casa').append('<option value="0">Seleccione una opción</option>');
+        $('#municipio_casa').append('<option value='+list[0].municipio_k+' selected >'+list[0].municipio+'</option>');
+
+
+        $('#colonia_casa').append('<option value="0">Seleccione una opción</option>');
+        $.each(list, function(index, direccion) {
+
+            $('#colonia_casa').append('<option value='+direccion.colonia_k+'>'+direccion.colonia+'</option>');
+
         });
+
+        $('#colonia_casa').focus();
+        
     }
-
-
-    function renderDireccionesCasa(data){
-
-        $('#estado_casa    option').remove();
-        $('#municipio_casa option').remove();
-        $('#colonia_casa   option').remove();
-
-        var list = data == null ? [] : (data.direcciones instanceof Array ? data.direcciones : [data.direcciones ]);
-
-        if (list.length < 1) {
-
-            alert("SIN NINGÚN RESULTADO EN LA BD");
-
-        } else {
-
-            $('#estado_casa').append('<option value="0">Seleccione una opción</option>');
-            $('#estado_casa').append('<option value='+list[0].estado_k+' selected>'+list[0].estado+'</option>');
-
-
-            $('#municipio_casa').append('<option value="0">Seleccione una opción</option>');
-            $('#municipio_casa').append('<option value='+list[0].municipio_k+' selected >'+list[0].municipio+'</option>');
-
-
-            $('#colonia_casa').append('<option value="0">Seleccione una opción</option>');
-            $.each(list, function(index, direccion) {
-
-                $('#colonia_casa').append('<option value='+direccion.colonia_k+'>'+direccion.colonia+'</option>');
-
-            });
-
-            $('#colonia_casa').focus();
-
-        }
-    }
+}
 
     $('#codigo_postal').blur(function(){
-        obtenerDirecciones($(this).val());
+     obtenerDirecciones($(this).val());
     });
     $('#codigo_postal_casa').blur(function(){
-        obtenerDireccionesCasa($('#codigo_postal_casa').val());
+     obtenerDireccionesCasa($('#codigo_postal_casa').val());
     });
 
     $('#codigo_postal_edit').blur(function(){
-        obtenerDireccionesEdit($('#codigo_postal_edit').val());
+     obtenerDireccionesEdit($('#codigo_postal_edit').val());
     });
     $('#estado_k').change(function(){
         obtenerMunicipios($('#estado_k').val());
@@ -492,7 +485,7 @@
 
     $('#tipo_casa_k').on('change', function(e){
         e.preventDefault();
-
+        
         $('#paquete_casa_k').val('').change();
         $('#div_cliente').hide();
 
@@ -516,14 +509,40 @@
             $('#div_cliente').hide();
         }
     });
-
+    
     $('#submit_form_2').on('click', function(e){
+      e.preventDefault();
+      var data = $('#form_2').serialize();
+      pnotify_common('info');
+      $.ajax({
+        type: 'POST',
+        url: "<?=base_url('servicio/set_visita')?>",
+        data: data,
+        success: function(data){
+            if (data == 1) {
+                pnotify_common('success');
+                table_1.ajax.reload();
+            }else{
+                pnotify_common('error');
+            }
+        },
+        error: function(a, b, c){
+            pnotify_common('error');
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+      });
+    });
+
+    $('#submit_form_3').on('click', function(e){
         e.preventDefault();
-        var data = $('#form_2').serialize();
+        var data = $('#form_3').serialize();
+        alert(data);
         pnotify_common('info');
         $.ajax({
             type: 'POST',
-            url: "<?=base_url('servicio/set_visita')?>",
+            url: "<?=base_url('casa/set_as_stock')?>",
             data: data,
             success: function(data){
                 if (data == 1) {
@@ -541,10 +560,10 @@
             }
         });
     });
-
-    $('#submit_form_3').on('click', function(e){
+    
+    $('#submit_form_4').on('click', function(e){
         e.preventDefault();
-        var data = $('#form_3').serialize();
+        var data = $('#form_4').serialize();
         pnotify_common('info');
         $.ajax({
             type: 'POST',
@@ -553,13 +572,13 @@
             success: function(data){
                 if (data == 1) {
                     pnotify_common('success');
-                    $('#modal_3').modal('hide');
-                    $('#form_3 input, #form_3 select, #form_3 textarea').each(function(){
+                    $('#modal_4').modal('hide');
+                    $('#form_4 input, #form_4 select, #form_4 textarea').each(function(){
                         $(this).val('');
                     });
                 }else{
                     pnotify_common('error');
-                    $('#modal_3').modal('hide');
+                    $('#modal_4').modal('hide');
                 }
             },
             error: function(a, b, c){
@@ -567,7 +586,7 @@
                 console.log(a);
                 console.log(b);
                 console.log(c);
-                $('#modal_3').modal('hide');
+                $('#modal_4').modal('hide');
             }
         });
     });
@@ -608,20 +627,20 @@
             });
     }
 
-    $('#submit_form_4').on('click', function(){
-        $("#modal_3").mask({'label':""});
-        var data = $('#form_4').serialize();
+    $('#submit_form_5').on('click', function(){
+        $("#modal_4").mask({'label':""});
+        var data = $('#form_5').serialize();
         $.ajax({
             type: 'POST',
             url: "<?=base_url('servicio/insertar_pago_propuesta_tmp')?>",
             data: data,
             success: function(data){
-                $("#modal_3").unmask({'label':""});
+                $("#modal_4").unmask({'label':""});
                 $('#div_btn_pago').show();
                 $("#pagos").hide();
                 $("#tbl_2").show();
                 obtenerPagosPropuesta();
-                $('#form_4 input, #form_4 select, #form_4 textarea').each(function(){
+                $('#form_5 input, #form_5 select, #form_5 textarea').each(function(){
                         $(this).val('');
                     });
             },
@@ -633,10 +652,5 @@
             }
         });
     });
-
-
-
-
-
 </script>
 

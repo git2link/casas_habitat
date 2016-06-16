@@ -22,6 +22,7 @@
     <thead>
     	<tr>
         	<th>Nombre</th>
+            <th>Procedencia</th>
             <th>Ocupación</th>
             <th>Empresa</th>
             <th>Correo</th>
@@ -53,7 +54,9 @@
             },
             columns: [{
                 "data": "name"
-            }, {
+            },{
+                "data": "procedencia"
+            },{
                 "data": "ocupacion"
             },{
                 "data": "empresa"

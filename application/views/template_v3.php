@@ -46,6 +46,9 @@
     <!--Pnotify-->
     <link rel="stylesheet" href="<?= base_url('../css/pnotify/pnotify.custom.min.css') ?>">
 
+    <!--Contextmenu-->
+    <link rel="stylesheet" href="<?= base_url('../css/context_menu.css') ?>">
+
     <?php
     if( !empty( $css_plugins ) )
       print $css_plugins; 
@@ -54,6 +57,7 @@
 <!-- javascript Plugins-->  
 
     <script src="<?= base_url('../js/libs/jquery-1.10.1.min.js') ?>"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></scr‌​ipt>
     <script src="<?= base_url('../js/libs/jquery-ui-1.9.2.custom.min.js') ?>"></script>
     <script src="<?= base_url('../js/libs/bootstrap.min.js') ?>"></script>
 
@@ -180,7 +184,7 @@
 
         <li class="dropdown navbar-profile">
           <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-            <img src="<?= $foto ?>" class="navbar-profile-avatar" alt="">
+            <img src="<?= $_SESSION["photo"] ?>" class="navbar-profile-avatar" alt="">
             <span class="navbar-profile-label">almarazjair@gmail.com &nbsp;</span>
             <i class="fa fa-caret-down"></i>
           </a>
@@ -255,7 +259,7 @@
 
           <ul class="dropdown-menu">
             <li><a href="<?= base_url('casa') ?>"> Prospectos</a></li>
-            <li><a href="<?= base_url('casa/inventario_ventas') ?>"> Inventario-Ventas</a></li>
+            <li><a href="<?= base_url('casa/inventario') ?>"> Inventario-Ventas</a></li>
             <li><a href="#"> Vendidas </a></li>
           </ul>
         </li> 
@@ -378,7 +382,6 @@
 
       <div class="content-header">
         <h2 class="content-header-title"><?= $titulo ?></h2>
-        
         <?= $this->load->view($contenido) ?>
       </div> <!-- /.content-header -->
 
@@ -458,5 +461,9 @@
   }
 
 </script>
+
+<!--Pnotify-->
+<script src="<?= base_url('../js/contextmenu/context_menu.js') ?> "></script>
+
 </body>
 </html>

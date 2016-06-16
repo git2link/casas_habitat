@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group" >
+                                <!--<div class="form-group" >
                                     <div class="col-md-6" >
                                         <br>
                                         <label>Precio de compra final</label>
@@ -96,13 +96,13 @@
                                         <label>Precio de venta final</label>
                                         <input  id="precio_venta_final" name="precio_venta_final" class="form-control" value="<?=$checklist[0]['precio_venta_final']?>">
                                     </div>
-                                </div>
+                                </div>-->
                                 <?php foreach ($checklist as $registro): ?>
                                     <?php foreach ($registro as $ind => $value): ?>
                                         <?php if (isset($checklist_name[$ind]) && isset($checklistfiles_habitat[0]->$ind)): ?>
                                             <?php  
                                                 $checked_1 = '';$checked_2 = '';$checked_3 = '';
-                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_1 =+ 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_1 =+ 1;}
+                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_1 += 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_1 += 1;}
                                                 $disabled = 'disabled';
                                                 if ( $checked_1 == 'checked' ) {$disabled = ''; }
                                             ?>
@@ -176,7 +176,7 @@
                                         <?php if (isset($checklist_name[$ind]) && isset($checklistfiles_casa[0]->$ind)): ?>
                                             <?php  
                                                 $checked_1 = '';$checked_2 = '';$checked_3 = '';
-                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_2 =+ 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_2 =+ 1;}
+                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_2 += 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_2 += 1;}
                                                 $disabled = 'disabled';
                                                 if ( $checked_1 == 'checked' ) {$disabled = ''; }
                                             ?>
@@ -216,7 +216,7 @@
                                         <?php if (isset($checklist_name[$ind]) && isset($checklistfiles_personales[0]->$ind)): ?>
                                             <?php  
                                                 $checked_1 = '';$checked_2 = '';$checked_3 = '';
-                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_3 =+ 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_3 =+ 1;}
+                                                if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_3 += 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_3 += 1;}
                                                 $disabled = 'disabled';
                                                 if ( $checked_1 == 'checked' ) {$disabled = ''; }
                                             ?>
@@ -255,13 +255,12 @@
             </div>
         </div>
         <input name="casa_k" value="<?= $casa_k ?>" hidden>
-        
     </form>
 
     <script type="text/javascript">
         var percent_chk_1 = Math.trunc(<?=$count_chk_1?>/3*100);
-        var percent_chk_2 = Math.trunc(<?=$count_chk_2?>/3*100);
-        var percent_chk_3 = Math.trunc(<?=$count_chk_3?>/3*100);
+        var percent_chk_2 = Math.trunc(<?=$count_chk_2?>/14*100);
+        var percent_chk_3 = Math.trunc(<?=$count_chk_3?>/6*100);
 
         $("#progress_bar_0").html( percent_chk_1 + '% Casas Habitat\n\
             <div class="progress-stat">\n\

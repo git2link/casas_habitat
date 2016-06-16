@@ -9,18 +9,23 @@ class Model_Cliente extends CI_Model {
     function all( $registro=NULL ) {
 
         $where = array(
-            'activo'    => 1
+            'cli.activo'    => 1
             );
 
         if( !empty ($registro['estatus_cliente']))
             $where['estatus_cliente'] = $registro['estatus_cliente'];
 
-        $this->db->select('cli.* , ce.nombre as estado , cm.nombre as municipio, cc.nombre as colonia, 
-                            concat(cli.nombre, " ", cli.apellido_paterno, " ", cli.apellido_materno) as name', false);
+        $this->db->select(' cli.*, 
+                            ce.nombre as estado , 
+                            cm.nombre as municipio, 
+                            cc.nombre as colonia, 
+                            concat(cli.nombre, " ", cli.apellido_paterno, " ", cli.apellido_materno) as name,
+                            p.descripcion as procedencia', false);
         $this->db->from('cliente cli');
         $this->db->join('cat_estados ce' , 'ce.estado_k = cli.estado_k');
         $this->db->join('cat_municipios cm' , 'cm.municipio_k = cli.municipio_k');
         $this->db->join('cat_colonias cc' , 'cc.colonia_k = cli.colonia_k');
+        $this->db->join('cat_procedencia p' , 'p.procedencia_k = cli.procedencia_k');
         $this->db->where ( $where );
         $query = $this->db->get();
         return $query->result();

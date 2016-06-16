@@ -11,21 +11,29 @@ class Casa extends CI_Controller {
 		$this->load->model('Model_Cliente');
 		$this->load->library('casaLib');
 		$this->load->library('comunLib');
+		$this->load->library('functions');
+		$this->load->library('pdf_list');
 		$this->form_validation->set_message('required', 'Debe ingresar campo %s');
 
     }
 
 	public function index() {
-		$data['contenido'] 	= 'casa/index';
-		$data['modal'] 		= 'casa/casa_modal';
+		$data['contenido'] 		= 'casa/index';
+		$data['modal'] 			= 'casa/casa_modal';
 		$data['titulo'] 		= 'Casas';
-		$data['tipo_paquete'] = $this->Model_Casa->getTipoPaquete();
+		$data['tipo_paquete'] 	= $this->Model_Casa->getTipoPaquete();
 		$data['cliente'] 		= $this->Model_Cliente->all();
 		$data['employee'] 	= $this->Model_Casa->employees_availabe();
 		$data['js']			= "<script src=".base_url('../js/loadmask/spin.min.js')."></script>
 										<script src=".base_url('../js/loadmask/jquery.loadmask.spin.js')."></script>
 		";
 		/*$data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );*/
+		$this->load->view('template_v3', $data);
+	}
+
+	public function inventario() {
+		$data['contenido'] 		= 'casa/inventario';
+		$data['titulo'] 		= 'Casas';
 		$this->load->view('template_v3', $data);
 	}
 
@@ -66,11 +74,8 @@ class Casa extends CI_Controller {
 		$data['tipo_vivienda'] 		= $this->Model_Casa->get_tipo_vivienda();
 		$data['usuarios'] 			= $this->Model_Casa->get_usuarios();
 		$data['llaves'] 			= $this->Model_Casa->get_llaves();
-		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>
-												<script src=".base_url('../js/loadmask/spin.min.js')."></script>
-												<script src=".base_url('../js/loadmask/jquery.loadmask.spin.js')."></script>
-		";
-		$this->load->view('template_v3', $data);
+		$data['js']				    = "<script src=".base_url('../js/app/direccion.js')."></script>";
+		$this->load->view('template2', $data);
 	}
 
 	public function insert() {
@@ -164,6 +169,39 @@ class Casa extends CI_Controller {
 			}
 			print 1;
 		}
+	}
+
+	public function update_2() {
+		$registro = $this->input->post();
+		$registro['fecha_hora_modificacion'] 	= date('Y-m-d H:i:s');
+		$registro['usuario_modificacion']		= $this->session->userdata('usuario_id');
+		$this->Model_Casa->update($registro);
+		print 1;
+	}
+
+	public function set_as_stock() {
+
+		$registro = $this->input->post();
+
+		$casa['fecha_hora_modificacion'] 	= date('Y-m-d H:i:s');
+		$casa['usuario_modificacion']		= $this->session->userdata('usuario_id');
+		$casa['casa_k']						= $registro['casa_k'];
+		$casa['estatus']					= 'inventario';
+		$this->Model_Casa->update($casa);
+
+		$arrQuery = $this->Model_Casa->casa_flujo_exist( $registro['casa_k'] );
+		
+		if ( count($arrQuery)>0 ) {
+			$flujo['s_compra_final']			= $registro['s_compra_final'];
+			$flujo['casa_k']					= $registro['casa_k'];
+			$this->Model_Casa->update_casa_flujo($flujo);
+		}else{
+			$flujo['s_compra_final']			= $registro['s_compra_final'];
+			$flujo['casa_k']					= $registro['casa_k'];
+			$this->Model_Casa->insert_casa_flujo($flujo);
+		}
+
+		print 1;
 	}
 
 	public function delete($id) {
@@ -302,8 +340,8 @@ class Casa extends CI_Controller {
 	public function getLocation(){
 		extract($_POST);
 		$location = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $latitud . ',' . $longitud . '&sensor=true';
-		$datos = file_get_contents($location);
-		print $datos;
+		$data = file_get_contents($location);
+		print $data;
 
 	}
 
@@ -415,22 +453,59 @@ class Casa extends CI_Controller {
 	public function datatable() {
 		if ($_POST) {
 			extract($_POST);
-			if ($table == 1) {
-				print '{"data": ' . json_encode($this->Model_Casa->all( 1 )) . '}';
-			}else{
+			if ( $table == 1 ) {
+				print '{"data": ' . json_encode($this->Model_Casa->all( 'prospecto' )) . '}';
+			}elseif ( $table == 2 ) {
+				$arrQuery = $this->Model_Casa->all( 'inventario' );
 
+				foreach ($arrQuery as $row) {
+					$row->casa_k = $this->functions->encrypt_decrypt('encrypt', $row->casa_k);
+				}
+				print '{"data": ' . json_encode($arrQuery) . '}';
 			}
-		}else{
-
 		}
 	}
 
+	public function pdf( ) {
+
+		$arrQuery = $this->Model_Casa->casa_details( 4 );
+
+		if ( count($arrQuery)>0 ) {
+			$data['casa_k'] 			= $arrQuery[0]->casa_k;
+
+			$data['tipo'] 				= $arrQuery[0]->descripcion_tipo_casa;
+			$data['paquete'] 			= $arrQuery[0]->descripcion_paquete_casa;
+			$data['clave'] 				= $arrQuery[0]->clave_interna;
+			$data['credito_anterior']	= $arrQuery[0]->credito_anterior;
+
+			$data['calle_numero'] 		= $arrQuery[0]->calle_numero;
+			$data['manzana'] 			= $arrQuery[0]->manzana;
+			$data['lote'] 				= $arrQuery[0]->lote;
+			$data['municipio']			= $arrQuery[0]->municipio;
+			$data['colonia'] 			= $arrQuery[0]->colonia;
+			$data['estado'] 			= $arrQuery[0]->estado;
+			$data['codigo_postal']		= $arrQuery[0]->codigo_postal;
+
+			$data['tipo_vivienda'] 		= $arrQuery[0]->tipo_vivienda;
+			$data['m2_terreno'] 		= $arrQuery[0]->m2_terreno;
+			$data['m2_construccion'] 	= $arrQuery[0]->m2_construccion;
+			$data['pisos_nivel']		= $arrQuery[0]->pisos_nivel;
+			$data['recamaras']			= $arrQuery[0]->recamaras;
+			$data['banios']				= $arrQuery[0]->banios;
+			$data['estacionamiento']	= $arrQuery[0]->estacionamiento;
+			$data['observaciones']		= $arrQuery[0]->observaciones;
+
+			$data['imagenes']			= $this->Model_Casa->getImagenes_by_casa( 4 );
+
+			$this->pdf_list->casa_prospecto($data);
+		}
+
+	}
+	
 	public function pagosdatatable() {
 		if ($_POST) {
 			extract($_POST);
 				print '{"data": ' . json_encode($this->Model_Casa->pagos_propuesta_tmp( $propuesta_tmp_k )) . '}';
-		}else{
-
 		}
 	}
 

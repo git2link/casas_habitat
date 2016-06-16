@@ -14,56 +14,40 @@ class Mejora extends CI_Controller {
 
     }
 
-
-	/*public function create( $id ) {
-		$data['contenido']  = 'mejora/index';
-		$data['casa_k'] 	= $id;
-		$data['titulo'] 	= 'Mejoras';
-
-		$data['js']			= "
-		<script type='text/javascript' src=".base_url('../js/angular/angular.min.js')."></script>
-		<script type='text/javascript' src=".base_url('../js/angular/ui-bootstrap-tpls-0.11.2.min.js')."></script>
-		<script type='text/javascript' src=".base_url('../js/angular/angular-route.min.js')."></script>
-		<script type='text/javascript' src=".base_url('../js/angular/angular-animate.min.js')."></script>
-
-
-		<script src=".base_url('../js/app/mejora/app.js')."></script>
-		<script src=".base_url('../js/app/mejora/data.js')."></script>
-		<script src=".base_url('../js/app/mejora/directives.js')."></script>
-		<script src=".base_url('../js/app/mejora/mejoraCtrl.js')."></script>
-
-
-		<script type='text/javascript' src=".base_url('../js/angular/underscore.min.js')."></script>
-		<script type='text/javascript' src=".base_url('../js/angular/ie10-viewport-bug-workaround.js')."></script>";
-
-
-		$this->load->view('template_v3', $data);
-	}*/
-
 	public function create( $id ) {
-
-		$data['modal'] 		= 'mejora/mejora_modal';
-		$data['titulo'] 	= 'Mejoras';
-		$data['casa_k'] 	= $id;
-		$data['proveedor'] 	= $this->Model_Proveedor->all();
-		$data['casa'] 		= $this->Model_Mejora->ubicacion( $id );
 		
-		if (count($data['casa'])>0) {
-			$data['clave'] 		= $data['casa'][0]->clave_interna;
-			$data['contenido'] 	= 'mejora/mejora';
-		}else{
-			$data['contenido'] 	= 'home/acceso_denegado';
+		$id = $this->functions->encrypt_decrypt('decrypt', $id);
+
+		$data['contenido'] 		= 'home/acceso_denegado';
+		$data['titulo'] 	= 'Denegado';
+
+		if ( is_numeric($id) ) {
+				
+			$data['casa'] 		= $this->Model_Mejora->ubicacion( $id );
+			
+			if (count($data['casa'])>0) {
+
+				$data['modal'] 		= 'mejora/mejora_modal';
+				$data['contenido'] 	= 'mejora/mejora';
+				$data['titulo'] 	= 'Mejoras';
+				$data['casa_k'] 	= $id;
+				$data['proveedor'] 	= $this->Model_Proveedor->all();
+				$data['clave'] 		= $data['casa'][0]->clave_interna;
+
+			}
+
 		}
+
 		$this->load->view('template_v3', $data);
 	}
 
 	function all( $id ){
-		$datos = $this->Model_Mejora->all( $id );
+		$data = $this->Model_Mejora->all( $id );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}

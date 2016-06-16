@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1> <?=$clave?> <small> <?=$casa[0]->direccion?> </small> </h1> 
   <div class="pull-left table_functions_left">
-      <a href="<?=base_url('servicio/vender')?>" class="btn btn-danger btn-sm" title="Regresar">
+      <a href="<?=base_url('casa/inventario')?>" class="btn btn-danger btn-sm" title="Regresar">
         <i class="fa fa-arrow-left"></i>
       </a>
       <a id="btn_add_1" data-toggle="modal" href="#modal_1" class="btn btn-success btn-sm" title="Agregar">

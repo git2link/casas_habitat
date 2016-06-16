@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 
 		$this->load->library('usuarioLib');
 		$this->load->model('Model_Noticias');
+		$this->load->model('Model_Usuario');
 		$this->form_validation->set_message('required', 'Debe ingresar un valor para %s');
 		$this->form_validation->set_message('loginok', 'Usuario o contraseña incorrectos');
 		$this->form_validation->set_message('matches', '%s no coincide con %s');
@@ -53,7 +54,16 @@ class Home extends CI_Controller {
 			$this->ingreso();
 		}
 		else {
+
+			$arrQuery 		= $this->Model_Usuario->usuario_foto_by_usuario( $this->session->userdata('usuario_id') );
+			if ( count($arrQuery)>0 ) {
+				$_SESSION["photo"]	= $arrQuery[0]->foto;
+			}else{
+				$_SESSION["photo"]	= '';
+			}
+			
 			redirect('home/index');
+
 		}
 	}
 

@@ -49,12 +49,12 @@ class Reporte extends CI_Controller {
 
 	public function atencion_compras(){
 
-		$datos = $this->Model_Reporte->atencion_compras();
+		$data = $this->Model_Reporte->atencion_compras();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 
@@ -62,12 +62,12 @@ class Reporte extends CI_Controller {
 
 	public function atencion_ventas(){
 
-		$datos = $this->Model_Reporte->atencion_ventas();
+		$data = $this->Model_Reporte->atencion_ventas();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 

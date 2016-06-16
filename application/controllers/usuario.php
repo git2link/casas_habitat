@@ -28,7 +28,7 @@ class Usuario extends CI_Controller {
 		$data['js'] 					= "
 			<script type='text/javascript' src=".base_url('../js/app/direccion_2.js')."></script>";
 
-		$this->load->view('template_v3', $data );
+		$this->load->view('template_v3', $data);
 		
 	}
 
@@ -163,12 +163,12 @@ class Usuario extends CI_Controller {
 	}
 
 	public function find_json( $id ){
-		$datos = $this->Model_Usuario->find_json( $id );
+		$data = $this->Model_Usuario->find_json( $id );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}

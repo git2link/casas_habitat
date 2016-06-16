@@ -30,7 +30,7 @@ class Servicio extends CI_Controller {
 		";
 
 
-		$this->load->view('template_v3', $data);
+		$this->load->view('template2', $data);
 
 	}
 
@@ -449,12 +449,12 @@ class Servicio extends CI_Controller {
 
 		$filtro = json_decode(file_get_contents('php://input'),true);
 
-		$datos = $this->Model_Servicio->casas_sin_interes( $cliente_k , $filtro );
+		$data = $this->Model_Servicio->casas_sin_interes( $cliente_k , $filtro );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}
@@ -529,24 +529,24 @@ class Servicio extends CI_Controller {
 
 	public function casas_con_interes( $cliente_k ){
 
-		$datos = $this->Model_Servicio->casas_con_interes( $cliente_k );
+		$data = $this->Model_Servicio->casas_con_interes( $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}
 
 	public function casas_en_venta( $cliente_k ){
 
-		$datos = $this->Model_Servicio->casas_en_venta( $cliente_k );
+		$data = $this->Model_Servicio->casas_en_venta( $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}
@@ -577,12 +577,12 @@ class Servicio extends CI_Controller {
 
 	public function visitas_casa( $casa_k , $cliente_k ){
 
-		$datos = $this->Model_Servicio->visitas_casa( $casa_k , $cliente_k );
+		$data = $this->Model_Servicio->visitas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 
@@ -628,14 +628,14 @@ class Servicio extends CI_Controller {
 			);
 		$this->Model_Cliente->update($array, $registro['cliente_k'] );
 
-		$datos = (object)array(
+		$data = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario')
 			);
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Propuesta enviada exitosamente',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 
 		echo json_encode($array_response);
@@ -643,12 +643,12 @@ class Servicio extends CI_Controller {
 
 	public function ofertas_casa( $casa_k , $cliente_k ){
 
-		$datos = $this->Model_Servicio->ofertas_casa( $casa_k , $cliente_k );
+		$data = $this->Model_Servicio->ofertas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 
@@ -656,12 +656,12 @@ class Servicio extends CI_Controller {
 
 	public function ofertas_casas(){
 
-		$datos = $this->Model_Servicio->ofertas_casas();
+		$data = $this->Model_Servicio->ofertas_casas();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 
@@ -690,7 +690,7 @@ class Servicio extends CI_Controller {
 			"fecha_proxima_atencion"=> date ( 'Y-m-d' , strtotime ( '+30 day' , strtotime ( date('Y-m-d') ) ) )
 			);
 		$this->Model_Cliente->update($array, $registro['cliente_k'] );
-		$datos = (object)array(
+		$data = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario'),
 			'estatus'			=> $arreglo['estatus'],
@@ -699,7 +699,7 @@ class Servicio extends CI_Controller {
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Oferta enviada exitosamente',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 
 		echo json_encode($array_response);
@@ -727,7 +727,7 @@ class Servicio extends CI_Controller {
 
 		$id = $this->Model_Servicio->insertar_oferta($arreglo);
 
-		$datos = (object)array(
+		$data = (object)array(
 			'id'				=> $id,
 			'nombre_usuario'	=> $this->session->userdata('usuario'),
 			'estatus'			=> $arreglo['estatus'],
@@ -736,7 +736,7 @@ class Servicio extends CI_Controller {
 		$array_response = array(
 			'status'	=> 'success',
 			'message'   => 'Oferta enviada exitosamente',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 
 		echo json_encode($array_response);
@@ -806,12 +806,12 @@ class Servicio extends CI_Controller {
 
 	public function propuestas_casa( $casa_k , $cliente_k ){
 
-		$datos = $this->Model_Servicio->propuestas_casa( $casa_k , $cliente_k );
+		$data = $this->Model_Servicio->propuestas_casa( $casa_k , $cliente_k );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 
