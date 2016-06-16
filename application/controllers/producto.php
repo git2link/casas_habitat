@@ -36,14 +36,15 @@ class Producto extends CI_Controller {
 
 		$this->load->view('template_v3', $data);
 	}
+	
 
 	function all(){
-		$datos = $this->Model_Producto->all();
+		$data = $this->Model_Producto->all();
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Data Selected From database',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}

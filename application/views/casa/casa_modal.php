@@ -291,8 +291,8 @@
                 console.log(c);
             }
 
-        });
-    }
+    });
+  }
 
   function obtenerDireccionesEdit(cp){
     $.ajax({

@@ -47,7 +47,7 @@
             }else if( event.estatus == 3 ){
                 element.css('background-color', 'rgb(217, 83, 79)');
                 element.css('border-color',     'rgb(217, 83, 79)');
-            }
+            }    
         },
 
         loading: function(bool) {
@@ -92,37 +92,37 @@
             var appointmentDiv = '  <div class="col-md-12"><br>\n\
                                     <ol class="breadcrumb" style="background-color: rgb(92, 184, 92); color: white;">'+e.title+' - '+e.cliente+' - Visita realizada</ol>\n\
                                 </div>';
-        }else if (e.estatus == 3){
-            var appointmentDiv = '  <div class="col-md-12"><br>\n\
+    }else if (e.estatus == 3){
+        var appointmentDiv = '  <div class="col-md-12"><br>\n\
                                     <ol class="breadcrumb" style="background-color: rgb(217, 83, 79); color: white;">'+e.title+' - '+e.cliente+' - Visita no atendida</ol>\n\
                                 </div>';
-        }
-
-        $('#hd-message').html(appointmentDiv);
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     }
 
-    function dismiss_event(){
+    $('#hd-message').html(appointmentDiv);
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+}
 
-        pnotify_common('info')
-        var visita = $('#btn_dismiss').attr('visita');
-        $.ajax({
-            type: 'POST',
-            url: "<?=base_url('actividades/dismiss_visita')?>",
-            data: {visita:visita},
-            success: function(data){
-                if (data == 1) {
-                    pnotify_common('success');
-                }else{
-                    pnotify_common('error');
-                }
-            },
-            error: function(a, b, c){
+function dismiss_event(){
+
+    pnotify_common('info')
+    var visita = $('#btn_dismiss').attr('visita');
+    $.ajax({
+        type: 'POST',
+        url: "<?=base_url('actividades/dismiss_visita')?>",
+        data: {visita:visita},
+        success: function(data){
+            if (data == 1) {
+                pnotify_common('success');
+            }else{
                 pnotify_common('error');
-                console.log(a);
-                console.log(b);
-                console.log(c);
             }
-        });
-    }
+        },
+        error: function(a, b, c){
+            pnotify_common('error');
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+    });
+}
 </script>

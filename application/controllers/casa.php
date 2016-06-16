@@ -23,10 +23,7 @@ class Casa extends CI_Controller {
 		$data['titulo'] 		= 'Casas';
 		$data['tipo_paquete'] 	= $this->Model_Casa->getTipoPaquete();
 		$data['cliente'] 		= $this->Model_Cliente->all();
-		$data['employee'] 	= $this->Model_Casa->employees_availabe();
-		$data['js']			= "<script src=".base_url('../js/loadmask/spin.min.js')."></script>
-										<script src=".base_url('../js/loadmask/jquery.loadmask.spin.js')."></script>
-		";
+		$data['employee'] 		= $this->Model_Casa->employees_availabe();
 		/*$data['query'] 			= $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );*/
 		$this->load->view('template_v3', $data);
 	}
@@ -48,12 +45,12 @@ class Casa extends CI_Controller {
 	}
 
 	function all(){
-		$datos = $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );
+		$data = $this->Model_Casa->all( ESTATUS_CASA_PROSPECTO );
 
 		$array_response = array( 
 			'success' 	=> true, 
 			'message'	=> 'Seleccionados de base de datos',
-			'data'		=> $datos
+			'data'		=> $data
 			);
 		echo json_encode($array_response);
 	}
