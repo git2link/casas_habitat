@@ -1,0 +1,38 @@
+
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="openEnviarPropuesta(propuesta);">&nbsp;Agregar Propuesta</button> 
+<div class="pull-right" style="padding-bottom: 10px;">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Propuestas ..." class="nav-search-input" ng-model="filterPropuestas" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+<br>
+<div class="table-responsive">                 
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="propuestas_casa.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="propuestas_casa.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columnas_propuestas">{{c.text}}</th></tr></thead>
+    
+    <tr ng-repeat="c in propuestas_casa | filter:filterPropuestas | orderBy:'fecha_oferta'" id="{{c.fecha_oferta}}"  ng-animate=" 'animate'">
+            <td>{{c.nombre_usuario}}</td>
+            <td>{{ c.pago_contado | currency:'$'}}</td>
+            <td>{{ c.precio_pactado | currency:'$'}}</td>
+            <td>{{ c.anticipo | currency:'$'}}</td>
+            <td>{{ c.mensualidades }}</td>
+            <td>{{ c.monto_mensualidades | currency:'$'}}</td>
+            <td> %{{ c.comercializacion }}</td>
+            <td>{{c.estatus}}</td>
+
+            <td style="width:100px" ng-show="{{mostrar}}">
+                <div class="btn-group">
+                  <a ng-click="autorizarPropuesta(c)"><button type="button" class="btn btn-success fa fa-check-circle-o" ></button></a>
+                  <a ng-click="rechazarPropuesta(c)"><button type="button" class="btn btn-primary fa fa-times-circle-o" ></button></a>
+                </div>
+
+            </td>
+
+    </tr>
+    </table>
+  </div>
+</div>

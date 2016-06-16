@@ -1,0 +1,31 @@
+<h4 class="blog-post-title">Mejora</h4>
+<hr/>
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="open(mejora);">&nbsp;Agregar Mejora</button>
+<div class="pull-right">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Mejoras ..." class="nav-search-input" ng-model="filterMejora" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>
+
+<div class="table-responsive">                 
+
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="mejoras.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="mejoras.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columns">{{c.text}}</th></tr></thead>
+
+    <tr ng-repeat="c in mejoras | filter:filterMejora | orderBy:'-mejora_k'" id="{{c.mejora_k}}" animate-on-change='c.empresa + c.presupuesto + c.fecha_inicio_trabajos + c.fecha_entrega_trabajos' ng-animate=" 'animate'">
+        <td>{{c.mejora_k}}</td><td>{{c.empresa}}</td><td>{{c.presupuesto}}</td><td>{{c.fecha_inicio_trabajos}}</td><td>{{c.fecha_entrega_trabajos}}</td>
+        <td style="width:100px">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
+              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="borrarMejora(c);"></button>
+            </div>
+        </td>
+    </tr>
+    </table>
+</div>
+</div>
+              

@@ -1,0 +1,30 @@
+<button type="button" class="btn btn-danger fa fa-plus" ng-click="evaluacionCompra();">&nbsp;Eliminar Prospecto de Venta</button>
+<!--<div class="pull-right" style="padding-bottom: 10px;">
+Filtrar: <span class="input-icon">
+                        <input placeholder="Filtrar Casas ..." class="nav-search-input" ng-blur="prueba()" ng-model="filterCasasEnVenta" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                    </span>
+</div>-->
+<br>
+<div class="table-responsive">                 
+  <div class="panel-body">
+    <table class="table table-bordered table-highlight">
+    <tr ng-show="casas_en_venta.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No se encontraron datos</td></tr>
+    <tr ng-hide="casas_en_venta.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Cargando</td></tr>
+    
+    <thead><tr><th ng-repeat="c in columnas_casas_en_venta">{{c.text}}</th></tr></thead>
+    
+    <tr ng-repeat="c in casas_en_venta | filter:filterCasasEnVenta | orderBy:'-casa_k'" id="{{c.casa_k}}"  ng-animate=" 'animate'">
+            <td>{{c.casa_k}}</td>
+            <td>{{c.codigo_postal}} {{c.calle_numero}} {{c.colonia}} {{c.municipio}} {{c.estado}}</td>
+            <td>{{c.nivel_urgencia}}</td>
+            <td style="width:100px">
+                <div class="btn-group">
+                    <a href="#/visitas_ventas/{{c.casa_k}}"><button type="button" class="btn btn-default fa fa-eye" ></button></a>
+                    <a href="#/propuestas/{{c.casa_k}}/{{c.cliente_k}}"><button type="button" class="btn btn-info fa fa-gavel" ></button></a>
+                    
+                </div>
+            </td>
+    </tr>
+    </table>
+  </div>
+</div>

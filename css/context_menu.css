@@ -1,0 +1,13 @@
+  .menu{
+    position: fixed;
+    display: none;
+    z-index: 10;
+  }
+  .menu a{
+    color: #FFF;
+    background-color: rgb(66, 139, 202);
+  }
+  .menu a:hover{
+    color: #FFF;
+    background-color: rgb(50, 118, 177);
+  }
