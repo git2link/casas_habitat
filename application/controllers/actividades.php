@@ -47,7 +47,7 @@ class Actividades extends CI_Controller {
 		if (isset($visita_k)) {
 			$arrQuery 					= $this->Model_Actividades->casa_by_visita($visita_k);
 			if (count($arrQuery)>0) {
-				if ($arrQuery[0]->realizada == 0) {
+				if ($arrQuery[0]->realizada == 1) {
 
 					$data['visita_k']			= $visita_k;
 					$casa_k						= $arrQuery[0]->casa_k;

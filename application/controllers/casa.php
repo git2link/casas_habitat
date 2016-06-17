@@ -182,9 +182,17 @@ class Casa extends CI_Controller {
 
 		$casa['fecha_hora_modificacion'] 	= date('Y-m-d H:i:s');
 		$casa['usuario_modificacion']		= $this->session->userdata('usuario_id');
+		$cliente 							= $casa;
+
 		$casa['casa_k']						= $registro['casa_k'];
 		$casa['estatus']					= 'inventario';
 		$this->Model_Casa->update($casa);
+
+		if ( $registro['cliente']!=0 ) {
+			$cliente['cliente_k']				= $registro['cliente'];
+			$cliente['estatus_cliente']			= 'cliente';
+			$this->Model_Cliente->update($cliente, $registro['cliente']);
+		}
 
 		$arrQuery = $this->Model_Casa->casa_flujo_exist( $registro['casa_k'] );
 		

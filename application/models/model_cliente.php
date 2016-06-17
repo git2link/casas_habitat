@@ -57,6 +57,7 @@ class Model_Cliente extends CI_Model {
         $this->db->where('cliente_k', $id);
         $this->db->update('cliente');
     }
+    
 
     function delete($id) {
     	$this->db->where('cliente_k', $id);

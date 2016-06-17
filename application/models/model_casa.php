@@ -9,7 +9,8 @@ class Model_Casa extends CI_Model {
     function all( $estatus_casa = NULL ) {
         $this->db->select(' case when isNull(casa_cliente_k) then 
                                 ctc.descripcion else concat(cli.nombre, " ", cli.apellido_paterno, " ", cli.apellido_materno) 
-                            end as cliente, ccli.cliente_k,
+                            end as cliente, 
+                            ccli.cliente_k,
                             c.*, ce.nombre as estado , 
                             cm.nombre as municipio, 
                             cc.nombre as colonia , 
