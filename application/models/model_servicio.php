@@ -226,12 +226,6 @@ class Model_Servicio extends CI_Model {
         $this->db->insert('casas_cliente_interes');
     }
 
-    function insertar_propuesta( $registro ){
-        $this->db->set($registro);
-        $this->db->insert('propuestas');
-        return $this->db->insert_id();
-    }
-
     function visitas_casa( $casa_k , $cliente_k ){
         
         $sql = " SELECT c.*, ce.nombre as estado , cm.nombre as municipio, cc.nombre as colonia , ctc.  descripcion as descripcion_tipo_casa, cpc.descripcion as descripcion_paquete_casa, vcv.realizada, vcv.visita_k, vcv.fecha_visita ,
@@ -404,28 +398,6 @@ class Model_Servicio extends CI_Model {
         $this->db->where('b.casa_k', $casa_k);
         return $this->db->update('venta a
                                     join casa_cliente b on a.casa_cliente_k = b.casa_cliente_k');
-    }
-
-    function insert_propuesta_temporal( $registro ){
-        $this->db->set($registro);
-        $this->db->insert('propuestas_tmp');
-        return $this->db->insert_id();
-    }
-    
-    function insertar_pago_propuesta_tmp( $registro ){
-        $this->db->set($registro);
-        $this->db->insert('pagos_propuesta_tmp');
-    }
-
-    function copiarPagosDePropuestaTemporal( $id , $propuesta_tmp_k){
-
-        $sql = "INSERT INTO pagos_propuesta (propuesta_k , monto , fecha )
-        SELECT ".$id." , monto , fecha  FROM pagos_propuesta_tmp
-         WHERE propuesta_tmp_k = ".$propuesta_tmp_k." " ;
-
-         $this->db->query($sql);
-
-
     }
 
 

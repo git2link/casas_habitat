@@ -551,30 +551,6 @@ class Servicio extends CI_Controller {
 		echo json_encode($array_response);
 	}
 
-	public function insertar_propuesta(){
-
-		$registro 							= $this->input->post();
-		$registro['fecha_hora_creacion'] 	= date('Y-m-d H:i:s');
-		$registro['usuario_creacion']	 	= $this->session->userdata('usuario_id');
-		$registro['estatus']			 = 'En espera';
-
-		$propuesta_tmp_k = $registro['propuesta_tmp_k']; 
-		unset($registro['propuesta_tmp_k']);
-		$id = $this->Model_Servicio->insertar_propuesta($registro);
-
-		$this->Model_Servicio->copiarPagosDePropuestaTemporal( $id , $propuesta_tmp_k);
-
-		$array = array(
-			"estatus_atencion"		=> 'En Propuesta',
-			"usuario_atencion"		=> $this->session->userdata('usuario_id'),
-			"fecha_atencion"		=> date('Y-m-d'),
-			"fecha_proxima_atencion"=> date ( 'Y-m-d' , strtotime ( '+7 day' , strtotime ( date('Y-m-d') ) ) )
-			);
-		$this->Model_Cliente->update($array, $registro['cliente_k'] );
-
-		echo 1;
-	}
-
 	public function visitas_casa( $casa_k , $cliente_k ){
 
 		$data = $this->Model_Servicio->visitas_casa( $casa_k , $cliente_k );
@@ -864,25 +840,6 @@ class Servicio extends CI_Controller {
 				print '{"data": ' . json_encode( $this->Model_Servicio->servicio_venta() ) . '}';
 			}
 		}
-	}
-
-	public function insert_propuesta_temporal() {
-		$registro = array();
-		$registro['fecha_hora_creacion'] 	= date('Y-m-d H:i:s');
-		$registro['usuario_creacion']	 	= $this->session->userdata('usuario_id');
-		$id = $this->Model_Servicio->insert_propuesta_temporal($registro);
-
-
-		print $id;
-	}
-
-	public function insertar_pago_propuesta_tmp() {
-
-		$registro 						= $this->input->post();
-
-		$this->Model_Servicio->insertar_pago_propuesta_tmp($registro);
-
-		print 1;
 	}
 
 }

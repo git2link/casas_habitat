@@ -127,23 +127,28 @@
     }
   });
 
-  $('#tbl_1 tbody').on('click', function(e){
-    e.preventDefault();
-    var dta_table = table_1.row($('tr.selected')).data();
-    console.log( dta_table );
-    if (dta_table != undefined) {
+    $('#tbl_1 tbody').on('click', function(e){
+        e.preventDefault();
+        var dta_table = table_1.row($('tr.selected')).data();
+        console.log( dta_table );
+        if (dta_table != undefined) {
 
-      $('.need_selection').attr('disabled', false);
+            $('.need_selection').attr('disabled', false);
 
-      if (dta_table['visita'] == 1) {
-        $('#casa_visita').val(dta_table['casa_k']);
-      }else{
-        $('#btn_visita_1').attr('disabled', true);
-      }
-    }else{
-      $('.need_selection').attr('disabled', true);
-    }
-  });
+            if (dta_table['visita'] == 1) {
+                $('#casa_visita').val(dta_table['casa_k']);
+            }else{
+                $('#btn_visita_1').attr('disabled', true);
+            }
+            if( dta_table['cliente_k'] == null || dta_table['cliente_k'] == '' ){
+                $('#btn_propuesta_1').attr('disabled', true);
+            }else{
+                $('#btn_propuesta_1').attr('disabled', false);
+            }
+        }else{
+            $('.need_selection').attr('disabled', true);
+        }
+    });
 
   $('#btn_checklist_1').on('click', function(e){
     e.preventDefault();
@@ -172,32 +177,11 @@
 
     $('#btn_propuesta_1').on('click', function(e){
         e.preventDefault();
-        $("#modal_4").mask({'label':""});
         var dta_table = table_1.row($('tr.selected')).data();
         if (dta_table != undefined) {
-
-            $.ajax({
-                type: 'POST',
-                url: "<?=base_url('servicio/insert_propuesta_temporal')?>",
-                success: function(data){
-                    $("#modal_4").unmask({'label':""});
-                    $("#propuesta_tmp_k").val(data);
-                    $("#propuesta_tmp").val(data);
-                },
-                error: function(a, b, c){
-                    pnotify_common('error');
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
-                }
-            });
-
             var casa_k     = dta_table['casa_k'];
             var cliente_k  = dta_table['cliente_k'];
-            $('#casa_k').val(casa_k);
-            $('#cliente_k').val(casa_k);
-
-            $('.action').val('update');
+            window.location.replace("<?=base_url('propuestas/index/" + casa_k + "/" + cliente_k + "')?>");
         }else{
             alert('Seleccione un registro');
             return false;
