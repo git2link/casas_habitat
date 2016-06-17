@@ -1,13 +1,4 @@
 
-$('.context_menu tbody').on('click', function(e){
-	e.preventDefault();
-    var dta_table = table_1.row($('tr.selected')).data();
-    if (dta_table != undefined) {
-      $('.need_selection').attr('disabled', false);
-    }else{
-      $('.need_selection').attr('disabled', true);
-    }
-});	
 
 $(document).ready( function(){
 	$('.list-group').hide();
@@ -40,9 +31,14 @@ $(document).ready( function(){
 		$('.DTTT_selected').removeClass('DTTT_selected');
 		$('.selected').removeClass('selected');
 	});
-
-
-
-
+	$('.context_menu tbody').on('click', function(e){
+		e.preventDefault();
+	    var dta_table = table_1.row($('tr.selected')).data();
+	    if (dta_table != undefined) {
+	      $('.need_selection').attr('disabled', false);
+	    }else{
+	      $('.need_selection').attr('disabled', true);
+    }
+});	
 });
 	

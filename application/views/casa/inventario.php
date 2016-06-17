@@ -10,19 +10,19 @@
         <a id="btn_edit_1" data-toggle="modal" href="#modal_1" class="btn btn-secondary btn-sm need_selection" title="Editar">
             <i class="fa fa-pencil-square-o"></i>
         </a>
-        <button class="btn btn-success btn-sm need_selection" title="Checklist">
+        <button class="btn btn-success btn-sm need_selection" title="Checklist" disabled>
         <i class="fa fa-check-square-o "></i>
       </button>
-        <button class="btn btn-warning btn-sm" title="CLG">
+        <button class="btn btn-warning btn-sm" title="CLG" disabled>
         CLG
       </button>
-        <button class="btn btn-success btn-sm need_selection" title="Saneamineto" onClick="saneamiento()">
-        <i class="fa fa-money"></i>
+        <button class="btn btn-success btn-sm need_selection" title="Saneamineto" onClick="saneamiento()" disabled>
+        <i class="fa fa-list-alt"></i>
       </button>
-        <button class="btn btn-secondary btn-sm need_selection" title="Mejora" onClick="mejora()">
+        <button class="btn btn-secondary btn-sm need_selection" title="Mejora" onClick="mejora()" disabled>
         <i class="fa fa-cogs"></i>
       </button>
-        <button class="btn btn-success btn-sm need_selection" title="Avaluo">
+        <button class="btn btn-success btn-sm need_selection" title="Avaluo" disabled>
         <i class="fa fa-usd"></i>
       </button>
     </div>
