@@ -26,11 +26,12 @@ $(document).ready( function(){
 		$('.list-group').show("fold", 500);
 	});
 
-	$('.context_menu tbody').on('click', 'tr', function(e){
+	/*$('.context_menu tbody').on('click', 'tr', function(e){
 		e.preventDefault();
 		$('.DTTT_selected').removeClass('DTTT_selected');
 		$('.selected').removeClass('selected');
-	});
+	});*/
+
 	$('.context_menu tbody').on('click', function(e){
 		e.preventDefault();
 	    var dta_table = table_1.row($('tr.selected')).data();
