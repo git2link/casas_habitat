@@ -4,9 +4,9 @@
         <a href="<?=base_url('actividades/visitas')?>" class="btn btn-danger btn-sm" title="Regresar">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <a id="btn_modal_upload" data-toggle="modal" href="#modal_upload" class="btn btn-sm btn-secondary btn_upload" class="btn btn-success" title="Agregar imagen">
+        <!--<a id="btn_modal_upload" data-toggle="modal" href="#modal_upload" class="btn btn-sm btn-secondary btn_upload" class="btn btn-success" title="Agregar imagen">
             <i class="fa fa-cloud-upload"></i>
-        </a>
+        </a>-->
         <a id="btn_terminar_visita" data-toggle="modal" href="#modal_end" class="btn btn-sm btn-success btn_upload" class="btn btn-success" title="Concluir visita">
             <i class="fa fa-check-square-o"> Finalizar</i>
         </a>

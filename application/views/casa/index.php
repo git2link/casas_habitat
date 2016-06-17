@@ -1,3 +1,7 @@
+<div class="list-group menu" title="Selecciona una opción o presiona esc para quitar!">
+  <a href="" id="menu_pdf" class="list-group-item list-group-item-info">Consultar PDF</a>
+</div>
+
 <div class="page-header">
   <h1> Prospectos <small> gestión  </small> </h1> 
   <div class="pull-left table_functions_left">
@@ -13,11 +17,12 @@
       <a id="btn_visita_1" data-toggle="modal" href="#modal_2" class="btn btn-warning btn-sm need_selection" title="Agendar visita" disabled>
         <i class="fa fa-eye"></i>
       </a>
+      <a id="btn_propuesta_1" data-toggle="modal" href="#modal_4" class="btn btn-info btn-sm need_selection" title="Agregar propuesta" disabled>
+          <i class="fa fa-money"></i>
+      </a>
+      &nbsp;
       <a id="btn_stock_1" data-toggle="modal" href="#modal_3" class="btn btn-success btn-sm need_selection" title="Incluir a inventario" disabled>
         <i class="fa fa-check"></i>
-      </a>
-      <a id="btn_propuesta_1" data-toggle="modal" href="#modal_3" class="btn btn-info btn-sm" title="Agregar propuesta" disabled>
-          <i class="fa fa-money"></i>
       </a>
       <button id="btn_dismiss_1" class="btn btn-danger btn-sm need_selection" title="Descartar" disabled>
         <i class="fa fa-times"></i>
@@ -34,7 +39,7 @@
 
 <div id="table_elemnts_left" class="col-lg-6"></div>
 <div id="table_elemnts_right" class="col-lg-6"></div>
-<table id="tbl_1" class="table-bordered table-highlight display" style="width:100%">
+<table id="tbl_1" class="table-bordered table-highlight display context_menu" style="width:100%">
     <thead>
     	<tr>
       	<th>Origen</th>
@@ -157,6 +162,11 @@
         e.preventDefault();
         var dta_table = table_1.row($('tr.selected')).data();
         $('#casa_stock').val( dta_table['casa_k'] );
+        if ( dta_table['cliente_k'] == null) {
+          $('#cliente_1').val(0);
+        }else{
+          $('#cliente_1').val(dta_table['cliente_k']);
+        }
     })
 
     $('#btn_propuesta_1').on('click', function(e){

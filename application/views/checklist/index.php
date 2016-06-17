@@ -104,7 +104,7 @@
                                                 $checked_1 = '';$checked_2 = '';$checked_3 = '';
                                                 if ( $value == 1 ) {$checked_1 = 'checked'; $count_chk_1 += 1;}elseif( $value == 2 ){$checked_2 = 'checked';}elseif( $value == 3 ){$checked_3 = 'checked'; $count_chk_1 += 1;}
                                                 $disabled = 'disabled';
-                                                if ( $checked_1 == 'checked' ) {$disabled = ''; }
+                                                if ( $checked_1 == 'checked' ) {$disabled = ''; $str_doc = 'Documento cargado'; }else{ $str_doc = 'Documento no cargado'; }
                                             ?>
                                             <div class="form-group" >
                                                 <div class="col-md-4">
@@ -128,7 +128,7 @@
                                                     <textarea id="txt_<?=$ind?>" hidden><?=$checklist_description[0][$ind]?></textarea>
                                                     <a data-toggle="modal" href="#modal_description" class="btn btn-xs btn-secondary btn_description" reference="<?=$ind?>" title="Descripción"><i class="fa fa-align-justify"></i></a>
                                                     <a data-toggle="modal" href="#modal_upload" class="btn btn-xs btn-success btn_upload_1" reference="<?=$ind?>"><i class="fa fa-upload" title="Cargar documento"></i></a>
-                                                    <a href="#modal_pdf" class="btn btn-sm btn-default a_file" reference="<?=$ind?>" file="<?=$checklistfiles_habitat[0]->$ind?>" <?=$disabled?>>Documento no cargado</a>                                                    
+                                                    <a href="#modal_pdf" class="btn btn-sm btn-default a_file" reference="<?=$ind?>" file="<?=$checklistfiles_habitat[0]->$ind?>" <?=$disabled?>><?=$str_doc?></a>                                                    
                                                 </div>    
                                             </div>
                                         <?php endif ?>

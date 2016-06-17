@@ -200,7 +200,8 @@
                 </div>
             </div>
         </div>
-        <input id="casa_stock" name="casa_k" hidden>
+        <input id="casa_stock"  name="casa_k" hidden>
+        <input id="cliente_1"   name="cliente" hidden>
     </div>
 </form>
 
@@ -538,7 +539,6 @@ function renderDireccionesCasa(data){
     $('#submit_form_3').on('click', function(e){
         e.preventDefault();
         var data = $('#form_3').serialize();
-        alert(data);
         pnotify_common('info');
         $.ajax({
             type: 'POST',

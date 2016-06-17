@@ -94,10 +94,15 @@
     <!--Pnotify-->
     <script src="<?= base_url('../js/pnotify/pnotify.custom.min.js') ?> "></script>
 
+    <!--ContextMenu-->
+    <script src="<?= base_url('../js/contextmenu/context_menu.js') ?> "></script>
+
     <?php
     if( !empty( $js_plugins ) )
       print $js_plugins; 
     ?>
+    
+
     <style type="text/css">
       th.prev{ display: inline;}
       th.next{ display: inline;}
@@ -253,18 +258,18 @@
         <li class="dropdown ">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
             <i class="fa fa-home"></i>
-            Casas
+            Servicios
             <span class="caret"></span>
           </a>
 
           <ul class="dropdown-menu">
-            <li><a href="<?= base_url('casa') ?>"> Prospectos</a></li>
-            <li><a href="<?= base_url('casa/inventario') ?>"> Inventario-Ventas</a></li>
-            <li><a href="#"> Vendidas </a></li>
+            <li><a href="<?= base_url('casa') ?>">Prospectos - Adquisición</a></li>
+            <li><a href="<?= base_url('casa/inventario') ?>">Inventario - Venta</a></li>
+            <!--<li><a href="#"> Vendidas </a></li>-->
           </ul>
         </li> 
 
-        <li class="dropdown ">
+        <!--<li class="dropdown ">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
             <i class="fa fa-th-large"></i>
             Servicios
@@ -278,7 +283,7 @@
             <li><a href="<?= base_url('servicio/construir') ?>"> Construir</a></li>
             <li><a href="<?= base_url('servicio/mantenimiento') ?>"> Mantenimiento</a></li>
           </ul>
-        </li>
+        </li>-->
 
         <li class="dropdown ">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
@@ -298,12 +303,12 @@
           </a>
         </li>
 
-        <li class="">
+        <!--<li class="">
           <a href="<?= base_url('avaluo') ?>">
             <i class="fa fa-usd"></i>
             Avaluos
           </a>
-        </li>
+        </li>-->
 
         <!--<li class="dropdown ">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
@@ -462,8 +467,7 @@
 
 </script>
 
-<!--Pnotify-->
-<script src="<?= base_url('../js/contextmenu/context_menu.js') ?> "></script>
+
 
 </body>
 </html>
